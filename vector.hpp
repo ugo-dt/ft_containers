@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/07 15:15:15 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/07 16:26:22 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ namespace ft
 {
 
 template<typename T, class Allocator = std::allocator<T> >
-class Vector
+class vector
 {
 	// Member types
 	public:
@@ -46,21 +46,24 @@ class Vector
 
 		/* A unsigned integral type that can represent any non-negative value of difference_type,
 		 * usually the sane as size_t */
-		//typedef typename allocator_type::size_type				size_type;
+		typedef typename allocator_type::size_type			size_type;
 
 		/* A random access iterator to value_type */
-		//typedef ft::random_access_iterator<value_type>			iterator;
+//		typedef ft::random_access_iterator<value_type>		iterator;
 
 		/* A random access iterator to const value_type */
-		//typedef ft::random_access_iterator<const value_type>	const_iterator;
+//		typedef ft::random_access_iterator<const value_type>	const_iterator;
 
-		//typedef ft::reverse_iterator	<iterator>				reverse_iterator;
-		//typedef ft::reverse_iterator<const_itertor>				const_reverse_iterator;
+// TODO: reverse_iterator
+//		typedef ft::reverse_iterator	<iterator>				reverse_iterator;
+//		typedef ft::reverse_iterator<const_itertor>			const_reverse_iterator;
 
 	// Attributes
 	private:
-		allocator_type	_alloc;
-		pointer			_vector;
+		allocator_type	_alloc;		// Object used to allocate storage
+		pointer			_vector;	// Pointer to the start of the array
+		size_type		_size;		// Number of elements
+		size_type		_capacity;	// Maximum size currently allocated
 
 	// Constructors
 	public:
@@ -69,13 +72,24 @@ class Vector
 		 * Constructs an empty container, with no elements.
 		 * @param alloc template class used to allocate storage
 		 */
-		Vector(const allocator_type& alloc = allocator_type()) {}
+		explicit vector(const allocator_type& alloc = allocator_type()):
+			_alloc(alloc), _size(0), _capacity(0)
+		{
+			this->_vector = this->_alloc.allocate(_capacity);
+			return ;
+		}
 	
 	// Destructors
 	public:
-		~Vector(void);
+		~vector(void)
+		{
+			// TODO: destroy all elements first
+			// no iterators yet
+			this->_alloc.deallocate(_vector, _capacity);
+			return ;
+		}
 
-}; // Vector
+}; // vector
 
 } // ft
 

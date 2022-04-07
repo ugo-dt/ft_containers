@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   random_access_iterator.hpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugdaniel <ugdaniel@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 14:13:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/07 16:32:23 by ugdaniel         ###   ########.fr       */
+/*   Created: 2022/04/07 16:10:06 by ugdaniel          #+#    #+#             */
+/*   Updated: 2022/04/07 16:31:26 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.hpp"
-#include <memory>
-#include <iostream>
-#include <vector>
+#ifndef ITERATOR_HPP
+# define ITERATOR_HPP
 
-int main(void)
+namespace ft
 {
-	ft::vector<int, std::allocator<int> > a;
-	std::vector<int>	b;
 
-	std::vector<int>::iterator
-	return (0);
-}
+struct random_access_iterator
+{
+
+}; // random_access_iterator
+
+} // ft
+
+#endif ITERATOR_HPP
