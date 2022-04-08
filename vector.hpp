@@ -6,13 +6,14 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/07 22:32:24 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/08 20:52:47 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
+# include "random_access_iterator.hpp"
 # include <memory>
 
 namespace ft
@@ -46,25 +47,40 @@ class vector
 
 		/* A unsigned integral type that can represent any non-negative value of difference_type,
 		 * usually the sane as size_t */
-		typedef typename allocator_type::size_type			size_type;
+		typedef typename allocator_type::size_type				size_type;
 
 		/* A random access iterator to value_type */
-//		typedef ft::random_access_iterator<value_type>		iterator;
+		typedef ft::random_access_iterator<value_type>			iterator;
 
 		/* A random access iterator to const value_type */
-//		typedef ft::random_access_iterator<const value_type>	const_iterator;
+		typedef ft::random_access_iterator<const value_type>	const_iterator;
 
-// TODO: reverse_iterator
-//		typedef ft::reverse_iterator	<iterator>				reverse_iterator;
-//		typedef ft::reverse_iterator<const_itertor>			const_reverse_iterator;
+// TODO		typedef ft::reverse_iterator	<iterator>				reverse_iterator;
+// TODO		typedef ft::reverse_iterator<const_itertor>				const_reverse_iterator;
 
 	// Attributes
 	private:
 		allocator_type	_alloc;		// Object used to allocate storage
 		pointer			_begin;		// Pointer to the first element of the array
-		pointer			_end;		// Pointer to the last element of the array
+		pointer			_end;		// Pointer to the past-the-end element of the array
 		size_type		_size;		// Number of elements
 		size_type		_capacity;	// Maximum size currently allocated
+
+	// Private functions
+	private:
+		void	_re_allocate(size_type capacity)
+		{
+			pointer		p;
+
+			if (capacity < this->_size)
+				this->_size = capacity;
+			for (size_type i = 0; i < this->_size; i++)
+				this->_alloc.construct(p, this->_begin[i]);
+			this->_alloc.deallocate(this->_begin, this->_capacity);
+			this->_begin = p;
+			this->_capacity = capacity;
+			this->_end = this->_begin + this->_size;
+		}
 
 	// Constructors
 	public:
@@ -77,7 +93,7 @@ class vector
 		explicit vector(const allocator_type& alloc = allocator_type()):
 			_alloc(alloc), _begin(nullptr), _end(nullptr), _size(0), _capacity(0)
 		{
-			this->_begin = this->_alloc.allocate(this->_capacity);
+			this->_begin = this->_end = this->_alloc.allocate(this->_capacity);
 			return ;
 		}
 
@@ -112,10 +128,12 @@ class vector
 		 */
 // TODO		vector (const vector& x);
 
-	// Destructors
+	// Destructor
 	public:
 		~vector(void)
 		{
+			for (iterator it = this->begin(); it != this->end(); it++)
+				
 // TODO		destroy all elements first
 			this->_alloc.deallocate(this->_begin, this->_capacity);
 			return ;
@@ -123,32 +141,82 @@ class vector
 	
 	// Member functions
 	public:
-// TODO		operator=
+		/**
+		 * @brief Copies all the elements from x into the container
+		 *
+		 * @param x A vector object of the same type (i.e., with the same template parameters,
+		 * T and Alloc).
+		 */
+		vector&	operator=(const vector& x)
+		{
+			if (*this != x)
+			{
+				if (this->_capacity < x._size)
+					this->_re_allocate(x._size);
+				for (size_type i = 0; i < x._size; i++)
+					this->_alloc.construct(&this->_begin[i], x._begin[i]);
+				this->_size = x._size;
+				this->end = this->_begin + this->_size;
+			}
+			return (*this);
+		}
+
 // TODO		assign
 // TODO		get_allocator
 
-		/* Element access */
+		// Element access
 // TODO		at
 // TODO		operator[]
 // TODO		front
 // TODO		back
 // TODO		data
 
-		/* Iterators */
-// TODO		begin
-// TODO		end
-// TODO		rbegin
-// TODO		rend
+		// Iterators
+		/* Returns an iterator pointing to the first element in the vector. */
+		iterator		begin(void)		  {return iterator(this->_begin);}
+		const_iterator	begin(void) const {return const_iterator(this->_begin);}
+
+		/**
+		 * @brief Returns an iterator referring to the past-the-end element in the vector container.
+		 * The past-the-end element is the theoretical element that would follow the last element in
+		 * the vector. It does not point to any element, and thus shall not be dereferenced.
+		 * If the container is empty, this function returns the same as vector::begin.
+		 */
+		iterator		end(void)		{return iterator(this->_end);}
+		const_iterator	end(void) const {return const_iterator(this->_end);}
+
+// TODO		iterator	rbegin(void) const {return reverse_iterator(this->end());}
+// TODO		iterator	rend(void) const {return reverse_iterator(this->begin());}
 
 		/* Capacity */
-		bool		empty(void)		const {return (this->_begin() == this->_end());}
+		/**
+		 * @brief Returns whether the vector is empty (i.e. whether its size is 0).
+		 * This function does not modify the container in any way.
+		 * To clear the content of a vector, see vector::clear.
+		 * 
+		 * @return true if the container size is 0.
+		 */
+		bool		empty(void)		const {return (this->_begin == this->_end);}
 		size_type	size(void)		const {return (this->_size);};
 		size_type	max_size(void)	const {return (this->_alloc.max_size());}
 // TODO		void		reserve(size_type);
 		size_type	capacity(void)	const {return (this->_capacity);}
 
-		/* Modifiers */
-// TODO		clear
+		// Modifiers
+		/**
+		 * @brief Removes all elements from the vector (which are destroyed),
+		 * leaving the container with a size of 0.
+		 */
+		void	clear(void)
+		{
+			if (this->_size == 0)
+				return ;
+			for (size_type i = 0; i < this->_size; i++)
+				this->_alloc.destroy(this->_begin + i);
+			this->_size = 0;
+			this->_end = this->_begin;
+		}
+
 // TODO		insert
 // TODO		erase
 // TODO		push_back
