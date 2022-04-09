@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 16:10:06 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/08 18:55:45 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/09 09:15:24 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ struct iterator
 	 * random_access_iterator_tag: Random-access Iterator
 	 */
 	typedef Category	iterator_category;
-};
+}; // iterator
+
 } // ft
 
 #endif // ITERATOR_HPP
