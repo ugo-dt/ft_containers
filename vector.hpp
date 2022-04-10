@@ -6,17 +6,15 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/10 13:01:39 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/10 18:12:04 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
-#include <iostream>
-
-# include "random_access_iterator.hpp"
 # include "algorithm.hpp"
+# include "iterator.hpp"
 # include <memory>
 # include <stdexcept>
 
@@ -24,7 +22,7 @@ namespace ft
 {
 
 /*	class vector synopsis */
-template<typename T, class Allocator = std::allocator<T> >
+template <typename T, class Allocator = std::allocator<T> >
 class vector
 {
 	// Member types
@@ -60,6 +58,7 @@ class vector
 		pointer			_copy_array(void);
 		iterator		_make_iter(pointer pos);
 		const_iterator	_make_iter(pointer pos) const;
+		void			_throw_length_error(void) const;
 
 	// Constructors/destructor/operator=
 	public:
@@ -74,7 +73,7 @@ class vector
 		~vector(void)
 			{this->_vdeallocate();}
 
-	// Iterators
+		// Iterators
 		      iterator	begin(void);
 		const_iterator	begin(void) const;
 		      iterator	end(void);
@@ -82,15 +81,15 @@ class vector
 // TODO		      iterator	rbegin(void) const;
 // TODO		      iterator	rend(void) const;
 
-	// Capacity
+		// Capacity
 		size_type		size(void) const;
 		size_type		max_size(void) const;
 		void			resize(size_type n, value_type val = value_type());
 		size_type		capacity() const;
 		bool			empty() const;
-// TODO		void			reserve(size_type);
+		void			reserve(size_type n);
 
-	// Element access
+		// Element access
 		      reference	operator[] (size_type n);
 		const_reference	operator[] (size_type n) const;
 // TODO		reference at (size_type n);
@@ -102,16 +101,16 @@ class vector
 
 	// Modifiers
 		template <class InputIterator>
-			void	assign (InputIterator first, InputIterator last);
-		void	assign (size_type n, const value_type& val);
+			void	assign(InputIterator first, InputIterator last);
+		void	assign(size_type n, const value_type& val);
 // TODO		void	push_back (const value_type& val);
 // TODO		void	pop_back();
-// TODO		iterator insert (iterator position, const value_type& val);
-// TODO    		void insert (iterator position, size_type n, const value_type& val);
+// TODO		iterator insert(iterator position, const value_type& val);
+// TODO    		void insert(iterator position, size_type n, const value_type& val);
 // TODO		template <class InputIterator>
-// TODO		void insert (iterator position, InputIterator first, InputIterator last);
-// TODO		iterator erase (iterator position);
-// TODO		iterator erase (iterator first, iterator last);
+// TODO		void insert(iterator position, InputIterator first, InputIterator last);
+// TODO		iterator erase(iterator position);
+// TODO		iterator erase(iterator first, iterator last);
 		void	swap(vector& v);
 		void	clear(void);
 
@@ -125,7 +124,7 @@ class vector
  *
  * @param alloc Allocator object. The container keeps and uses an internal copy of this allocator.
  */
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 vector<T, Allocator>::vector(const allocator_type& alloc) :
 	_alloc(alloc), 
 	_begin(nullptr),
@@ -144,7 +143,7 @@ vector<T, Allocator>::vector(const allocator_type& alloc) :
  * initialized to a copy of this value.
  * @param alloc Allocator object. The container keeps and uses an internal copy of this allocator.
  */
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 vector<T, Allocator>::vector(size_type n, const value_type& val, const allocator_type& alloc) :
 	_alloc(alloc),
 	_begin(nullptr),
@@ -177,7 +176,7 @@ vector<T, Allocator>::vector(size_type n, const value_type& val, const allocator
  * @param x Another vector object of the same type (with the same class template
  * arguments T and Alloc), whose contents are either copied or acquired.
  */
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 vector<T, Allocator>::vector(const vector& x) :
 	_alloc(x._alloc),
 	_begin(nullptr),
@@ -193,17 +192,17 @@ vector<T, Allocator>::vector(const vector& x) :
 // Private member functions
 
 // Allocate array with size n
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 void
 vector<T, Allocator>::_vallocate(size_type n)
 {
 	if (n > this->max_size())
-		std::__throw_length_error("vector");
+		this->_throw_length_error();
 	this->_begin = this->_alloc.allocate(n);
 }
 
 // Clears all vector allocations
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 void
 vector<T, Allocator>::_vdeallocate(void)
 {
@@ -215,34 +214,22 @@ vector<T, Allocator>::_vdeallocate(void)
 	this->_capacity = 0;
 }
 
-// Returns a pointer to a newly allocated copy of the array used by the current instance
-template<typename T, class Allocator>
-typename vector<T, Allocator>::pointer
-vector<T, Allocator>::_copy_array(void)
-{
-	pointer p;
-	if (!this->_begin) return (nullptr);
-	p = this->_alloc.allocate(this->_size);
-	for (size_type i = 0; i < this->_size; i++)
-		this->_alloc.construct(p, this->_begin[i]);
-	return (p);
-}
-
 // Deallocate all vector allocations, then allocate new storage of size c
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 void
 vector<T, Allocator>::_vreallocate(size_type c)
 {
-	pointer	p;
+	vector	v(c);
+
 	if (c < this->_size)
 		this->_size = c;
-	p = _copy_array();
-	this->_vdeallocate();
-	this->_begin = p;
-	this->_capacity = c;
+	v._vconstruct(0, this->_size, this->_begin);
+	v._size = this->_size;
+	swap(v);
 }
 
-template<typename T, class Allocator>
+/* Construct object at position pos in array, with value val */
+template <typename T, class Allocator>
 inline
 void
 vector<T, Allocator>::_vconstruct(size_type pos, const value_type& val)
@@ -251,7 +238,7 @@ vector<T, Allocator>::_vconstruct(size_type pos, const value_type& val)
 }
 
 /* Construct from start to end, not including end, with value val */
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 inline
 void
 vector<T, Allocator>::_vconstruct(size_type start, size_type end, const value_type& val)
@@ -260,7 +247,8 @@ vector<T, Allocator>::_vconstruct(size_type start, size_type end, const value_ty
 		this->_alloc.construct(this->_begin + i, val);
 }
 
-template<typename T, class Allocator>
+/* Copy array x, constructing from start to end */
+template <typename T, class Allocator>
 inline
 void
 vector<T, Allocator>::_vconstruct(size_type start, size_type end, pointer x)
@@ -269,7 +257,7 @@ vector<T, Allocator>::_vconstruct(size_type start, size_type end, pointer x)
 		this->_alloc.construct(this->_begin + i, x[i]);
 }
 
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 inline
 typename ft::vector<T, Allocator>::iterator
 vector<T, Allocator>::_make_iter(pointer p)
@@ -277,12 +265,19 @@ vector<T, Allocator>::_make_iter(pointer p)
 	return iterator(p);
 }
 
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 inline
 typename ft::vector<T, Allocator>::const_iterator
 vector<T, Allocator>::_make_iter(pointer p) const
 {
 	return const_iterator(p);
+}
+
+template <typename T, class Allocator>
+void
+vector<T, Allocator>::_throw_length_error(void) const
+{
+	std::__throw_length_error("vector");
 }
 
 // Public member functions
@@ -293,7 +288,7 @@ vector<T, Allocator>::_make_iter(pointer p) const
  * @param x A vector object of the same type (i.e., with the same template parameters,
  * T and Alloc).
  */
-template<class T, class Allocator>
+template <class T, class Allocator>
 typename ft::vector<T, Allocator>&
 vector<T, Allocator>::operator=(const vector& x)
 {
@@ -310,7 +305,7 @@ vector<T, Allocator>::operator=(const vector& x)
 
 //		template <class InputIterator>
 //		void assign (InputIterator first, InputIterator last)
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 void
 vector<T, Allocator>::assign(size_type n, const value_type& val)
 {
@@ -320,14 +315,14 @@ vector<T, Allocator>::assign(size_type n, const value_type& val)
 	this->_size = n;
 }
 
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 typename ft::vector<T, Allocator>::reference
 vector<T, Allocator>::operator[](size_type n)
 {
 	return this->_begin[n];
 }
 
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 typename ft::vector<T, Allocator>::const_reference
 vector<T, Allocator>::operator[](size_type n) const
 {
@@ -335,7 +330,7 @@ vector<T, Allocator>::operator[](size_type n) const
 }
 
 /* Returns an iterator pointing to the first element in the vector. */
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 typename ft::vector<T, Allocator>::iterator
 vector<T, Allocator>::begin(void)
 {
@@ -343,7 +338,7 @@ vector<T, Allocator>::begin(void)
 }
 
 /* Returns a constant iterator pointing to the first element in the vector. */
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 typename ft::vector<T, Allocator>::const_iterator
 vector<T, Allocator>::begin(void) const
 {
@@ -356,28 +351,28 @@ vector<T, Allocator>::begin(void) const
  * the vector. It does not point to any element, and thus shall not be dereferenced.
  * If the container is empty, this function returns the same as vector::begin.
  */
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 typename ft::vector<T, Allocator>::iterator
 vector<T, Allocator>::end(void)
 {
 	return _make_iter(this->_begin + this->_size);
 }
 
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 typename ft::vector<T, Allocator>::const_iterator
 vector<T, Allocator>::end(void) const
 {
 	return _make_iter(this->_begin + this->_size);
 }
 
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 typename ft::vector<T, Allocator>::size_type
 vector<T, Allocator>::size(void) const
 {
 	return this->_size;
 }
 
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 typename ft::vector<T, Allocator>::size_type
 vector<T, Allocator>::max_size(void) const
 {
@@ -407,7 +402,7 @@ vector<T, Allocator>::max_size(void) const
  * of the elements in the container, defined in vector as an alias of the
  * first template parameter (T).
  */
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 void
 vector<T, Allocator>::resize(size_type n, value_type val)
 {
@@ -423,7 +418,7 @@ vector<T, Allocator>::resize(size_type n, value_type val)
 	}
 }
 
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 typename ft::vector<T, Allocator>::size_type
 vector<T, Allocator>::capacity(void) const
 {
@@ -437,22 +432,31 @@ vector<T, Allocator>::capacity(void) const
  * 
  * @return true if the container size is 0.
  */
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 bool
 vector<T, Allocator>::empty(void) const
 {
 	return this->_size == 0;
 }
 
+template <typename T, class Allocator>
+void
+vector<T, Allocator>::reserve(size_type n)
+{
+	if (n > this->_capacity)
+		this->_vreallocate(n);
+}
+
 /**
  * @brief Removes all elements from the vector (which are destroyed),
  * leaving the container with a size of 0.
  */
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 void
 vector<T, Allocator>::clear(void)
 {
 	if (this->_size == 0 || !this->_begin)
+		return ;
 	for (size_type i = 0; i < this->_size; i++)
 		this->_alloc.destroy(this->_begin + i);
 	this->_size = 0;
@@ -466,7 +470,7 @@ vector<T, Allocator>::clear(void)
  * with the same template parameters, T and Alloc) whose content is
  * swapped with that of this container.
  */
-template<typename T, class Allocator>
+template <typename T, class Allocator>
 void
 vector<T, Allocator>::swap(vector& v)
 {
@@ -477,7 +481,7 @@ vector<T, Allocator>::swap(vector& v)
 }
 
 // vector non member functions
-template<class T, class Allocator>
+template <class T, class Allocator>
 inline
 bool
 operator==(const vector<T, Allocator>& x, const vector<T, Allocator>& y)
@@ -486,7 +490,7 @@ operator==(const vector<T, Allocator>& x, const vector<T, Allocator>& y)
 	return sz == y.size() && ft::equal(x.begin(), x.end(), y.begin());
 }
 
-template<class T, class Allocator>
+template <class T, class Allocator>
 inline
 bool
 operator!=(const vector<T, Allocator>& x, const vector<T, Allocator>& y)
@@ -494,7 +498,7 @@ operator!=(const vector<T, Allocator>& x, const vector<T, Allocator>& y)
 	return !(x == y);
 }
 
-template<class T, class Allocator>
+template <class T, class Allocator>
 inline
 bool
 operator<(const vector<T, Allocator>& x, const vector<T, Allocator>& y)
@@ -502,7 +506,7 @@ operator<(const vector<T, Allocator>& x, const vector<T, Allocator>& y)
 	return ft::lexicographical_compare(x.begin(), x.end(), y.begin(), y.end());
 }
 
-template<class T, class Allocator>
+template <class T, class Allocator>
 inline
 bool
 operator>(const vector<T, Allocator>& x, const vector<T, Allocator>& y)
@@ -510,7 +514,7 @@ operator>(const vector<T, Allocator>& x, const vector<T, Allocator>& y)
 	return y < x;
 }
 
-template<class T, class Allocator>
+template <class T, class Allocator>
 inline
 bool
 operator<=(const vector<T, Allocator>& x, const vector<T, Allocator>& y)
@@ -518,7 +522,7 @@ operator<=(const vector<T, Allocator>& x, const vector<T, Allocator>& y)
 	return !(y < x);
 }
 
-template<class T, class Allocator>
+template <class T, class Allocator>
 inline
 bool
 operator>=(const vector<T, Allocator>& x, const vector<T, Allocator>& y)
@@ -533,7 +537,7 @@ operator>=(const vector<T, Allocator>& x, const vector<T, Allocator>& y)
  * 
  * @param x,y vector containers of the same type (i.e., having both the same template parameters, T and Alloc).
  */
-template<class T, class Allocator>
+template <class T, class Allocator>
 inline
 void
 swap(vector<T, Allocator>& x, vector<T, Allocator>& y)

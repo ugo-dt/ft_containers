@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:13:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/10 12:59:35 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/10 17:23:01 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int main(void)
 
 	std::cout << a.capacity() << std::endl;
 	a.assign(4, "xd");
+	a.reserve(199);
 	for (it = a.begin(); it != a.end(); it++)
 		std::cout << *it << std::endl;
 	std::cout << a.size() << std::endl;
