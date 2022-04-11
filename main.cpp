@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:13:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/10 17:23:01 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/11 21:00:11 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,13 @@
 
 int main(void)
 {
-	ft::vector<std::string>				a(5, "lol");
-	ft::vector<std::string>				b(a);
-	ft::vector<std::string>				c;
-	ft::vector<std::string>::iterator	it;
+	ft::vector<std::string>						a(5, "lol");
+	ft::vector<std::string>::iterator			it;
+	ft::vector<std::string>::reverse_iterator	it2;
 
+	a[0] = "salut";
 	for (it = a.begin(); it != a.end(); it++)
-		std::cout << "a: " << (*it = "lal") << std::endl;
-	for (it = b.begin(); it != b.end(); it++)
-		std::cout << "b: " << *it << std::endl;
-	c = b;
-	for (it = c.begin(); it != c.end(); it++)
-		std::cout << "c: " << *it << std::endl;
+		std::cout << "a: " << *it << std::endl;
 	std::cout << a.size() << std::endl;
 	std::cout << a.capacity() << std::endl;
 	std::cout << a.max_size() << std::endl;
@@ -42,10 +37,15 @@ int main(void)
 
 	std::cout << a.capacity() << std::endl;
 	a.assign(4, "xd");
-	a.reserve(199);
+	a[0] = "salut";
+	a.reserve(34);
 	for (it = a.begin(); it != a.end(); it++)
 		std::cout << *it << std::endl;
 	std::cout << a.size() << std::endl;
 	std::cout << a.capacity() << std::endl;
+
+	for (it2 = a.rbegin(); it2 != a.rend(); it2++)
+		std::cout << *it2 << std::endl;
+
 	return (0);
 }

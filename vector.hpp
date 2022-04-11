@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/10 18:12:04 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/11 20:43:35 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,61 +37,68 @@ class vector
 		typedef typename allocator_type::size_type				size_type;
 		typedef ft::random_access_iterator<value_type>			iterator;
 		typedef ft::random_access_iterator<const value_type>	const_iterator;
-// TODO		typedef ft::reverse_iterator	<iterator>				reverse_iterator;
-// TODO		typedef ft::reverse_iterator<const_itertor>				const_reverse_iterator;
+		typedef ft::reverse_iterator<iterator>					reverse_iterator;
+		typedef ft::reverse_iterator<const_iterator>			const_reverse_iterator;
 
 	// Attributes
 	private:
-		allocator_type	_alloc;		// Object used to allocate storage
-		pointer			_begin;		// Pointer to the first element of the array
-		size_type		_capacity;	// Maximum size currently allocated
-		size_type		_size;		// Number of elements
+		allocator_type			_alloc;		// Object used to allocate storage
+		pointer					_begin;		// Pointer to the first element of the array
+		size_type				_capacity;	// Maximum size currently allocated
+		size_type				_size;		// Number of elements
 
 	// Private member functions
 	private:
-		void			_vallocate(size_type n);
-		void			_vdeallocate(void);
-		void			_vreallocate(size_type c);
-		void			_vconstruct(size_type pos, const value_type& val = value_type());
-		void			_vconstruct(size_type start, size_type end, const value_type& val = value_type());
-		void			_vconstruct(size_type start, size_type end, pointer x);
-		pointer			_copy_array(void);
-		iterator		_make_iter(pointer pos);
-		const_iterator	_make_iter(pointer pos) const;
-		void			_throw_length_error(void) const;
+		void					_vallocate(size_type n);
+		void					_vdeallocate(void);
+		void					_vreallocate(size_type c);
+		void					_vconstruct(size_type pos, const value_type& val = value_type());
+		void					_vconstruct(size_type start, size_type end, const value_type& val = value_type());
+		void					_vconstruct(size_type start, size_type end, pointer x);
+		pointer					_copy_array(void);
+		iterator				_make_iter(pointer pos);
+		const_iterator			_make_iter(pointer pos) const;
+		void					_throw_length_error(void) const;
 
 	// Constructors/destructor/operator=
 	public:
-		explicit		vector(const allocator_type& alloc = allocator_type());
-		explicit 		vector(size_type n, const value_type& val = value_type(),
-							   const allocator_type& alloc = allocator_type());
+		explicit vector(const allocator_type& alloc = allocator_type());
+
+		explicit vector(size_type n, const value_type& val = value_type(),
+			const allocator_type& alloc = allocator_type());
+
 		template <class InputIterator>
-			vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type());
+			vector(InputIterator first, InputIterator last,
+				   const allocator_type& alloc = allocator_type());
+
 		vector(const vector& x);
-		vector&			operator=(const vector& x);
+
+		vector&					operator=(const vector& x);
 
 		~vector(void)
 			{this->_vdeallocate();}
 
 		// Iterators
-		      iterator	begin(void);
-		const_iterator	begin(void) const;
-		      iterator	end(void);
-		const_iterator	end(void) const;
-// TODO		      iterator	rbegin(void) const;
-// TODO		      iterator	rend(void) const;
+		iterator				begin(void);
+		const_iterator			begin(void) const;
+		iterator				end(void);
+		const_iterator			end(void) const;
+		reverse_iterator		rbegin(void);
+		const_reverse_iterator	rbegin(void) const;
+		reverse_iterator		rend(void);
+		const_reverse_iterator	rend(void) const;
 
 		// Capacity
-		size_type		size(void) const;
-		size_type		max_size(void) const;
-		void			resize(size_type n, value_type val = value_type());
-		size_type		capacity() const;
-		bool			empty() const;
-		void			reserve(size_type n);
+		size_type				size(void) const;
+		size_type				max_size(void) const;
+		void					resize(size_type n, value_type val = value_type());
+		size_type				capacity() const;
+		bool					empty() const;
+		void					reserve(size_type n);
 
 		// Element access
-		      reference	operator[] (size_type n);
-		const_reference	operator[] (size_type n) const;
+		reference				operator[] (size_type n);
+		const_reference			operator[] (size_type n) const;
 // TODO		reference at (size_type n);
 // TODO		const_reference at (size_type n) const;
 // TODO		reference front();
@@ -102,7 +109,7 @@ class vector
 	// Modifiers
 		template <class InputIterator>
 			void	assign(InputIterator first, InputIterator last);
-		void	assign(size_type n, const value_type& val);
+		void					assign(size_type n, const value_type& val);
 // TODO		void	push_back (const value_type& val);
 // TODO		void	pop_back();
 // TODO		iterator insert(iterator position, const value_type& val);
@@ -111,11 +118,10 @@ class vector
 // TODO		void insert(iterator position, InputIterator first, InputIterator last);
 // TODO		iterator erase(iterator position);
 // TODO		iterator erase(iterator first, iterator last);
-		void	swap(vector& v);
-		void	clear(void);
+		void					swap(vector& v);
+		void					clear(void);
 
-		allocator_type	get_allocator(void) const
-			{return this->_alloc;}
+		allocator_type			get_allocator(void) const {return this->_alloc;}
 };	// vector
 
 /** 
@@ -363,6 +369,34 @@ typename ft::vector<T, Allocator>::const_iterator
 vector<T, Allocator>::end(void) const
 {
 	return _make_iter(this->_begin + this->_size);
+}
+
+template <typename T, class Allocator>
+typename ft::vector<T, Allocator>::reverse_iterator
+vector<T, Allocator>::rbegin(void)
+{
+	return reverse_iterator(this->end());
+}
+
+template <typename T, class Allocator>
+typename ft::vector<T, Allocator>::const_reverse_iterator
+vector<T, Allocator>::rbegin(void) const
+{
+	return reverse_iterator(this->end());
+}
+
+template <typename T, class Allocator>
+typename ft::vector<T, Allocator>::reverse_iterator
+vector<T, Allocator>::rend(void)
+{
+	return reverse_iterator(this->begin());
+}
+
+template <typename T, class Allocator>
+typename ft::vector<T, Allocator>::const_reverse_iterator
+vector<T, Allocator>::rend(void) const
+{
+	return reverse_iterator(this->begin());
 }
 
 template <typename T, class Allocator>
