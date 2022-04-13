@@ -6,12 +6,13 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:13:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/11 21:00:11 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/13 09:31:51 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.hpp"
 #include <memory>
+#include <algorithm>
 #include <iostream>
 #include <vector>
 #include <string>

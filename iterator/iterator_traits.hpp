@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:21:03 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/11 12:25:39 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/13 09:42:22 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,17 @@ struct output_iterator_tag {};
 struct forward_iterator_tag : input_iterator_tag {};
 struct bidirectional_iterator_tag : forward_iterator_tag {};
 struct random_access_iterator_tag : bidirectional_iterator_tag {};
+
+template <class Category, class T, class Distance = ptrdiff_t,
+	class Pointer = T*, class Reference = T&>
+struct iterator
+{
+	typedef T			value_type;
+	typedef Distance 	difference_type;
+	typedef Pointer		pointer;
+	typedef Reference	reference;
+	typedef Category	iterator_category;
+};
 
 template <class Iterator>
 struct iterator_traits

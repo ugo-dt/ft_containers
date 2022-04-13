@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iterator.hpp                                       :+:      :+:    :+:   */
+/*   random_access_iterator.hpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/07 16:10:06 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/11 20:18:19 by ugdaniel         ###   ########.fr       */
+/*   Created: 2022/04/13 09:09:27 by ugdaniel          #+#    #+#             */
+/*   Updated: 2022/04/13 09:41:03 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITERATOR_HPP
-# define ITERATOR_HPP
+#ifndef RANDOM_ACCESS_ITERATOR_HPP
+# define RANDOM_ACCESS_ITERATOR_HPP
 
 # include "iterator_traits.hpp"
-# include "reverse_iterator.hpp"
 
 namespace ft
 {
-
-template <class Category, class T, class Distance = ptrdiff_t,
-	class Pointer = T*, class Reference = T&>
-struct iterator
-{
-	typedef T			value_type;
-	typedef Distance 	difference_type;
-	typedef Pointer		pointer;
-	typedef Reference	reference;
-	typedef Category	iterator_category;
-}; // iterator
 
 template <typename T>
 class random_access_iterator : public ft::iterator<ft::random_access_iterator_tag, T>
@@ -87,6 +75,6 @@ class random_access_iterator : public ft::iterator<ft::random_access_iterator_ta
 
 }; // random_access_iterator
 
-} // ft
+}  // ft
 
-#endif // ITERATOR_HPP
+#endif // RANDOM_ACCESS_ITERATOR_HPP

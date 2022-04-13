@@ -6,14 +6,14 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 09:06:30 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/10 18:15:17 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/13 09:32:13 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ALGORITHM_HPP
 # define ALGORITHM_HPP
 
-# include "iterator.hpp"
+# include "iterator/iterator.hpp"
 
 namespace ft
 {

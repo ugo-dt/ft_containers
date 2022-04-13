@@ -6,14 +6,14 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:38:59 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/11 20:43:01 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/13 09:41:07 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef REVERSE_ITERATOR_HPP
 # define REVERSE_ITERATOR_HPP
 
-# include "iterator.hpp"
+# include "iterator_traits.hpp"
 
 namespace ft
 {
@@ -60,9 +60,65 @@ class reverse_iterator
 template <class _Iter1, class _Iter2>
 inline
 bool
+operator==(const reverse_iterator<_Iter1>& x, const reverse_iterator<_Iter2>& y)
+{
+    return x.base() == y.base();
+}
+
+template <class _Iter1, class _Iter2>
+inline
+bool
+operator<(const reverse_iterator<_Iter1>& x, const reverse_iterator<_Iter2>& y)
+{
+    return x.base() > y.base();
+}
+
+template <class _Iter1, class _Iter2>
+inline
+bool
 operator!=(const reverse_iterator<_Iter1>& x, const reverse_iterator<_Iter2>& y)
 {
     return x.base() != y.base();
+}
+
+template <class _Iter1, class _Iter2>
+inline
+bool
+operator>(const reverse_iterator<_Iter1>& x, const reverse_iterator<_Iter2>& y)
+{
+    return x.base() < y.base();
+}
+
+template <class _Iter1, class _Iter2>
+inline
+bool
+operator>=(const reverse_iterator<_Iter1>& x, const reverse_iterator<_Iter2>& y)
+{
+    return x.base() <= y.base();
+}
+
+template <class _Iter1, class _Iter2>
+inline
+bool
+operator<=(const reverse_iterator<_Iter1>& x, const reverse_iterator<_Iter2>& y)
+{
+    return x.base() >= y.base();
+}
+
+template <class _Iter1, class _Iter2>
+inline
+typename reverse_iterator<_Iter1>::difference_type
+operator-(const reverse_iterator<_Iter1>& x, const reverse_iterator<_Iter2>& y)
+{
+    return y.base() - x.base();
+}
+
+template <class _Iter>
+inline
+reverse_iterator<_Iter>
+operator+(typename reverse_iterator<_Iter>::difference_type __n, const reverse_iterator<_Iter>& x)
+{
+    return reverse_iterator<_Iter>(x.base() - __n);
 }
 
 }	// ft

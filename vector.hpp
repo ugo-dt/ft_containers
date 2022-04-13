@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/11 20:43:35 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/13 09:43:25 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 # define VECTOR_HPP
 
 # include "algorithm.hpp"
-# include "iterator.hpp"
-# include <memory>
+# include "iterator/iterator.hpp"
 # include <stdexcept>
+
+# if defined(_LIBCPP_HAS_NO_NULLPTR)
+# include <cstddef>
+# endif
 
 namespace ft
 {
 
-/*	class vector synopsis */
+/*  class vector synopsis  */
 template <typename T, class Allocator = std::allocator<T> >
 class vector
 {
@@ -123,6 +126,8 @@ class vector
 
 		allocator_type			get_allocator(void) const {return this->_alloc;}
 };	// vector
+
+// 
 
 /** 
  * @brief Empty container constructor (default constructor).
