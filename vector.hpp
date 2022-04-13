@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/13 09:43:25 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/13 21:01:18 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,6 @@
 # include "algorithm.hpp"
 # include "iterator/iterator.hpp"
 # include <stdexcept>
-
-# if defined(_LIBCPP_HAS_NO_NULLPTR)
-# include <cstddef>
-# endif
 
 namespace ft
 {

@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:21:03 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/13 09:42:22 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/13 21:00:54 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define ITERATOR_TRAITS_HPP
 
 # include <cstddef>
+# if !defined(nullptr)
+#  define nullptr NULL
+# endif
 
 namespace ft
 {
