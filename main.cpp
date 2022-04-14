@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:13:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/13 09:31:51 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/14 19:47:04 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main(void)
 {
 	ft::vector<std::string>						a(5, "lol");
 	ft::vector<std::string>::iterator			it;
-	ft::vector<std::string>::reverse_iterator	it2;
+	ft::vector<std::string>::const_reverse_iterator	it2;
 
 	a[0] = "salut";
 	for (it = a.begin(); it != a.end(); it++)
