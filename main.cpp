@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:13:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/14 19:47:04 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/27 18:52:17 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int main(void)
 	std::cout << a.size() << std::endl;
 	std::cout << a.capacity() << std::endl;
 	std::cout << a.max_size() << std::endl;
+	std::cout << "front: " << a.front() << std::endl;
+	std::cout << "back: " << a.back() << std::endl;
 
 	a.resize(3, "salut");
 	for (it = a.begin(); it != a.end(); it++)

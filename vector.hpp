@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/14 19:36:34 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/27 19:06:47 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,27 @@ class vector
 		pointer					_copy_array(void);
 		iterator				_make_iter(pointer pos);
 		const_iterator			_make_iter(pointer pos) const;
+		reference				_make_ref(size_type pos);
+		const_reference			_make_ref(size_type pos) const ;
 		void					_throw_length_error(void) const;
+		void					_throw_out_of_range(void) const;
 
-	// Constructors/destructor/operator=
+	// Member functions
 	public:
-		explicit vector(const allocator_type& alloc = allocator_type());
+		explicit
+		vector(const allocator_type& alloc = allocator_type());
 
-		explicit vector(size_type n, const value_type& val = value_type(),
-			const allocator_type& alloc = allocator_type());
+		explicit
+		vector(size_type n, const value_type& val = value_type(),
+			   const allocator_type& alloc = allocator_type());
 
 		template <class InputIterator>
-			vector(InputIterator first, InputIterator last,
-				   const allocator_type& alloc = allocator_type());
+		vector(InputIterator first, InputIterator last,
+			   const allocator_type& alloc = allocator_type());
 
 		vector(const vector& x);
 
-		vector&					operator=(const vector& x);
+		vector&	operator=(const vector& x);
 
 		~vector(void)
 			{this->_vdeallocate();}
@@ -98,18 +103,18 @@ class vector
 		// Element access
 		reference				operator[] (size_type n);
 		const_reference			operator[] (size_type n) const;
-// TODO		reference at (size_type n);
-// TODO		const_reference at (size_type n) const;
-// TODO		reference front();
-// TODO		const_reference front() const;
-// TODO		reference back();
-// TODO		const_reference back() const;
+		reference				at(size_type n);
+		const_reference			at(size_type n) const;
+		reference				front();
+		const_reference			front() const;
+		reference				back();
+		const_reference			back() const;
 
 	// Modifiers
 		template <class InputIterator>
-			void	assign(InputIterator first, InputIterator last);
+			void				assign(InputIterator first, InputIterator last);
 		void					assign(size_type n, const value_type& val);
-// TODO		void	push_back (const value_type& val);
+// TODO		void	push_back(const value_type& val);
 // TODO		void	pop_back();
 // TODO		iterator insert(iterator position, const value_type& val);
 // TODO    		void insert(iterator position, size_type n, const value_type& val);
@@ -168,7 +173,7 @@ vector<T, Allocator>::vector(size_type n, const value_type& val, const allocator
  * in the same order.
  * 
  * @param first,last Input iterators to the initial and final positions in a range.
- * The range used is [first,last), which includes all the elements between first and last,
+ * The range used is (first,last), which includes all the elements between first and last,
  * including the element pointed by first but not the element pointed by last.
  */
 //	template <class InputIterator>
@@ -264,6 +269,7 @@ vector<T, Allocator>::_vconstruct(size_type start, size_type end, pointer x)
 		this->_alloc.construct(this->_begin + i, x[i]);
 }
 
+/* Returns an iterator to the element p */
 template <typename T, class Allocator>
 inline
 typename ft::vector<T, Allocator>::iterator
@@ -272,6 +278,7 @@ vector<T, Allocator>::_make_iter(pointer p)
 	return iterator(p);
 }
 
+/* Returns an constant iterator to the element p */
 template <typename T, class Allocator>
 inline
 typename ft::vector<T, Allocator>::const_iterator
@@ -280,11 +287,36 @@ vector<T, Allocator>::_make_iter(pointer p) const
 	return const_iterator(p);
 }
 
+/* Returns a reference to the element at the position pos */
+template <typename T, class Allocator>
+inline
+typename ft::vector<T, Allocator>::reference
+vector<T, Allocator>::_make_ref(size_type pos)
+{
+	return reference(*(_begin + pos));
+}
+
+/* Returns a constant reference to the element at the position pos */
+template <typename T, class Allocator>
+inline
+typename ft::vector<T, Allocator>::const_reference
+vector<T, Allocator>::_make_ref(size_type pos) const
+{
+	return reference(*(_begin + pos));
+}
+
 template <typename T, class Allocator>
 void
 vector<T, Allocator>::_throw_length_error(void) const
 {
 	std::__throw_length_error("vector");
+}
+
+template <typename T, class Allocator>
+void
+vector<T, Allocator>::_throw_out_of_range(void) const
+{
+	std::__throw_out_of_range("vector");
 }
 
 // Public member functions
@@ -308,32 +340,6 @@ vector<T, Allocator>::operator=(const vector& x)
 		this->_size = x._size;
 	}
 	return (*this);
-}
-
-//		template <class InputIterator>
-//		void assign (InputIterator first, InputIterator last)
-template <typename T, class Allocator>
-void
-vector<T, Allocator>::assign(size_type n, const value_type& val)
-{
-	if (n > this->_capacity)
-		this->_vreallocate(n);
-	this->_vconstruct(0, n, val);
-	this->_size = n;
-}
-
-template <typename T, class Allocator>
-typename ft::vector<T, Allocator>::reference
-vector<T, Allocator>::operator[](size_type n)
-{
-	return this->_begin[n];
-}
-
-template <typename T, class Allocator>
-typename ft::vector<T, Allocator>::const_reference
-vector<T, Allocator>::operator[](size_type n) const
-{
-	return this->_begin[n];
 }
 
 /* Returns an iterator pointing to the first element in the vector. */
@@ -480,6 +486,85 @@ vector<T, Allocator>::reserve(size_type n)
 {
 	if (n > this->_capacity)
 		this->_vreallocate(n);
+}
+
+template <typename T, class Allocator>
+template <class InputIterator>
+void
+vector<T, Allocator>::assign(InputIterator first, InputIterator last)
+{
+	this->clear();
+	*this = vector(first, last);
+}
+
+template <typename T, class Allocator>
+void
+vector<T, Allocator>::assign(size_type n, const value_type& val)
+{
+	if (n > this->_capacity)
+		this->_vreallocate(n);
+	this->_vconstruct(0, n, val);
+	this->_size = n;
+}
+
+template <typename T, class Allocator>
+typename ft::vector<T, Allocator>::reference
+vector<T, Allocator>::operator[](size_type n)
+{
+	return _make_ref(n);
+}
+
+template <typename T, class Allocator>
+typename ft::vector<T, Allocator>::const_reference
+vector<T, Allocator>::operator[](size_type n) const
+{
+	return _make_ref(n);
+}
+
+template <typename T, class Allocator>
+typename ft::vector<T, Allocator>::reference
+vector<T, Allocator>::at(size_type n)
+{
+	if (n >= this->_size)
+		this->_throw_out_of_range();
+	return (this->_begin[n]);
+}
+
+template <typename T, class Allocator>
+typename ft::vector<T, Allocator>::const_reference
+vector<T, Allocator>::at(size_type n) const
+{
+	if (n >= this->_size)
+		this->_throw_out_of_range();
+	return (this->_begin[n]);
+}
+
+template <typename T, class Allocator>
+typename ft::vector<T, Allocator>::reference
+vector<T, Allocator>::front()
+{
+	return _make_ref(0);
+}
+
+template <typename T, class Allocator>
+typename ft::vector<T, Allocator>::const_reference
+vector<T, Allocator>::front() const
+{
+	return _make_ref(0);
+}
+
+template <typename T, class Allocator>
+typename ft::vector<T, Allocator>::reference
+vector<T, Allocator>::back()
+{
+	return _make_ref(this->_size + 1);
+}
+
+template <typename T, class Allocator>
+typename ft::vector<T, Allocator>::const_reference
+vector<T, Allocator>::back() const
+{
+	return _make_ref(this->_size + 1);
 }
 
 /**
