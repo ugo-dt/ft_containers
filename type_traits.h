@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iterator.hpp                                       :+:      :+:    :+:   */
+/*   type_traits.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/13 09:32:28 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/28 15:54:17 by ugdaniel         ###   ########.fr       */
+/*   Created: 2022/04/28 11:45:27 by ugdaniel          #+#    #+#             */
+/*   Updated: 2022/04/28 11:49:14 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITERATOR_HPP
-# define ITERATOR_HPP
+#ifndef TYPE_TRAITS_H
+# define TYPE_TRAITS_H
 
-# include "iterator_traits.hpp"
-# include "reverse_iterator.hpp"
-# include "random_access_iterator.hpp"
+template <bool B, typename T = void>
+struct enable_if
+{};
 
-#endif // ITERATOR_HPP
+template <typename T>
+struct enable_if<true, T>
+{
+	typedef T type;
+};
+
+#endif // TYPE_TRAITS_H

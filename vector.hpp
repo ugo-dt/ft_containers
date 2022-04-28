@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/27 19:06:47 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:53:34 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,14 @@ class vector
 		void					_vconstruct(size_type pos, const value_type& val = value_type());
 		void					_vconstruct(size_type start, size_type end, const value_type& val = value_type());
 		void					_vconstruct(size_type start, size_type end, pointer x);
+		void					_throw_length_error(void) const;
+		void					_throw_out_of_range(void) const;
 		pointer					_copy_array(void);
 		iterator				_make_iter(pointer pos);
 		const_iterator			_make_iter(pointer pos) const;
 		reference				_make_ref(size_type pos);
-		const_reference			_make_ref(size_type pos) const ;
-		void					_throw_length_error(void) const;
-		void					_throw_out_of_range(void) const;
+		const_reference			_make_ref(size_type pos) const;
+		
 
 	// Member functions
 	public:
@@ -114,8 +115,8 @@ class vector
 		template <class InputIterator>
 			void				assign(InputIterator first, InputIterator last);
 		void					assign(size_type n, const value_type& val);
-// TODO		void	push_back(const value_type& val);
-// TODO		void	pop_back();
+		void					push_back(const value_type& val);
+		void					pop_back();
 // TODO		iterator insert(iterator position, const value_type& val);
 // TODO    		void insert(iterator position, size_type n, const value_type& val);
 // TODO		template <class InputIterator>
@@ -143,7 +144,6 @@ vector<T, Allocator>::vector(const allocator_type& alloc) :
 	_capacity(0),
 	_size(0)
 {
-	this->_vallocate(this->_capacity);
 }
 
 /** 
@@ -162,6 +162,8 @@ vector<T, Allocator>::vector(size_type n, const value_type& val, const allocator
 	_capacity(n),
 	_size(n)
 {
+	if (this->_capacity == 0)
+		return;
 	this->_vallocate(this->_capacity);
 	this->_vconstruct(0, n, val);
 }
@@ -195,7 +197,7 @@ vector<T, Allocator>::vector(const vector& x) :
 	_capacity(x._capacity),
 	_size(x._size)
 {
-	if (!this->_capacity)
+	if (this->_capacity == 0)
 		return ;
 	this->_vallocate(this->_capacity);
 	this->_vconstruct(0, x._size, x._begin);
@@ -205,6 +207,7 @@ vector<T, Allocator>::vector(const vector& x) :
 
 // Allocate array with size n
 template <typename T, class Allocator>
+inline
 void
 vector<T, Allocator>::_vallocate(size_type n)
 {
@@ -215,19 +218,22 @@ vector<T, Allocator>::_vallocate(size_type n)
 
 // Clears all vector allocations
 template <typename T, class Allocator>
+inline
 void
 vector<T, Allocator>::_vdeallocate(void)
 {
 	if (!this->_begin)
 		return ;
 	this->clear();
-	this->_alloc.deallocate(this->_begin, this->_capacity);
+	if (this->_capacity)
+		this->_alloc.deallocate(this->_begin, this->_capacity);
 	this->_begin = nullptr;
 	this->_capacity = 0;
 }
 
-// Deallocate all vector allocations, then allocate new storage of size c
+// Deallocate all vector allocations, then allocate new storage with capacity c
 template <typename T, class Allocator>
+inline
 void
 vector<T, Allocator>::_vreallocate(size_type c)
 {
@@ -494,7 +500,8 @@ void
 vector<T, Allocator>::assign(InputIterator first, InputIterator last)
 {
 	this->clear();
-	*this = vector(first, last);
+	for (; first != last; first++)
+		this->push_back(*first);
 }
 
 template <typename T, class Allocator>
@@ -505,6 +512,19 @@ vector<T, Allocator>::assign(size_type n, const value_type& val)
 		this->_vreallocate(n);
 	this->_vconstruct(0, n, val);
 	this->_size = n;
+}
+
+template <typename T, class Allocator>
+void
+vector<T, Allocator>::push_back(const value_type& val)
+{
+	if (this->_size != this->_capacity)
+	{
+		this->_vconstruct(++_size, val);
+		return ;
+	}
+	this->_vreallocate(_size + 1);
+	this->_vconstruct(_size++, val);
 }
 
 template <typename T, class Allocator>
