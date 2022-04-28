@@ -6,7 +6,7 @@
 #    By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/07 22:13:05 by ugdaniel          #+#    #+#              #
-#    Updated: 2022/04/28 16:30:53 by ugdaniel         ###   ########.fr        #
+#    Updated: 2022/04/28 20:03:40 by ugdaniel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJS		:= $(SRCS:.cpp=.o)
 HEADERS		:= -I .
 
 CC			:= c++
-CFLAGS		= -Wall -Werror -Wextra -std=c++98 -DSTD
+CFLAGS		= -Wall -Werror -Wextra -std=c++98 -DST
 
 all: $(NAME)
 

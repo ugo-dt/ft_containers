@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/28 16:21:33 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/28 19:57:54 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ class vector
 		const_iterator			_make_iter(pointer pos) const;
 		reference				_make_ref(size_type pos);
 		const_reference			_make_ref(size_type pos) const;
-		
+		void					_construct_one_at_end(const value_type& val = value_type());
 
 	// Member functions
 	public:
@@ -143,9 +143,7 @@ vector<T, Allocator>::vector(const allocator_type& alloc) :
 	_begin(nullptr),
 	_capacity(0),
 	_size(0)
-{
-	printf("lol\n");
-}
+{}
 
 /** 
  * @brief Fill constructor. Constructs a container with n elements.
@@ -301,6 +299,14 @@ typename ft::vector<T, Allocator>::reference
 vector<T, Allocator>::_make_ref(size_type pos)
 {
 	return reference(*(_begin + pos));
+}
+
+template <typename T, class Allocator>
+inline
+void
+vector<T, Allocator>::_construct_one_at_end(const value_type& val)
+{
+	this->_vconstruct(_size++, val);
 }
 
 /* Returns a constant reference to the element at the position pos */
@@ -525,7 +531,7 @@ vector<T, Allocator>::push_back(const value_type& val)
 		return ;
 	}
 	this->_vreallocate(_size + 1);
-	this->_vconstruct(_size++, val);
+	this->_construct_one_at_end(val);
 }
 
 template <typename T, class Allocator>
@@ -676,7 +682,8 @@ operator>=(const vector<T, Allocator>& x, const vector<T, Allocator>& y)
  * Both container objects must be of the same type (same template parameters),
  * although sizes may differ.
  * 
- * @param x,y vector containers of the same type (i.e., having both the same template parameters, T and Alloc).
+ * @param x,y vector containers of the same type (i.e.,
+ * having both the same template parameters, T and Alloc).
  */
 template <class T, class Allocator>
 inline
