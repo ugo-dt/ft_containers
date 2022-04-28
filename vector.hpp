@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/28 15:53:34 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/28 16:21:33 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ vector<T, Allocator>::vector(const allocator_type& alloc) :
 	_capacity(0),
 	_size(0)
 {
+	printf("lol\n");
 }
 
 /** 

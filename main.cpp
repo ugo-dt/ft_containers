@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:13:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/28 16:14:57 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/28 16:30:39 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 #include <vector>
 #include <string>
 
-#ifndef NAMESPACE
+#ifdef STD
+# define NAMESPACE	std
+#else
 # define NAMESPACE	ft
 #endif
 
