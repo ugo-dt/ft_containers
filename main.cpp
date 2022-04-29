@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:13:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/28 16:30:39 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/29 19:06:37 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,10 @@ int main(void)
 	std::cout << "size:\t  " << v.size() << std::endl;
 	std::cout << "capacity: " << v.capacity() << std::endl;
 	std::cout << "empty:\t  " << v.empty() << std::endl;
+
+//	ft::vector<int>		v(1);
+//	ft::vector<int>		v2(3);
+//	ft::vector<int>		v3(v);
 
 	return (0);
 }

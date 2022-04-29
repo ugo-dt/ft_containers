@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:38:59 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/13 09:41:07 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/29 13:06:19 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,58 +57,58 @@ class reverse_iterator
 		reference			operator[](difference_type n) const {return *(*this + n);}
 };
 
-template <class _Iter1, class _Iter2>
+template <class Iter1, class Iter2>
 inline
 bool
-operator==(const reverse_iterator<_Iter1>& x, const reverse_iterator<_Iter2>& y)
+operator==(const reverse_iterator<Iter1>& x, const reverse_iterator<Iter2>& y)
 {
     return x.base() == y.base();
 }
 
-template <class _Iter1, class _Iter2>
+template <class Iter1, class Iter2>
 inline
 bool
-operator<(const reverse_iterator<_Iter1>& x, const reverse_iterator<_Iter2>& y)
+operator<(const reverse_iterator<Iter1>& x, const reverse_iterator<Iter2>& y)
 {
     return x.base() > y.base();
 }
 
-template <class _Iter1, class _Iter2>
+template <class Iter1, class Iter2>
 inline
 bool
-operator!=(const reverse_iterator<_Iter1>& x, const reverse_iterator<_Iter2>& y)
+operator!=(const reverse_iterator<Iter1>& x, const reverse_iterator<Iter2>& y)
 {
     return x.base() != y.base();
 }
 
-template <class _Iter1, class _Iter2>
+template <class Iter1, class Iter2>
 inline
 bool
-operator>(const reverse_iterator<_Iter1>& x, const reverse_iterator<_Iter2>& y)
+operator>(const reverse_iterator<Iter1>& x, const reverse_iterator<Iter2>& y)
 {
     return x.base() < y.base();
 }
 
-template <class _Iter1, class _Iter2>
+template <class Iter1, class Iter2>
 inline
 bool
-operator>=(const reverse_iterator<_Iter1>& x, const reverse_iterator<_Iter2>& y)
+operator>=(const reverse_iterator<Iter1>& x, const reverse_iterator<Iter2>& y)
 {
     return x.base() <= y.base();
 }
 
-template <class _Iter1, class _Iter2>
+template <class Iter1, class Iter2>
 inline
 bool
-operator<=(const reverse_iterator<_Iter1>& x, const reverse_iterator<_Iter2>& y)
+operator<=(const reverse_iterator<Iter1>& x, const reverse_iterator<Iter2>& y)
 {
     return x.base() >= y.base();
 }
 
-template <class _Iter1, class _Iter2>
+template <class Iter1, class Iter2>
 inline
-typename reverse_iterator<_Iter1>::difference_type
-operator-(const reverse_iterator<_Iter1>& x, const reverse_iterator<_Iter2>& y)
+typename reverse_iterator<Iter1>::difference_type
+operator-(const reverse_iterator<Iter1>& x, const reverse_iterator<Iter2>& y)
 {
     return y.base() - x.base();
 }

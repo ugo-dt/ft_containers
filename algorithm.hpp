@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 09:06:30 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/13 09:32:13 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/29 13:07:34 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ bool	lexicographical_compare (InputIterator1 first1, InputIterator1 last1,
 	return (first2 != last2);
 }
 
-template <class T>
-void	swap(T& a, T& b)
+template <class Tp>
+void	swap(Tp& a, Tp& b)
 {
-	T	c(a);
+	Tp	c(a);
 
 	a = b;
 	b = c;

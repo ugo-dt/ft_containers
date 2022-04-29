@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 09:09:27 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/13 21:00:59 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/29 13:06:59 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 namespace ft
 {
 
-template <typename T>
-class random_access_iterator : public ft::iterator<ft::random_access_iterator_tag, T>
+template <class Tp>
+class random_access_iterator : public ft::iterator<ft::random_access_iterator_tag, Tp>
 {
 	public:
-		typedef random_access_iterator<T>			iterator;
-		typedef random_access_iterator<const T>		const_iterator;
+		typedef random_access_iterator<Tp>			iterator;
+		typedef random_access_iterator<const Tp>	const_iterator;
 		typedef typename iterator::value_type		value_type;
 		typedef typename iterator::pointer			pointer;
 		typedef typename iterator::reference		reference;

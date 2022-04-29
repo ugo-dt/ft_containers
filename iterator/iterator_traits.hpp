@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:21:03 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/28 15:55:30 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/29 13:05:27 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ struct forward_iterator_tag : input_iterator_tag {};
 struct bidirectional_iterator_tag : forward_iterator_tag {};
 struct random_access_iterator_tag : bidirectional_iterator_tag {};
 
-template <class Category, class T, class Distance = ptrdiff_t,
-	class Pointer = T*, class Reference = T&>
+template <class Category, class Tp, class Distance = ptrdiff_t,
+	class Pointer = Tp*, class Reference = Tp&>
 struct iterator
 {
-	typedef T			value_type;
+	typedef Tp			value_type;
 	typedef Distance 	difference_type;
 	typedef Pointer		pointer;
 	typedef Reference	reference;
@@ -48,23 +48,23 @@ struct iterator_traits
 	typedef typename Iterator::iterator_category	iterator_category;
 };
 
-template <class T>
-struct iterator_traits<T*>
+template <class Tp>
+struct iterator_traits<Tp*>
 {
 	typedef ptrdiff_t								difference_type;
-	typedef T										value_type;
-	typedef T*										pointer;
-	typedef T&										reference;
+	typedef Tp										value_type;
+	typedef Tp*										pointer;
+	typedef Tp&										reference;
 	typedef typename ft::random_access_iterator_tag	iterator_category;
 };
 
-template <class T>
-struct iterator_traits<const T*>
+template <class Tp>
+struct iterator_traits<const Tp*>
 {
 	typedef ptrdiff_t								difference_type;
-	typedef T										value_type;
-	typedef const T*								pointer;
-	typedef const T&								reference;
+	typedef Tp										value_type;
+	typedef const Tp*								pointer;
+	typedef const Tp&								reference;
 	typedef typename ft::random_access_iterator_tag	iterator_category;
 };
 
