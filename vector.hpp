@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/29 22:08:36 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/29 22:10:29 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,10 @@ template <class Tp, class Allocator>
 class _vector_base
 {
 protected:
-	typedef Allocator                                allocator_type;
-	typedef typename allocator_type::pointer         pointer;
-	typedef typename allocator_type::const_pointer   const_pointer;
-	typedef typename allocator_type::size_type       size_type;
+	typedef Allocator                              allocator_type;
+	typedef typename allocator_type::pointer       pointer;
+	typedef typename allocator_type::const_pointer const_pointer;
+	typedef typename allocator_type::size_type     size_type;
 
 protected:
 	pointer        _begin_;	  // Pointer to the first element of the array
@@ -299,7 +299,7 @@ private:
 
 	      iterator _make_iter(pointer pos);
 	const_iterator _make_iter(pointer pos) const;
-};	// vector
+};  // vector
 
 template <class Tp, class _Allocator>
 void
@@ -583,7 +583,6 @@ vector<Tp, Allocator>::swap(vector& v)
 	ft::swap(this->_alloc_, v._alloc_);
 }
 
-// vector non member functions
 template <class Tp, class Allocator>
 inline
 bool
@@ -649,6 +648,6 @@ swap(vector<Tp, Allocator>& x, vector<Tp, Allocator>& y)
 	x.swap(y);
 }
 
-} // ft
+}  // ft
 
 #endif // VECTOR_HPP
