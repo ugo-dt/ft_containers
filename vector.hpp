@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/29 21:58:30 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/29 22:02:05 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,18 @@ template <class Tp, class Allocator = std::allocator<Tp> >
 class vector
 {
 public:
-	typedef Tp												value_type;
-	typedef Allocator										allocator_type;	
-	typedef typename allocator_type::reference				reference;
-	typedef typename allocator_type::const_reference		const_reference;
-	typedef typename allocator_type::pointer				pointer;
-	typedef typename allocator_type::const_pointer			const_pointer;
-	typedef typename allocator_type::difference_type		difference_type	;
-	typedef typename allocator_type::size_type				size_type;
-	typedef ft::random_access_iterator<value_type>			iterator;
-	typedef ft::random_access_iterator<const value_type>	const_iterator;
-	typedef ft::reverse_iterator<iterator>					reverse_iterator;
-	typedef ft::reverse_iterator<const_iterator>			const_reverse_iterator;
+	typedef Tp                                           value_type;
+	typedef Allocator                                    allocator_type;	
+	typedef typename allocator_type::reference           reference;
+	typedef typename allocator_type::const_reference     const_reference;
+	typedef typename allocator_type::pointer             pointer;
+	typedef typename allocator_type::const_pointer       const_pointer;
+	typedef typename allocator_type::difference_type     difference_type;
+	typedef typename allocator_type::size_type           size_type;
+	typedef ft::random_access_iterator<value_type>       iterator;
+	typedef ft::random_access_iterator<const value_type> const_iterator;
+	typedef ft::reverse_iterator<iterator>               reverse_iterator;
+	typedef ft::reverse_iterator<const_iterator>         const_reverse_iterator;
 
 	vector(const vector& x);
 	explicit vector(const allocator_type&);
@@ -103,14 +103,14 @@ template <class Tp, class Allocator>
 class _vector_base
 {
 protected:
-	typedef Tp											value_type;
-	typedef Allocator									allocator_type;
-	typedef value_type&									reference;
-	typedef const value_type&							const_reference;
-	typedef typename allocator_type::pointer			pointer;
-	typedef typename allocator_type::const_pointer		const_pointer;
-	typedef typename allocator_type::difference_type	difference_type;
-	typedef typename allocator_type::size_type			size_type;
+	typedef Tp                                       value_type;
+	typedef Allocator                                allocator_type;
+	typedef value_type&                              reference;
+	typedef const value_type&                        const_reference;
+	typedef typename allocator_type::pointer         pointer;
+	typedef typename allocator_type::const_pointer   const_pointer;
+	typedef typename allocator_type::difference_type difference_type;
+	typedef typename allocator_type::size_type       size_type;
 
 protected:
 	pointer        _begin_;	  // Pointer to the first element of the array
@@ -199,20 +199,20 @@ class vector
 	: private _vector_base<Tp, Allocator>
 {
 private:
-	typedef _vector_base<Tp, Allocator>						_base;
+	typedef _vector_base<Tp, Allocator>                  _base;
 public:
-	typedef Tp												value_type;
-	typedef Allocator										allocator_type;	
-	typedef typename _base::reference						reference;
-	typedef typename _base::const_reference					const_reference;
-	typedef typename _base::pointer							pointer;
-	typedef typename _base::const_pointer					const_pointer;
-	typedef typename _base::difference_type					difference_type;
-	typedef typename _base::size_type						size_type;
-	typedef ft::random_access_iterator<value_type>			iterator;
-	typedef ft::random_access_iterator<const value_type>	const_iterator;
-	typedef ft::reverse_iterator<iterator>					reverse_iterator;
-	typedef ft::reverse_iterator<const_iterator>			const_reverse_iterator;
+	typedef Tp                                           value_type;
+	typedef Allocator                                    allocator_type;	
+	typedef typename _base::reference                    reference;
+	typedef typename _base::const_reference              const_reference;
+	typedef typename _base::pointer                      pointer;
+	typedef typename _base::const_pointer                const_pointer;
+	typedef typename _base::difference_type              difference_type;
+	typedef typename _base::size_type                    size_type;
+	typedef ft::random_access_iterator<value_type>       iterator;
+	typedef ft::random_access_iterator<const value_type> const_iterator;
+	typedef ft::reverse_iterator<iterator>               reverse_iterator;
+	typedef ft::reverse_iterator<const_iterator>         const_reverse_iterator;
 
 public:
 	explicit vector(const allocator_type& a = allocator_type())
