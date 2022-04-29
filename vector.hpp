@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/29 22:02:05 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/29 22:03:43 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,17 @@ public:
 	vector&	operator=(const vector& x);
 	~vector();
 
-	allocator_type			get_allocator() const;
+	allocator_type         get_allocator() const;
 
-	iterator				begin();
-	const_iterator			begin() const;
-	iterator				end();
-	const_iterator			end() const;
+	iterator               begin();
+	const_iterator         begin() const;
+	iterator               end();
+	const_iterator         end() const;
 
-	reverse_iterator		rbegin();
-	const_reverse_iterator	rbegin() const;
-	reverse_iterator		rend();
-	const_reverse_iterator	rend() const;
+	reverse_iterator       rbegin();
+	const_reverse_iterator rbegin() const;
+	reverse_iterator       rend();
+	const_reverse_iterator rend() const;
 
 	size_type size() const;
 	size_type max_size() const;
@@ -67,27 +67,27 @@ public:
 	bool empty() const;
 	void reserve(size_type n);
 
-	reference		operator[] (size_type n);
-	const_reference	operator[] (size_type n) const;
-	reference		at(size_type n);
-	const_reference	at(size_type n) const;
+	reference       operator[] (size_type n);
+	const_reference operator[] (size_type n) const;
+	reference       at(size_type n);
+	const_reference at(size_type n) const;
 
-	reference		front();
-	const_reference	front() const;
-	reference		back();
-	const_reference	back() const;
+	reference       front();
+	const_reference front() const;
+	reference       back();
+	const_reference back() const;
 
 	template <class InputIterator>
 		void assign(InputIterator first, InputIterator last);
 	void assign(size_type n, const value_type& val);
 	void push_back(const value_type& val);
 	void pop_back();
-// TODO		iterator insert(iterator position, const value_type& val);
-// TODO    		void insert(iterator position, size_type n, const value_type& val);
-// TODO		template <class InputIterator>
-// TODO			void insert(iterator position, InputIterator first, InputIterator last);
-// TODO		iterator erase(iterator position);
-// TODO		iterator erase(iterator first, iterator last);
+	iterator insert(iterator position, const value_type& val);
+  		void insert(iterator position, size_type n, const value_type& val);
+	template <class InputIterator>
+		void insert(iterator position, InputIterator first, InputIterator last);
+	iterator erase(iterator position);
+	iterator erase(iterator first, iterator last);
 	void swap(vector& v);
 	void clear();
 };
