@@ -6,12 +6,12 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/29 21:21:30 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/29 21:58:30 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTOROLD_HPP
-# define VECTOROLD_HPP
+#ifndef VECTOR_HPP
+# define VECTOR_HPP
 
 # include "algorithm.hpp"
 # include "iterator/iterator.hpp"
@@ -113,9 +113,9 @@ protected:
 	typedef typename allocator_type::size_type			size_type;
 
 protected:
-	pointer		   _begin_;	  // Pointer to the first element of the array
-	pointer		   _end_;	  // Pointer past the last element of the array
-	pointer		   _end_cap_; // Pointer to the end of the currently allocated storage
+	pointer        _begin_;	  // Pointer to the first element of the array
+	pointer        _end_;	  // Pointer past the last element of the array
+	pointer        _end_cap_; // Pointer to the end of the currently allocated storage
 	allocator_type _alloc_;	  // Object used to allocate storage
 
 	allocator_type& _alloc()
@@ -243,17 +243,17 @@ public:
 	void reserve(size_type n);
 	void resize(size_type n, value_type val = value_type());
 
-	iterator			   begin();
-	const_iterator		   begin() const;
-	iterator			   end();
-	const_iterator		   end()const;
+	iterator               begin();
+	const_iterator         begin() const;
+	iterator               end();
+	const_iterator         end()const;
 
-	reverse_iterator	   rbegin()
+	reverse_iterator       rbegin()
 		{return       reverse_iterator(end());}
 	const_reverse_iterator rbegin() const
 		{return       const_reverse_iterator(end());}
 
-	reverse_iterator	   rend()
+	reverse_iterator       rend()
 		{return       reverse_iterator(begin());}
 	const_reverse_iterator rend() const
 		{return       const_reverse_iterator(begin());}
@@ -269,19 +269,19 @@ public:
 	void clear()
 		{_base::clear();}
 
-	reference			   operator[] (size_type n);
-	const_reference		   operator[] (size_type n) const;
+	reference       operator[] (size_type n);
+	const_reference operator[] (size_type n) const;
 
-	reference			   at(size_type n);
-	const_reference		   at(size_type n) const;
+	reference       at(size_type n);
+	const_reference at(size_type n) const;
 
-	reference			   front()
+	reference       front()
 		{return *this->_begin_;}
-	const_reference		   front() const
+	const_reference front() const
 		{return *this->_begin_;}
-	reference			   back()
+	reference       back()
 		{return *this->_end_ - 1;}
-	const_reference		   back() const
+	const_reference back() const
 		{return *this->_end_ - 1;}
 
 	iterator insert(iterator position, const value_type& val);
