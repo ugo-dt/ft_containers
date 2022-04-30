@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:13:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/29 21:20:11 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/30 22:28:17 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,13 @@
 # define NAMESPACE	ft
 #endif
 
+void	test(void)
+{
+}
+
 int main(void)
 {
+	//test();return (0);
 	NAMESPACE::vector<int>						v;
 	NAMESPACE::vector<int>						v2(0);
 	NAMESPACE::vector<int>::iterator			it;
@@ -70,8 +75,18 @@ int main(void)
 	for (it = v.begin(); it != v.end(); it++)
 		std::cout << *it << std::endl;
 	std::cout << "------------" << std::endl;
+	std::cout << "> operator[]" << std::endl;
+	for (int i = 0; i < 3; i++)
+		std::cout << v[i] << std::endl;
+	std::cout << "> at" << std::endl;
+	for (int i = 0; i < 3; i++)
+		std::cout << v.at(i) << std::endl;
+	std::cout << "> front: " << v.front() << std::endl;
+	std::cout << "> back: " << v.back() << std::endl;
+	std::cout << "------------" << std::endl;
 	v.pop_back();
-	std::cout << "> pop_back" << std::endl;
+	std::cout << "> pop_back, insert begin" << std::endl;
+	v.insert(v.begin(), 20);
 	for (it = v.begin(); it != v.end(); it++)
 		std::cout << *it << std::endl;
 	std::cout << "------------" << std::endl;
@@ -88,6 +103,5 @@ int main(void)
 	std::cout << "size:\t  " << v.size() << std::endl;
 	std::cout << "capacity: " << v.capacity() << std::endl;
 	std::cout << "empty:\t  " << v.empty() << std::endl;
-
 	return (0);
 }

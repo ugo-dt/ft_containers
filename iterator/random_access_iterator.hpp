@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 09:09:27 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/29 13:06:59 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/04/30 21:17:57 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ class random_access_iterator : public ft::iterator<ft::random_access_iterator_ta
 			i -= lhs;
 			return (i);
 		}
+
+		difference_type	operator-(const random_access_iterator &b) const {return _ptr - b._ptr;}
 
 }; // random_access_iterator
 
