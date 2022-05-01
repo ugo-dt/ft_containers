@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/30 22:25:47 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/01 22:41:23 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,7 +296,7 @@ private:
     template <class ForwardIterator>
 		void _construct_at_end(ForwardIterator first, ForwardIterator last, size_type n);
     void __destruct_at_end(pointer new_last) {_base::__destruct_at_end(new_last);}
-	void _insert_move_range(pointer p, iterator position, const value_type& x);
+	void _insert_in_array(pointer p, iterator position, const value_type& x);
 
 	      iterator _make_iter(pointer pos);
 	const_iterator _make_iter(pointer pos) const;
@@ -524,7 +524,7 @@ vector<Tp, Allocator>::pop_back()
 template <class Tp, class Allocator>
 inline
 void
-vector<Tp, Allocator>::_insert_move_range(pointer p, iterator position, const value_type& x)
+vector<Tp, Allocator>::_insert_in_array(pointer p, iterator position, const value_type& x)
 {
 	int      i = 0;
 	iterator it;
@@ -549,26 +549,51 @@ vector<Tp, Allocator>::insert(iterator position, const value_type& x)
         }
 		else
 		{
-			_insert_move_range(this->_begin, position, x);
+			_insert_in_array(this->_begin, position, x);
 			this->_end++;
 		}
 	}
 	else
 	{
 		vector   v(size() + 1);
-		_insert_move_range(v._begin, position, x);
+		_insert_in_array(v._begin, position, x);
 		swap(v);
 	}
 	return (_make_iter(p));
 }
-/*
+
 template <class Tp, class Allocator>
 void
 vector<Tp, Allocator>::insert(iterator position, size_type n, const value_type& x)
 {
-
+	pointer p = this->_begin + (position - begin());
+	if (n > 0)
+	{
+		if (n <= static_cast<size_type>(this->_end_capacity() - this->_end))
+		{
+			size_type old_n = n;
+            pointer old_last = this->_end;
+            if (n > static_cast<size_type>(this->_end - p))
+            {
+				size_type cx = n - (this->_end - p);
+                _construct_at_end(cx, x);
+                n -= cx;
+            }
+            if (n > 0)
+            {
+		//		__move_range(__p, __old_last, __p + __old_n);
+            }
+		}
+		else
+		{
+			vector   v(size() + 1);
+			_insert_in_array(v._begin, position, x);
+			swap(v);
+		}
+	}
+	return (_make_iter(p));
 }
-
+/*
 template <class Tp, class Allocator>
 template <class InputIterator>
 void
