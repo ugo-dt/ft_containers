@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:13:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/30 22:28:17 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/02 21:05:51 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,8 @@
 # define NAMESPACE	ft
 #endif
 
-void	test(void)
-{
-}
-
 int main(void)
 {
-	//test();return (0);
 	NAMESPACE::vector<int>						v;
 	NAMESPACE::vector<int>						v2(0);
 	NAMESPACE::vector<int>::iterator			it;

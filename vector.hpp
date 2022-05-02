@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/01 22:41:23 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/02 21:05:15 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,8 +295,10 @@ private:
     void _construct_at_end(size_type n, const_reference x);
     template <class ForwardIterator>
 		void _construct_at_end(ForwardIterator first, ForwardIterator last, size_type n);
-    void __destruct_at_end(pointer new_last) {_base::__destruct_at_end(new_last);}
-	void _insert_in_array(pointer p, iterator position, const value_type& x);
+    void _destruct_at_end(pointer new_last) {_base::_destruct_at_end(new_last);}
+	void _insert_in_array(pointer p, size_type n, iterator position, const value_type& x);
+	template <class InputIterator>
+		void _insert_in_array(pointer p, iterator position, InputIterator first, InputIterator last);
 
 	      iterator _make_iter(pointer pos);
 	const_iterator _make_iter(pointer pos) const;
@@ -507,7 +509,7 @@ vector<Tp, Allocator>::push_back(const value_type& x)
 		this->_alloc.construct(this->_end++, x);
     else
 	{
-		vector	v(size() + 1);
+		vector	v(size() + 1, value_type(), this->_allocator());
 		v.assign(this->_begin, this->_end);
 		v._alloc.construct(v._end++, x);
 		swap(v);
@@ -524,15 +526,33 @@ vector<Tp, Allocator>::pop_back()
 template <class Tp, class Allocator>
 inline
 void
-vector<Tp, Allocator>::_insert_in_array(pointer p, iterator position, const value_type& x)
+vector<Tp, Allocator>::_insert_in_array(pointer p, size_type n, iterator position, const value_type& x)
 {
 	int      i = 0;
 	iterator it;
 
 	for (it = this->begin(); it != position; it++)
 		p[i++] = *it;
-	p[i++] = x;
+	while (n--)
+		p[i++] = x;
+	for (; it != this->end(); it++)
+		p[i++] = *it;
+}
+
+template <class Tp, class Allocator>
+template <class InputIterator>
+inline
+void
+vector<Tp, Allocator>::_insert_in_array(pointer p, iterator position, InputIterator first, InputIterator last)
+{
+	int      i = 0;
+	iterator it;
+
 	for (it = this->begin(); it != position; it++)
+		p[i++] = *it;
+	for (; first != last; first++)
+		p[i++] = *first;
+	for (; it != this->end(); it++)
 		p[i++] = *it;
 }
 
@@ -549,14 +569,14 @@ vector<Tp, Allocator>::insert(iterator position, const value_type& x)
         }
 		else
 		{
-			_insert_in_array(this->_begin, position, x);
+			_insert_in_array(this->_begin, 1, position, x);
 			this->_end++;
 		}
 	}
 	else
 	{
-		vector   v(size() + 1);
-		_insert_in_array(v._begin, position, x);
+		vector   v(size() + 1, value_type(), this->_allocator());
+		_insert_in_array(v._begin, 1, position, x);
 		swap(v);
 	}
 	return (_make_iter(p));
@@ -566,42 +586,86 @@ template <class Tp, class Allocator>
 void
 vector<Tp, Allocator>::insert(iterator position, size_type n, const value_type& x)
 {
-	pointer p = this->_begin + (position - begin());
 	if (n > 0)
 	{
 		if (n <= static_cast<size_type>(this->_end_capacity() - this->_end))
 		{
-			size_type old_n = n;
-            pointer old_last = this->_end;
-            if (n > static_cast<size_type>(this->_end - p))
-            {
-				size_type cx = n - (this->_end - p);
-                _construct_at_end(cx, x);
-                n -= cx;
-            }
-            if (n > 0)
-            {
-		//		__move_range(__p, __old_last, __p + __old_n);
-            }
+			_insert_in_array(this->_begin, n, position, x);
+			this->_end += n;
 		}
 		else
 		{
-			vector   v(size() + 1);
-			_insert_in_array(v._begin, position, x);
-			swap(v);
+			vector   v(size() + n, value_type(), this->_allocator());
+			_insert_in_array(v._begin, n, position, x);
+			swap(v); 
 		}
 	}
-	return (_make_iter(p));
 }
-/*
+
 template <class Tp, class Allocator>
 template <class InputIterator>
 void
 vector<Tp, Allocator>::insert(iterator position, InputIterator first, InputIterator last)
 {
-
+	size_type n = last - first;
+	if (n > 0)
+	{
+		if (n <= static_cast<size_type>(this->_end_capacity() - this->_end))
+		{
+			_insert_in_array(this->_begin, position, first, last);
+			this->_end += n;
+		}
+		else
+		{
+			vector	v(size() + n, value_type(), this->_allocator());
+			_insert_in_array(v._begin, position, first, last);
+			swap(v);
+		}
+	}
 }
-*/
+
+template <class Tp, class Allocator>
+typename ft::vector<Tp, Allocator>::iterator
+vector<Tp, Allocator>::erase(iterator position)
+{
+	pointer p = this->_begin + (position - begin());
+	if (p == this->_end - 1)
+	{
+		this->_destruct_at_end(this->_end - 1);
+	}
+	else
+	{
+		vector   v(this->_allocator());
+		iterator it;
+
+		v.reserve(size() - 1);
+		for (it = this->begin(); it != position; it++)
+			v.push_back(*it);
+		this->_alloc.destroy(p);
+		for (it = position + 1; it != this->end(); it++)
+			v.push_back(*it);
+		swap(v);
+	}
+	return (_make_iter(p));
+}
+
+template <class Tp, class Allocator>
+typename ft::vector<Tp, Allocator>::iterator
+vector<Tp, Allocator>::erase(iterator first, iterator last)
+{
+	pointer  p = this->_begin + (first - begin());
+	vector   v(this->_allocator());
+	iterator it;
+
+	v.reserve(size() - (last - first));
+	for (it = this->begin(); it != first; it++)
+		v.push_back(*it);
+	for (it = last + 1; it != this->end(); it++)
+		v.push_back(*it);
+	swap(v);
+	return (_make_iter(p));
+}
+
 template <class Tp, class Allocator>
 typename ft::vector<Tp, Allocator>::reference
 vector<Tp, Allocator>::operator[](size_type n)
@@ -640,7 +704,7 @@ vector<Tp, Allocator>::reserve(size_type n)
 {
 	if (n > capacity())
     {
-		vector	v(n);
+		vector	v(n, value_type(), this->_allocator());
 
 		v.assign(this->_begin, this->_end);
         swap(v);
@@ -718,6 +782,16 @@ operator>=(const vector<Tp, Allocator>& x, const vector<Tp, Allocator>& y)
  * @brief The contents of container x are exchanged with those of y.
  * Both container objects must be of the same type (same template parameters),
  * although sizes may differ.
+ * 
+ * After the call to this member function, the elements in x are those which
+ * were in y before the call, and the elements of y are those which were in x.
+ * All iterators, references and pointers remain valid for the swapped objects.
+ * 
+ * This is an overload of the generic algorithm swap that improves its performance
+ * by mutually transferring ownership over their assets to the other container
+ * (i.e., the containers exchange references to their data, without actually
+ * performing any element copy or movement): It behaves as if x.swap(y) was
+ * called.
  * 
  * @param x,y vector containers of the same type (i.e.,
  * having both the same template parameters, T and Alloc).
