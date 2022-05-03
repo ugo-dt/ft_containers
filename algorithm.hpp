@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 09:06:30 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/04/29 13:07:34 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/03 16:46:35 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ namespace ft
 {
 
 template <class InputIterator1, class InputIrerator2>
-bool	equal(InputIterator1 first1, InputIterator1 last1, InputIrerator2 first2)
+bool
+equal(InputIterator1 first1, InputIterator1 last1, InputIrerator2 first2)
 {
 	while (first1 != last1)
 	{
@@ -32,8 +33,9 @@ bool	equal(InputIterator1 first1, InputIterator1 last1, InputIrerator2 first2)
 }
 
 template <class InputIterator1, class InputIrerator2, class BinaryPredicate>
-bool	equal(InputIterator1 first1, InputIterator1 last1,
-			  InputIrerator2 first2, BinaryPredicate pred)
+bool
+equal(InputIterator1 first1, InputIterator1 last1,
+	  InputIrerator2 first2, BinaryPredicate pred)
 {
 	while (first1 != last1)
 	{
@@ -46,8 +48,9 @@ bool	equal(InputIterator1 first1, InputIterator1 last1,
 }
 
 template <class InputIterator1, class InputIterator2>
-bool	lexicographical_compare (InputIterator1 first1, InputIterator1 last1,
-								 InputIterator2 first2, InputIterator2 last2)
+bool
+lexicographical_compare(InputIterator1 first1, InputIterator1 last1,
+						InputIterator2 first2, InputIterator2 last2)
 {
 	while (first1 != last1)
 	{
@@ -62,9 +65,10 @@ bool	lexicographical_compare (InputIterator1 first1, InputIterator1 last1,
 }
 
 template <class InputIterator1, class InputIterator2, class Compare>
-bool	lexicographical_compare (InputIterator1 first1, InputIterator1 last1,
-								 InputIterator2 first2, InputIterator2 last2,
-								 Compare comp)
+bool
+lexicographical_compare(InputIterator1 first1, InputIterator1 last1,
+						InputIterator2 first2, InputIterator2 last2,
+						Compare comp)
 {
 	while (first1 != last1)
 	{
@@ -79,7 +83,8 @@ bool	lexicographical_compare (InputIterator1 first1, InputIterator1 last1,
 }
 
 template <class Tp>
-void	swap(Tp& a, Tp& b)
+void
+swap(Tp& a, Tp& b)
 {
 	Tp	c(a);
 
@@ -87,6 +92,6 @@ void	swap(Tp& a, Tp& b)
 	b = c;
 }
 
-} // ft
+}  // ft
 
 #endif // ALGORITHM_HPP

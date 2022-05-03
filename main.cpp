@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:13:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/02 21:05:51 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/03 16:45:41 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,26 @@
 # define NAMESPACE	ft
 #endif
 
-int main(void)
+class Class
 {
+private:
+	void*	test;
+
+public:
+	Class() {test = malloc(sizeof(char) * 5);}
+	Class(const Class &) {}
+	~Class() {
+		free(test);
+	}
+};
+
+void	test()
+{
+}
+
+int main()
+{
+
 	NAMESPACE::vector<int>						v;
 	NAMESPACE::vector<int>						v2(0);
 	NAMESPACE::vector<int>::iterator			it;
@@ -56,6 +74,7 @@ int main(void)
 		std::cout << v[ref] << std::endl;
 	while (ref--)
 		std::cout << v[ref] << std::endl;
+
 
 	std::cout << "------------" << std::endl;
 	v.reserve(50);
