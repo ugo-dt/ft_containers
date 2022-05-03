@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 09:09:27 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/03 16:44:51 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/03 22:54:00 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ class random_access_iterator
 	: public ft::iterator<ft::random_access_iterator_tag, Tp>
 {
 	public:
-		typedef random_access_iterator<Tp>			iterator;
-		typedef random_access_iterator<const Tp> const_iterator;
-		typedef typename iterator::value_type		value_type;
-		typedef typename iterator::pointer			pointer;
-		typedef typename iterator::reference		reference;
-		typedef typename iterator::difference_type	difference_type;
+		typedef random_access_iterator<Tp>          iterator;
+		typedef random_access_iterator<const Tp>    const_iterator;
+		typedef typename iterator::value_type       value_type;
+		typedef typename iterator::pointer          pointer;
+		typedef typename iterator::reference        reference;
+		typedef typename iterator::difference_type  difference_type;
 
 	private:
 		pointer	_ptr;
