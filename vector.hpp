@@ -6,14 +6,13 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/03 16:45:29 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/03 22:33:11 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
-#include <iostream>
 # include "algorithm.hpp"
 # include "iterator/iterator.hpp"
 # include <stdexcept>
@@ -116,10 +115,10 @@ protected:
     typedef typename allocator_type::difference_type difference_type;
 
 protected:
-	pointer        _begin;	  // Pointer to the first element of the array
-	pointer        _end;	  // Pointer past the last element of the array
+	pointer        _begin;   // Pointer to the first element of the array
+	pointer        _end;     // Pointer past the last element of the array
 	pointer        _end_cap; // Pointer to the end of the currently allocated storage
-	allocator_type _alloc;	  // Object used to allocate storage
+	allocator_type _alloc;   // Object used to allocate storage
 
 	allocator_type& _allocator()
 		{return _alloc;}
