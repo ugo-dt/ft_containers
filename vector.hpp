@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/03 22:33:11 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/03 22:35:39 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,10 @@ public:
 protected:
 	typedef Tp                                       value_type;
 	typedef	value_type&                              reference;
-    typedef const value_type&                        const_reference;
+	typedef const value_type&                        const_reference;
 	typedef typename allocator_type::pointer         pointer;
 	typedef typename allocator_type::const_pointer   const_pointer;
-    typedef typename allocator_type::difference_type difference_type;
+	typedef typename allocator_type::difference_type difference_type;
 
 protected:
 	pointer        _begin;   // Pointer to the first element of the array
