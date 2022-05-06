@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.hpp                                            :+:      :+:    :+:   */
+/*   pair.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 16:51:02 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/04 19:41:49 by ugdaniel         ###   ########.fr       */
+/*   Created: 2022/05/04 18:05:23 by ugdaniel          #+#    #+#             */
+/*   Updated: 2022/05/04 18:07:58 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_HPP
-# define MAP_HPP
-
-# include "pair.hpp"
-# include <memory>     // std::allocator
-# include <functional> // std::less
+#ifndef PAIR_HPP
+# define PAIR_HPP
 
 namespace ft
 {
 
-template <class Key, class Tp, class Compare = std::less<Key>,
-          class Allocator = std::allocator<pair<const Key, Tp> > >
-class map
+template <class T1, class T2>
+class pair
 {
-	map();
-	~map();
-}; // map
+
+}; // pair
 
 }  // ft
 
-#endif // MAP_HPP
+#endif // PAIR_HPP

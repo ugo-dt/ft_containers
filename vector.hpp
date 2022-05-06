@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/03 22:55:20 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/06 16:46:49 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "algorithm.hpp"
 # include "iterator/iterator.hpp"
+# include "type_traits.hpp"
 # include <stdexcept>
 
 /*
@@ -230,7 +231,8 @@ public:
 					const allocator_type& alloc = allocator_type());
 	template <class InputIterator>
 		vector(InputIterator first, InputIterator last,
-				const allocator_type& alloc = allocator_type());
+				const allocator_type& alloc = allocator_type(),
+				typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type* = 0);
 	vector&	operator=(const vector& x);
 
 	template <class InputIterator>
@@ -241,20 +243,24 @@ public:
 	void reserve(size_type n);
 	void resize(size_type n, value_type val = value_type());
 
-	iterator               begin();
-	const_iterator         begin() const;
-	iterator               end();
-	const_iterator         end()const;
+	iterator               begin()
+		{return _make_iter(this->_begin);}
+	const_iterator         begin() const
+		{return _make_iter(this->_begin);}
+	iterator               end()
+		{return _make_iter(this->_end);}
+	const_iterator         end()const
+		{return _make_iter(this->_end);}
 
 	reverse_iterator       rbegin()
-		{return       reverse_iterator(end());}
+		{return reverse_iterator(end());}
 	const_reverse_iterator rbegin() const
-		{return       const_reverse_iterator(end());}
+		{return const_reverse_iterator(end());}
 
 	reverse_iterator       rend()
-		{return       reverse_iterator(begin());}
+		{return reverse_iterator(begin());}
 	const_reverse_iterator rend() const
-		{return       const_reverse_iterator(begin());}
+		{return const_reverse_iterator(begin());}
 
 	allocator_type get_allocator() const
 		{return this->_alloc;}
@@ -413,11 +419,15 @@ vector<Tp, Allocator>::vector(size_type n, const value_type& x, const allocator_
         _construct_at_end(n, x);
     }
 }
-	
+
+/* The function template argument InputIterator shall be an input iterator type that
+ * points to elements of a type from which value_type objects can be constructed. */
 template <class Tp, class Allocator>
 template <class InputIterator>
 inline
-vector<Tp, Allocator>::vector(InputIterator first, InputIterator last, const allocator_type& a)
+vector<Tp, Allocator>::vector(InputIterator first, InputIterator last, const allocator_type& a,
+							  typename enable_if<!is_integral<
+							  	InputIterator>::value, InputIterator>::type*)
 	: _base(a)
 {
 	for (; first != last; ++first)
@@ -435,42 +445,6 @@ vector<Tp, Allocator>::operator=(const vector& x)
         assign(x._begin, x._end);
     }
     return *this;
-}
-
-/* Returns an iterator pointing to the first element in the vector. */
-template <class Tp, class Allocator>
-typename ft::vector<Tp, Allocator>::iterator
-vector<Tp, Allocator>::begin()
-{
-	return _make_iter(this->_begin);
-}
-
-/* Returns a constant iterator pointing to the first element in the vector. */
-template <class Tp, class Allocator>
-typename ft::vector<Tp, Allocator>::const_iterator
-vector<Tp, Allocator>::begin() const
-{
-	return _make_iter(this->_begin);
-}
-
-/**
- * @brief Returns an iterator referring to the past-the-end element in the vector container.
- * The past-the-end element is the theoretical element that would follow the last element in
- * the vector. It does not point to any element, and thus shall not be dereferenced.
- * If the container is empty, this function returns the same as vector::begin.
- */
-template <class Tp, class Allocator>
-typename ft::vector<Tp, Allocator>::iterator
-vector<Tp, Allocator>::end()
-{
-	return _make_iter(this->_end);
-}
-
-template <class Tp, class Allocator>
-typename ft::vector<Tp, Allocator>::const_iterator
-vector<Tp, Allocator>::end() const
-{
-	return _make_iter(this->_end);
 }
 
 template <class Tp, class Allocator>

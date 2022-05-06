@@ -6,16 +6,20 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:13:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/03 16:45:41 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/06 16:50:17 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.hpp"
+#include "map.hpp"
 #include <memory>
 #include <algorithm>
 #include <iostream>
 #include <vector>
 #include <string>
+#include <stack>
+#include <map>
+#include <type_traits>
 
 #ifdef STD
 # define NAMESPACE	std
@@ -36,13 +40,8 @@ public:
 	}
 };
 
-void	test()
-{
-}
-
 int main()
 {
-
 	NAMESPACE::vector<int>						v;
 	NAMESPACE::vector<int>						v2(0);
 	NAMESPACE::vector<int>::iterator			it;
