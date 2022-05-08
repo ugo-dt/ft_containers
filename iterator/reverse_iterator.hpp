@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:38:59 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/03 16:44:39 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/07 14:29:11 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,12 +159,12 @@ operator-(const reverse_iterator<Iter1>& x, const reverse_iterator<Iter2>& y)
     return y.base() - x.base();
 }
 
-template <class _Iter>
+template <class Iter>
 inline
-reverse_iterator<_Iter>
-operator+(typename reverse_iterator<_Iter>::difference_type __n, const reverse_iterator<_Iter>& x)
+reverse_iterator<Iter>
+operator+(typename reverse_iterator<Iter>::difference_type n, const reverse_iterator<Iter>& x)
 {
-    return reverse_iterator<_Iter>(x.base() - __n);
+    return reverse_iterator<Iter>(x.base() - n);
 }
 
 }  // ft

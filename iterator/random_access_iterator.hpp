@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 09:09:27 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/03 22:54:00 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/08 12:54:26 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,77 +52,209 @@ class random_access_iterator
 		~random_access_iterator() {}
 
 	public:
-		bool      operator==(const iterator &rhs) const {return this->_ptr == rhs._ptr;}
-		bool      operator!=(const iterator &rhs) const {return this->_ptr != rhs._ptr;}
-		bool      operator<(const iterator &rhs)  const {return this->_ptr < rhs._ptr;}
-		bool      operator>(const iterator &rhs)  const {return this->_ptr > rhs._ptr;}
-		bool      operator<=(const iterator &rhs) const {return this->_ptr <= rhs._ptr;}
-		bool      operator>=(const iterator &rhs) const {return this->_ptr >= rhs._ptr;}
+		bool operator==(const iterator &y) const;
+		bool operator!=(const iterator &y) const;
+		bool operator<=(const iterator &y) const;
+		bool operator>=(const iterator &y) const;
+		bool operator<(const iterator &y)  const;
+		bool operator>(const iterator &y)  const;
 
-		pointer   operator->() const {return this->_ptr;}
+		//pointer   operator->() const {return this->_ptr;}
 
-		iterator  operator+(const int &rhs)	{return iterator(this->_ptr + rhs);}
-		iterator  operator-(const int &rhs) {return iterator(this->_ptr - rhs);}
-		operator  const_iterator()      {return const_iterator(this->_ptr);}
-		iterator  &operator=(const random_access_iterator &rhs)
-		{
-			this->_ptr = rhs._ptr;
-			return (*this);
-		}
-		iterator  operator++(int)
-		{
-			iterator i(*this);
-			this->_ptr++;
-			return i;
-		}
-		iterator  operator--(int)
-		{
-			iterator i(*this);
-			this->_ptr--;
-			return i;
-		}
-		iterator& operator++()
-		{
-			this->_ptr++;
-			return *this;
-		}
-		iterator& operator--()
-		{
-			this->_ptr--;
-			return *this;
-		}
-		iterator& operator+=(const int &rhs)
-		{
-			this->_ptr += rhs;
-			return *this;
-		}
-		iterator& operator-=(const int &rhs)
-		{
-			this->_ptr -= rhs;
-			return *this;
-		}
+		iterator  operator+(const int &y);
+		iterator  operator-(const int &y);
 
-		reference operator*()          const {return *(this->_ptr);}
-		reference operator[](const int &n) const {return this->_ptr[n];}
+		operator  const_iterator() {return const_iterator(this->_ptr);}
 
+		iterator  &operator=(const random_access_iterator &y);
+		iterator  operator++(int);
+		iterator  operator--(int);
+		iterator& operator++();
+		iterator& operator--();
+		iterator& operator+=(const int &y);
+		iterator& operator-=(const int &y);
 
-		friend	random_access_iterator	operator+(const int &lhs, const random_access_iterator &rhs)
+		reference operator*() const;
+		reference operator[](const int &n) const;
+
+		friend	random_access_iterator	operator+(const int &x, const random_access_iterator &y)
 		{
-			random_access_iterator	i(rhs);
-			i += lhs;
+			random_access_iterator	i(y);
+			i += x;
 			return (i);
 		}
 
-		friend	random_access_iterator	operator-(const int &lhs, const random_access_iterator &rhs)
+		friend	random_access_iterator	operator-(const int &x, const random_access_iterator &y)
 		{
-			random_access_iterator	i(rhs);
-			i -= lhs;
+			random_access_iterator	i(y);
+			i -= x;
 			return (i);
 		}
 
 		difference_type	operator-(const random_access_iterator &b) const {return _ptr - b._ptr;}
 
 }; // random_access_iterator
+
+template <class Tp>
+bool
+random_access_iterator<Tp>::operator==(const iterator &y) const
+{
+	return this->_ptr == y._ptr;
+}
+
+template <class Tp>
+bool
+random_access_iterator<Tp>::operator!=(const iterator &y) const
+{
+	return !(this->_ptr == y._ptr);
+}
+
+template <class Tp>
+bool
+random_access_iterator<Tp>::operator<(const iterator &y) const
+{
+	return this->_ptr < y._ptr;
+}
+
+template <class Tp>
+bool
+random_access_iterator<Tp>::operator>(const iterator &y) const
+{
+	return y._ptr < this->_ptr;
+}
+
+template <class Tp>
+bool
+random_access_iterator<Tp>::operator<=(const iterator &y) const
+{
+	return !(this->_ptr > y._ptr);
+}
+
+template <class Tp>
+bool
+random_access_iterator<Tp>::operator>=(const iterator &y) const
+{
+	return !(this->_ptr < y._ptr);
+}
+
+template <class Tp>
+typename random_access_iterator<Tp>::iterator
+random_access_iterator<Tp>::operator+(const int &y)
+{
+	return iterator(this->_ptr + y);
+}
+
+template <class Tp>
+typename random_access_iterator<Tp>::iterator
+random_access_iterator<Tp>::operator-(const int &y) {return iterator(this->_ptr - y);}
+
+template <class Tp>
+typename random_access_iterator<Tp>::iterator&
+random_access_iterator<Tp>::operator=(const random_access_iterator &y)
+{
+	this->_ptr = y._ptr;
+	return (*this);
+}
+
+template <class Tp>
+typename random_access_iterator<Tp>::iterator
+random_access_iterator<Tp>::operator++(int)
+{
+	iterator i(*this);
+	this->_ptr++;
+	return i;
+}
+
+template <class Tp>
+typename random_access_iterator<Tp>::iterator
+random_access_iterator<Tp>::operator--(int)
+{
+	iterator i(*this);
+	this->_ptr--;
+	return i;
+}
+
+template <class Tp>
+typename random_access_iterator<Tp>::iterator&
+random_access_iterator<Tp>::operator++()
+{
+	this->_ptr++;
+	return *this;
+}
+
+template <class Tp>
+typename random_access_iterator<Tp>::iterator&
+random_access_iterator<Tp>::operator--()
+{
+	this->_ptr--;
+	return *this;
+}
+
+template <class Tp>
+typename random_access_iterator<Tp>::iterator&
+random_access_iterator<Tp>::operator+=(const int &y)
+{
+	this->_ptr += y;
+	return *this;
+}
+
+template <class Tp>
+typename random_access_iterator<Tp>::iterator&
+random_access_iterator<Tp>::operator-=(const int &y)
+{
+	this->_ptr -= y;
+	return *this;
+}
+
+
+template <class Tp>
+typename random_access_iterator<Tp>::reference
+random_access_iterator<Tp>::operator*() const
+{
+	return *(this->_ptr);
+}
+
+template <class Tp1, class Tp2>
+bool
+operator==(const random_access_iterator<Tp1> &x, const random_access_iterator<Tp2> &y)
+{
+	return x == y;
+}
+
+template <class Tp1, class Tp2>
+bool
+operator!=(const random_access_iterator<Tp1> &x, const random_access_iterator<Tp2> &y)
+{
+	return !(x == y);
+}
+
+template <class Tp1, class Tp2>
+bool
+operator<(const random_access_iterator<Tp1> &x, const random_access_iterator<Tp2> &y)
+{
+	return x < y;
+}
+
+template <class Tp1, class Tp2>
+bool
+operator>(const random_access_iterator<Tp1> &x, const random_access_iterator<Tp2> &y)
+{
+	return y < x;
+}
+
+template <class Tp1, class Tp2>
+bool
+operator<=(const random_access_iterator<Tp1> &x, const random_access_iterator<Tp2> &y)
+{
+	return !(x > y);
+}
+
+template <class Tp1, class Tp2>
+bool
+operator>=(const random_access_iterator<Tp1> &x, const random_access_iterator<Tp2> &y)
+{
+	return !(x < y);
+}
 
 }  // ft
 

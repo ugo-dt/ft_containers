@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iterator.hpp                                       :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/13 09:32:28 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/08 12:52:04 by ugdaniel         ###   ########.fr       */
+/*   Created: 2022/05/08 12:49:14 by ugdaniel          #+#    #+#             */
+/*   Updated: 2022/05/08 15:13:17 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITERATOR_HPP
-# define ITERATOR_HPP
+#include "tests.h"
 
-# include "iterator_traits.hpp"
-# include "reverse_iterator.hpp"
-# include "random_access_iterator.hpp"
-
-#endif // ITERATOR_HPP
+int	main(void)
+{
+#ifdef STD
+	std::cout << "Testing with std" << std::endl;
+#else
+	std::cout << "Testing with ft" << std::endl;
+#endif
+	tests_vector_constructors();
+	return (0);
+}

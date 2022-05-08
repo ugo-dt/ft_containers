@@ -6,13 +6,14 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/06 16:46:49 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/07 19:57:17 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
+#include <iostream>
 # include "algorithm.hpp"
 # include "iterator/iterator.hpp"
 # include "type_traits.hpp"
@@ -169,7 +170,7 @@ _vector_base<Tp, Allocator>::_destruct_at_end(pointer new_last)
 template <class Tp, class Allocator>
 inline
 _vector_base<Tp, Allocator>::_vector_base()
-	:  _begin(nullptr),
+	: _begin(nullptr),
 	  _end(nullptr),
 	  _end_cap(nullptr),
 	  _alloc(allocator_type())
@@ -236,7 +237,8 @@ public:
 	vector&	operator=(const vector& x);
 
 	template <class InputIterator>
-		void assign(InputIterator first, InputIterator last);
+		void assign(InputIterator first, InputIterator last,
+					typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type* = 0);
 	void assign(size_type n, const value_type& val);
 	void push_back(const value_type& val);
 	void pop_back();
@@ -293,7 +295,9 @@ public:
 	iterator insert(iterator position, const value_type& val);
 	void insert(iterator position, size_type n, const value_type& val);
 	template <class InputIterator>
-		void insert(iterator position, InputIterator first, InputIterator last);
+		void insert(iterator position, InputIterator first, InputIterator last,
+					typename enable_if<!is_integral<
+						InputIterator>::value, InputIterator>::type* = 0);
 	iterator erase(iterator position);
 	iterator erase(iterator first, iterator last);
 	void swap(vector& v);
@@ -304,11 +308,16 @@ private:
 	void _construct_at_end(size_type n);
     void _construct_at_end(size_type n, const_reference x);
     template <class ForwardIterator>
-		void _construct_at_end(ForwardIterator first, ForwardIterator last, size_type n);
+		void _construct_at_end(ForwardIterator first, ForwardIterator last, size_type n,
+							   typename enable_if<!is_integral<
+								ForwardIterator>::value, ForwardIterator>::type* = 0);
     void _destruct_at_end(pointer new_last) {_base::_destruct_at_end(new_last);}
 	void _insert_in_array(pointer p, size_type n, iterator position, const value_type& x);
 	template <class InputIterator>
-		void _insert_in_array(pointer p, iterator position, InputIterator first, InputIterator last);
+		void _insert_in_array(pointer p, iterator position, InputIterator first, InputIterator last,
+							  typename enable_if<!is_integral<
+							  	InputIterator>::value, InputIterator>::type* = 0);
+	void _append(size_type n, const_reference x);
 
 	      iterator _make_iter(pointer pos);
 	const_iterator _make_iter(pointer pos) const;
@@ -369,7 +378,9 @@ vector<Tp, Allocator>::_construct_at_end(size_type n, const_reference x)
 template <class Tp, class Allocator>
 template <class ForwardIterator>
 void
-vector<Tp, Allocator>::_construct_at_end(ForwardIterator first, ForwardIterator last, size_type n)
+vector<Tp, Allocator>::_construct_at_end(ForwardIterator first, ForwardIterator last, size_type n,
+										 typename enable_if<!is_integral<
+										 	ForwardIterator>::value, ForwardIterator>::type*)
 {
 	if (size() + n > capacity() || n == 0)
 		return ;
@@ -401,11 +412,10 @@ vector<Tp, Allocator>::vector(const vector& x)
 	: _base(x._allocator())
 {
 	size_type n = x.size();
-    if (n > 0)
-    {
-        _vallocate(n);
-        _construct_at_end(x._begin, x._end, n);
-    }
+    if (n < 0)
+		return ;
+    _vallocate(n);
+	_construct_at_end(x._begin, x._end, n);
 }
 
 template <class Tp, class Allocator>
@@ -413,11 +423,10 @@ inline
 vector<Tp, Allocator>::vector(size_type n, const value_type& x, const allocator_type& a)
 	: _base(a)
 {
-	if (n > 0)
-    {
-        _vallocate(n);
-        _construct_at_end(n, x);
-    }
+	if (n < 0)
+		return ;
+    _vallocate(n);
+    _construct_at_end(n, x);
 }
 
 /* The function template argument InputIterator shall be an input iterator type that
@@ -472,7 +481,9 @@ vector<Tp, Allocator>::assign(size_type n, const value_type& x)
 template <class Tp, class Allocator>
 template <class InputIterator>
 void
-vector<Tp, Allocator>::assign(InputIterator first, InputIterator last)
+vector<Tp, Allocator>::assign(InputIterator first, InputIterator last,
+							  typename enable_if<!is_integral<
+								InputIterator>::value, InputIterator>::type*)
 {
 	clear();
 	for (; first != last; first++)
@@ -502,11 +513,26 @@ vector<Tp, Allocator>::pop_back()
 }
 
 template <class Tp, class Allocator>
+void
+vector<Tp, Allocator>::_append(size_type n, const_reference x)
+{
+	if (static_cast<size_type>(this->_end_capacity() - this->_end) >= n)
+        this->_construct_at_end(n, x);
+    else
+    {
+		vector v(size() + 1, value_type(), this->_allocator());
+		v.assign(this->_begin, this->_end);
+		v._construct_at_end(n, x);
+		swap(v);
+    }
+}
+
+template <class Tp, class Allocator>
 inline
 void
 vector<Tp, Allocator>::_insert_in_array(pointer p, size_type n, iterator position, const value_type& x)
 {
-	int      i = 0;
+	int i = 0;
 	iterator it;
 
 	for (it = this->begin(); it != position; it++)
@@ -521,9 +547,11 @@ template <class Tp, class Allocator>
 template <class InputIterator>
 inline
 void
-vector<Tp, Allocator>::_insert_in_array(pointer p, iterator position, InputIterator first, InputIterator last)
+vector<Tp, Allocator>::_insert_in_array(pointer p, iterator position, InputIterator first, InputIterator last,
+										typename enable_if<!is_integral<
+											InputIterator>::value, InputIterator>::type*)
 {
-	int      i = 0;
+	int i = 0;
 	iterator it;
 
 	for (it = this->begin(); it != position; it++)
@@ -538,7 +566,8 @@ template <class Tp, class Allocator>
 typename vector<Tp, Allocator>::iterator
 vector<Tp, Allocator>::insert(iterator position, const value_type& x)
 {
-	pointer p = this->_begin + (position - begin());
+	difference_type d = position - this->begin();
+	pointer p = this->_begin + d;
 	if (this->_end < this->_end_capacity())
 	{
 		if (p == this->_end)
@@ -557,48 +586,50 @@ vector<Tp, Allocator>::insert(iterator position, const value_type& x)
 		_insert_in_array(v._begin, 1, position, x);
 		swap(v);
 	}
-	return (_make_iter(p));
+	return (_make_iter(this->_begin + d));
 }
 
 template <class Tp, class Allocator>
 void
 vector<Tp, Allocator>::insert(iterator position, size_type n, const value_type& x)
 {
-	if (n > 0)
+	if (n < 0)
+		return ;
+	if (n <= static_cast<size_type>(this->_end_capacity() - this->_end))
 	{
-		if (n <= static_cast<size_type>(this->_end_capacity() - this->_end))
-		{
-			_insert_in_array(this->_begin, n, position, x);
-			this->_end += n;
-		}
-		else
-		{
-			vector   v(size() + n, value_type(), this->_allocator());
-			_insert_in_array(v._begin, n, position, x);
-			swap(v); 
-		}
+		_insert_in_array(this->_begin, n, position, x);
+		this->_end += n;
+	}
+	else
+	{
+		vector   v(size() + n, value_type(), this->_allocator());
+		_insert_in_array(v._begin, n, position, x);
+		swap(v);
 	}
 }
 
 template <class Tp, class Allocator>
 template <class InputIterator>
 void
-vector<Tp, Allocator>::insert(iterator position, InputIterator first, InputIterator last)
+vector<Tp, Allocator>::insert(iterator position, InputIterator first, InputIterator last,
+							  typename enable_if<!is_integral<
+							  	InputIterator>::value, InputIterator>::type*)
 {
-	size_type n = last - first;
-	if (n > 0)
+	size_type n = 0;
+	for (InputIterator tmp = first; tmp != last; tmp++)
+		n++;
+	if (n < 0)
+		return ;
+	if (n <= static_cast<size_type>(this->_end_capacity() - this->_end))
 	{
-		if (n <= static_cast<size_type>(this->_end_capacity() - this->_end))
-		{
-			_insert_in_array(this->_begin, position, first, last);
-			this->_end += n;
-		}
-		else
-		{
-			vector	v(size() + n, value_type(), this->_allocator());
-			_insert_in_array(v._begin, position, first, last);
-			swap(v);
-		}
+		_insert_in_array(this->_begin, position, first, last);
+		this->_end += n;
+	}
+	else
+	{
+		vector	v(size() + n, value_type(), this->_allocator());
+		_insert_in_array(v._begin, position, first, last);
+		swap(v);
 	}
 }
 
@@ -606,42 +637,38 @@ template <class Tp, class Allocator>
 typename ft::vector<Tp, Allocator>::iterator
 vector<Tp, Allocator>::erase(iterator position)
 {
-	pointer p = this->_begin + (position - begin());
-	if (p == this->_end - 1)
-	{
-		this->_destruct_at_end(this->_end - 1);
-	}
-	else
-	{
-		vector   v(this->_allocator());
-		iterator it;
-
-		v.reserve(size() - 1);
-		for (it = this->begin(); it != position; it++)
-			v.push_back(*it);
-		this->_alloc.destroy(p);
-		for (it = position + 1; it != this->end(); it++)
-			v.push_back(*it);
-		swap(v);
-	}
-	return (_make_iter(p));
+	return (erase(position, position + 1));
 }
 
 template <class Tp, class Allocator>
 typename ft::vector<Tp, Allocator>::iterator
 vector<Tp, Allocator>::erase(iterator first, iterator last)
 {
-	pointer  p = this->_begin + (first - begin());
+/*	pointer  p = this->_begin + (first - begin());
 	vector   v(this->_allocator());
 	iterator it;
 
 	v.reserve(size() - (last - first));
 	for (it = this->begin(); it != first; it++)
 		v.push_back(*it);
-	for (it = last + 1; it != this->end(); it++)
+	for (it = last; it != this->end(); it++)
 		v.push_back(*it);
 	swap(v);
 	return (_make_iter(p));
+*/
+	iterator r = first;
+	size_type deleted = 0;
+	for (iterator tmp = first; tmp != last; tmp++)
+		deleted++;
+	while (last != this->end())
+	{
+		*first = *last;
+		++first;
+		++last;
+	}
+	while (deleted--)
+		this->_destruct_at_end(this->_end - 1);
+	return (r);
 }
 
 template <class Tp, class Allocator>
@@ -671,7 +698,7 @@ template <class Tp, class Allocator>
 typename ft::vector<Tp, Allocator>::const_reference
 vector<Tp, Allocator>::at(size_type n) const
 {
-	if (n >= this->_size)
+	if (n >= this->size())
 		this->_throw_out_of_range();
 	return (this->_begin[n]);
 }
@@ -687,6 +714,17 @@ vector<Tp, Allocator>::reserve(size_type n)
 		v.assign(this->_begin, this->_end);
         swap(v);
     }
+}
+
+template <class Tp, class Allocator>
+void
+vector<Tp, Allocator>::resize(size_type n, value_type val)
+{
+	size_type cs = size();
+    if (cs < n)
+		this->_append(n - cs, val);
+    else if (cs > n)
+        this->_destruct_at_end(this->_begin + n);
 }
 
 /**
