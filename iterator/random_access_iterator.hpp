@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 09:09:27 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/08 12:54:26 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/08 17:54:12 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define RANDOM_ACCESS_ITERATOR_HPP
 
 # include "iterator_traits.hpp"
+#include <iostream>
 
 namespace ft
 {
@@ -206,7 +207,6 @@ random_access_iterator<Tp>::operator-=(const int &y)
 	return *this;
 }
 
-
 template <class Tp>
 typename random_access_iterator<Tp>::reference
 random_access_iterator<Tp>::operator*() const
@@ -214,10 +214,12 @@ random_access_iterator<Tp>::operator*() const
 	return *(this->_ptr);
 }
 
+/*
 template <class Tp1, class Tp2>
 bool
 operator==(const random_access_iterator<Tp1> &x, const random_access_iterator<Tp2> &y)
 {
+	//std::cout << "olol"<< std::endl;
 	return x == y;
 }
 
@@ -255,6 +257,7 @@ operator>=(const random_access_iterator<Tp1> &x, const random_access_iterator<Tp
 {
 	return !(x < y);
 }
+*/
 
 }  // ft
 

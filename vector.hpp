@@ -6,14 +6,13 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/07 19:57:17 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/08 18:19:41 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
-#include <iostream>
 # include "algorithm.hpp"
 # include "iterator/iterator.hpp"
 # include "type_traits.hpp"
@@ -245,13 +244,13 @@ public:
 	void reserve(size_type n);
 	void resize(size_type n, value_type val = value_type());
 
-	iterator               begin()
+	inline iterator        begin()
 		{return _make_iter(this->_begin);}
-	const_iterator         begin() const
+	inline const_iterator  begin() const
 		{return _make_iter(this->_begin);}
-	iterator               end()
+	inline iterator        end()
 		{return _make_iter(this->_end);}
-	const_iterator         end()const
+	inline const_iterator  end() const
 		{return _make_iter(this->_end);}
 
 	reverse_iterator       rbegin()
@@ -495,7 +494,8 @@ void
 vector<Tp, Allocator>::push_back(const value_type& x)
 {
     if (this->_end != this->_end_capacity())
-		this->_alloc.construct(this->_end++, x);
+		this->_construct_at_end(1, x);
+		//this->_alloc.construct(this->_end++, x);
     else
 	{
 		vector	v(size() + 1, value_type(), this->_allocator());
@@ -707,11 +707,13 @@ template <class Tp, class Allocator>
 void
 vector<Tp, Allocator>::reserve(size_type n)
 {
+	if (n >= max_size())
+		this->_throw_length_error();
 	if (n > capacity())
     {
-		vector	v(n, value_type(), this->_allocator());
-
-		v.assign(this->_begin, this->_end);
+		vector	v(n, size(), this->_allocator());
+		for (size_type i = 0; i < size(); i++)
+			v[i] = this->_begin[i];
         swap(v);
     }
 }

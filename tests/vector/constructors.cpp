@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 15:07:03 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/08 15:10:18 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/08 18:38:10 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	test_constructor(NAMESPACE::vector<int>::size_type n = 0, NAMESPACE:
 	std::cout << "-------------" << std::endl;
 }
 
-void	tests_vector_constructors(void)
+void	tests_vector_constructors()
 {
 	std::cout << ">>> CONSTRUCTORS <<<" << std::endl;
 	{		
