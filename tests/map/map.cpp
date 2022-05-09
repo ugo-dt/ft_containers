@@ -1,13 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operators.cpp                                      :+:      :+:    :+:   */
+/*   map.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 16:29:56 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/09 16:35:18 by ugdaniel         ###   ########.fr       */
+/*   Created: 2022/05/09 16:37:49 by ugdaniel          #+#    #+#             */
+/*   Updated: 2022/05/09 17:32:16 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tests_vector.hpp"
+#include "tests_map.hpp"
+
+void	test_map()
+{
+	std::cout << ">>> Container: map <<<" << std::endl;
+	std::cout << "TODO" << std::endl;
+}

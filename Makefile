@@ -6,22 +6,24 @@
 #    By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/07 22:13:05 by ugdaniel          #+#    #+#              #
-#    Updated: 2022/05/09 11:05:14 by ugdaniel         ###   ########.fr        #
+#    Updated: 2022/05/09 18:24:37 by ugdaniel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= ft.out
 NAME_STD	:= std.out
 
-SRCS		:= tests/vector/main.cpp tests/vector/constructors.cpp tests/vector/iterators.cpp
+SRCS		:= tests/main.cpp tests/vector/constructors.cpp tests/vector/iterators.cpp \
+				tests/vector/capacity.cpp \
+				tests/stack/stack.cpp tests/map/map.cpp
 
 OBJS		:= $(SRCS:.cpp=.o)
 HEADERS		:= -I .
 
 CC			:= c++
-CFLAGS		= -Wall -Werror -Wextra -std=c++98
+CFLAGS		:= -Wall -Werror -Wextra -std=c++98
 
-all: $(NAME)
+all: $(NAME) $(NAME_STD)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
@@ -37,20 +39,25 @@ fclean: clean
 
 re: fclean all
 
-test: fclean all
-	$(CC) $(FLAGS) $(HEADERS) -DSTD -c tests/vector/main.cpp -o tests/vector/main.o
-	$(CC) $(FLAGS) $(HEADERS) -c tests/vector/constructors.cpp -o tests/vector/constructors.o
-	$(CC) $(FLAGS) $(HEADERS) -c tests/vector/iterators.cpp -o tests/vector/iterators.o
-	$(CC) $(FLAGS) $(OBJS) -o $(NAME_STD)
-	@./$(NAME) vector > ft
-	@./$(NAME_STD) vector > std
-	@(diff -I '^Testing with.*' std ft && echo "vector OK" ) || echo "vector KO"
-	@./$(NAME) stack > ft
-	@./$(NAME_STD) stack > std
-	@(diff -I '^Testing with.*' std ft && echo "stack OK" ) || echo "stack KO"
-	@./$(NAME) map > ft
-	@./$(NAME_STD) map > std
-	@(diff -I '^Testing with.*' std ft && echo "map OK" ) || echo "map KO"
+$(NAME_STD):
+	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/main.cpp -o tests/main.o
+	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/vector/constructors.cpp -o tests/vector/constructors.o
+	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/vector/iterators.cpp -o tests/vector/iterators.o
+	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/vector/capacity.cpp -o tests/vector/capacity.o
+	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/stack/stack.cpp -o tests/stack/stack.o
+	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/map/map.cpp -o tests/map/map.o
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME_STD)
+
+test: fclean $(NAME) $(NAME_STD)
+	@./$(NAME) vector > ft_vector
+	@./$(NAME_STD) vector > std_vector
+	@(diff -I '^Testing with.*' ft_vector std_vector && echo "vector OK" && rm -f ft_vector std_vector) || echo "vector KO"
+	@./$(NAME) stack > ft_stack
+	@./$(NAME_STD) stack > std_stack
+	@(diff -I '^Testing with.*' ft_stack std_stack && echo "stack OK" && rm -f ft_stack std_stack) || echo "stack KO"
+	@./$(NAME) map > ft_map
+	@./$(NAME_STD) map > std_map
+	@(diff -I '^Testing with.*' ft_map std_map && echo "map OK" && rm -f ft_map std_map) || echo "map KO"
 	@make -s fclean
 
 .PHONY: all clean fclean re

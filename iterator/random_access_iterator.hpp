@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 09:09:27 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/09 10:12:44 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/09 18:19:05 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ class random_access_iterator
 
 		//pointer   operator->() const {return this->_ptr;}
 
-		iterator  operator+(const int &y);
-		iterator  operator-(const int &y);
+		iterator  operator+(const int &y) const;
+		iterator  operator-(const int &y) const;
 
 		operator  const_iterator() {return const_iterator(this->_ptr);}
 
@@ -142,14 +142,17 @@ random_access_iterator<Tp>::operator>=(const iterator &y) const
 
 template <class Tp>
 typename random_access_iterator<Tp>::iterator
-random_access_iterator<Tp>::operator+(const int &y)
+random_access_iterator<Tp>::operator+(const int &y) const
 {
 	return iterator(this->_ptr + y);
 }
 
 template <class Tp>
 typename random_access_iterator<Tp>::iterator
-random_access_iterator<Tp>::operator-(const int &y) {return iterator(this->_ptr - y);}
+random_access_iterator<Tp>::operator-(const int &y) const
+{
+	return iterator(this->_ptr - y);
+}
 
 template <class Tp>
 typename random_access_iterator<Tp>::iterator&

@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/08 18:19:41 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/09 18:31:05 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,13 +226,13 @@ public:
 	{
 	}
 
-	vector(const vector& x);
 	explicit vector(size_type n, const value_type& val = value_type(),
 					const allocator_type& alloc = allocator_type());
 	template <class InputIterator>
 		vector(InputIterator first, InputIterator last,
 				const allocator_type& alloc = allocator_type(),
 				typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type* = 0);
+	vector(const vector& x);
 	vector&	operator=(const vector& x);
 
 	template <class InputIterator>
@@ -520,8 +520,11 @@ vector<Tp, Allocator>::_append(size_type n, const_reference x)
         this->_construct_at_end(n, x);
     else
     {
-		vector v(size() + 1, value_type(), this->_allocator());
-		v.assign(this->_begin, this->_end);
+		size_type cs = size();
+		vector v(this->_allocator());
+		v.reserve(cs + n);
+		for (size_type i = 0; i < cs; i++)
+			v[i] = this->_begin[i];
 		v._construct_at_end(n, x);
 		swap(v);
     }
@@ -711,7 +714,8 @@ vector<Tp, Allocator>::reserve(size_type n)
 		this->_throw_length_error();
 	if (n > capacity())
     {
-		vector	v(n, size(), this->_allocator());
+		vector	v(this->_allocator());
+		v._vallocate(n);
 		for (size_type i = 0; i < size(); i++)
 			v[i] = this->_begin[i];
         swap(v);

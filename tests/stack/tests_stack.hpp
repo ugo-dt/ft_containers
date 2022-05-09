@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack.c                                            :+:      :+:    :+:   */
+/*   tests_stack.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 11:06:05 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/09 11:06:31 by ugdaniel         ###   ########.fr       */
+/*   Created: 2022/05/09 16:30:27 by ugdaniel          #+#    #+#             */
+/*   Updated: 2022/05/09 16:46:35 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.hpp"
-#include <stack>
+#ifndef TESTS_STACK_HPP
+# define TESTS_STACK_HPP
 
-int	main(void)
-{
-	if ()
-	return (0);
-}
+# include "stack.hpp"
+# include <stack>
+# include <iostream>
+# include <memory>
+
+#ifndef NAMESPACE
+# ifdef STD
+#  define NAMESPACE		std
+# else
+#  define NAMESPACE		ft
+# endif
+#endif
+
+void	test_stack();
+
+#endif // TESTS_STACK_HPP

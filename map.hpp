@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:51:02 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/04 19:41:49 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/09 16:46:19 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <memory>     // std::allocator
 # include <functional> // std::less
 
+/*
 namespace ft
 {
 
@@ -29,5 +30,6 @@ class map
 }; // map
 
 }  // ft
+*/
 
 #endif // MAP_HPP

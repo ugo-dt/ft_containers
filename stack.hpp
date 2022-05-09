@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:51:24 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/04 11:10:55 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/09 16:35:56 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ template <class Tp, class Container>
 class stack
 {
 public:
-	typedef Container                  container_type;
-	typedef	container_type::value_type value_type;
-	typedef container_type::size_type  size_type;
+	typedef Container                           container_type;
+	typedef	typename container_type::value_type value_type;
+	typedef typename container_type::size_type  size_type;
 
 protected:
 	container_type c;
