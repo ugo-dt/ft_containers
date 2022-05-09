@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:38:59 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/07 14:29:11 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/09 09:50:44 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,25 @@ class reverse_iterator
 		{
 		}
 
-		iterator_type		base()       const {return this->current;}
-		pointer				operator->() const {return *(this->current);}
+		iterator_type base() const {return this->current;}
 
-		reverse_iterator  operator++(int)
+		pointer operator->() const {return *(this->current);}
+
+		reverse_iterator operator++(int)
 		{
 			reverse_iterator tmp(*this);
 			--this->current;
 			return tmp;
 		}
-		reverse_iterator  operator--(int)
+		reverse_iterator operator--(int)
 		{
 			reverse_iterator tmp(*this);
 			++this->current;
 			return tmp;
 		}
 
-		reverse_iterator  operator+ (difference_type n) const {return reverse_iterator(this->current - n);}
-		reverse_iterator  operator- (difference_type n) const {return reverse_iterator(this->current + n);}
+		reverse_iterator operator+ (difference_type n) const {return reverse_iterator(this->current - n);}
+		reverse_iterator operator- (difference_type n) const {return reverse_iterator(this->current + n);}
 
 		reverse_iterator& operator++()
 		{

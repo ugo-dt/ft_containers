@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 16:12:13 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/08 18:38:20 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/09 10:47:04 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ void	tests_vector_iterators()
 
 	for (int i = 0; i < 5; i++)
 		v.push_back(i);
-	std::cout << "size:     " << v.size() << std::endl;
-	std::cout << "max_size: " << v.max_size() << std::endl;
-	std::cout << "capacity: " << v.capacity() << std::endl;
+	print_vector(v);
 
 	std::cout << "-------------" << std::endl << "> iterator" << std::endl;
 	for (it = v.begin(); it != v.end(); it++)

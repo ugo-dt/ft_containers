@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 09:09:27 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/08 17:54:12 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/09 10:12:44 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ class random_access_iterator
 		~random_access_iterator() {}
 
 	public:
+		pointer base() const {return _ptr;}
+
 		bool operator==(const iterator &y) const;
 		bool operator!=(const iterator &y) const;
 		bool operator<=(const iterator &y) const;
@@ -214,50 +216,47 @@ random_access_iterator<Tp>::operator*() const
 	return *(this->_ptr);
 }
 
-/*
 template <class Tp1, class Tp2>
 bool
 operator==(const random_access_iterator<Tp1> &x, const random_access_iterator<Tp2> &y)
 {
-	//std::cout << "olol"<< std::endl;
-	return x == y;
+	return x.base() == y.base();
 }
 
 template <class Tp1, class Tp2>
 bool
 operator!=(const random_access_iterator<Tp1> &x, const random_access_iterator<Tp2> &y)
 {
-	return !(x == y);
+	return !(x.base() == y.base());
 }
 
 template <class Tp1, class Tp2>
 bool
 operator<(const random_access_iterator<Tp1> &x, const random_access_iterator<Tp2> &y)
 {
-	return x < y;
+	return x.base() < y.base();
 }
 
 template <class Tp1, class Tp2>
 bool
 operator>(const random_access_iterator<Tp1> &x, const random_access_iterator<Tp2> &y)
 {
-	return y < x;
+	return y.base() < x.base();
 }
 
 template <class Tp1, class Tp2>
 bool
 operator<=(const random_access_iterator<Tp1> &x, const random_access_iterator<Tp2> &y)
 {
-	return !(x > y);
+	return !(x.base() > y.base());
 }
 
 template <class Tp1, class Tp2>
 bool
 operator>=(const random_access_iterator<Tp1> &x, const random_access_iterator<Tp2> &y)
 {
-	return !(x < y);
+	return !(x.base() < y.base());
 }
-*/
 
 }  // ft
 
