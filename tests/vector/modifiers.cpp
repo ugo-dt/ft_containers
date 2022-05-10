@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:30:02 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/10 16:48:17 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/10 22:24:59 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	tests_vector_modifiers()
 		it = myvector.begin();
 		it = myvector.insert(it, 200);
 
-		myvector.insert (it,2,300);
+		myvector.insert(it,2,300);
 
 		// "it" no longer valid, get a new one:
 		it = myvector.begin();
