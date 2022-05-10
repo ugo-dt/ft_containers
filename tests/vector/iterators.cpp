@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 16:12:13 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/09 18:20:01 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/10 15:13:28 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	tests_vector_iterators()
 {
-	std::cout << ">>> vector: iterators <<<" << std::endl;
+	std::cout << ">> vector: iterators" << std::endl;
 	NAMESPACE::vector<int> v(0, 0, std::allocator<int>());
 	NAMESPACE::vector<int>::iterator				it;
 	NAMESPACE::vector<int>::const_iterator			cit;
@@ -24,7 +24,7 @@ void	tests_vector_iterators()
 	v.reserve(5);
 	for (int i = 0; i < 5; i++)
 		v.push_back(i);
-	std::cout << "-------------" << std::endl << "> iterator" << std::endl;
+	std::cout << "> iterator" << std::endl;
 	for (it = v.begin(); it != v.end(); it++)
 		std::cout << *it << std::endl;
 
@@ -44,4 +44,5 @@ void	tests_vector_iterators()
 	std::cout << "end - 1:  " << *(v.end() - 1) << std::endl;
 	std::cout << "rbegin:   " << *(v.rbegin()) << std::endl;
 	std::cout << "rend - 1: " << *(v.rend() - 1) << std::endl;
+	std::cout << "-------------------" << std::endl;
 }

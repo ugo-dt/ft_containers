@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 12:49:14 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/09 18:25:01 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/10 15:32:31 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,28 @@ void test_vector(char *s)
 	std::cout << ">>> Container: vector <<<" << std::endl;
 	if (s)
 	{
+		if (strcmp(s, "all") == 0)
+			goto vector_all;
 		if (strcmp(s, "constructors") == 0 || strcmp(s, "constructor") == 0)
 			tests_vector_constructors();
 		else if (strcmp(s, "iterators") == 0 || strcmp(s, "iterator") == 0)
 			tests_vector_iterators();
 		else if (strcmp(s, "capacity") == 0)
 			tests_vector_capacity();
+		else if (strcmp(s, "access") == 0 || strcmp(s, "element") == 0 || strcmp(s, "element_access") == 0)
+			tests_vector_elem_access();
+		else if (strcmp(s, "modifiers") == 0 || strcmp(s, "modifier") == 0)
+			tests_vector_modifiers();
 		return ;
 	}
-	tests_vector_constructors();
-	tests_vector_iterators();
-	tests_vector_capacity();
+	{
+		vector_all:
+		tests_vector_constructors();
+		tests_vector_iterators();
+		tests_vector_capacity();
+		tests_vector_elem_access();
+		tests_vector_modifiers();
+	}
 }
 
 int	main(int ac, char **av)
