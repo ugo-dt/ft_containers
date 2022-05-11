@@ -6,7 +6,7 @@
 #    By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/07 22:13:05 by ugdaniel          #+#    #+#              #
-#    Updated: 2022/05/10 15:31:56 by ugdaniel         ###   ########.fr        #
+#    Updated: 2022/05/11 20:34:36 by ugdaniel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME_STD	:= std.out
 
 SRCS		:= tests/main.cpp tests/vector/constructors.cpp tests/vector/iterators.cpp \
 				tests/vector/capacity.cpp tests/vector/elem_access.cpp tests/vector/modifiers.cpp \
+				tests/vector/allocator.cpp \
 				tests/stack/stack.cpp tests/map/map.cpp
 
 OBJS		:= $(SRCS:.cpp=.o)
@@ -46,6 +47,7 @@ $(NAME_STD):
 	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/vector/capacity.cpp -o tests/vector/capacity.o
 	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/vector/elem_access.cpp -o tests/vector/elem_access.o
 	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/vector/modifiers.cpp -o tests/vector/modifiers.o
+	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/vector/allocator.cpp -o tests/vector/allocator.o
 	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/stack/stack.cpp -o tests/stack/stack.o
 	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/map/map.cpp -o tests/map/map.o
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME_STD)

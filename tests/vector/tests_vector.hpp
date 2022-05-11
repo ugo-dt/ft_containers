@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 15:07:50 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/10 15:31:34 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/11 20:32:15 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,6 @@ void	tests_vector_iterators();
 void	tests_vector_capacity();
 void	tests_vector_elem_access();
 void	tests_vector_modifiers();
+void	tests_vector_allocator();
 
 #endif // TESTS_VECTOR_HPP

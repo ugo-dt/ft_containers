@@ -6,13 +6,14 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 12:49:14 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/10 15:32:31 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/11 20:35:03 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector/tests_vector.hpp"
 #include "stack/tests_stack.hpp"
 #include "map/tests_map.hpp"
+#include <type_traits>
 
 static inline
 void test_vector(char *s)
@@ -32,6 +33,8 @@ void test_vector(char *s)
 			tests_vector_elem_access();
 		else if (strcmp(s, "modifiers") == 0 || strcmp(s, "modifier") == 0)
 			tests_vector_modifiers();
+		else if (strcmp(s, "allocator") == 0)
+			tests_vector_allocator();
 		return ;
 	}
 	{
@@ -41,6 +44,7 @@ void test_vector(char *s)
 		tests_vector_capacity();
 		tests_vector_elem_access();
 		tests_vector_modifiers();
+		tests_vector_allocator();
 	}
 }
 
