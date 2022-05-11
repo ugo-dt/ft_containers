@@ -6,7 +6,7 @@
 #    By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/07 22:13:05 by ugdaniel          #+#    #+#              #
-#    Updated: 2022/05/11 20:34:36 by ugdaniel         ###   ########.fr        #
+#    Updated: 2022/05/11 21:32:54 by ugdaniel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ NAME_STD	:= std.out
 SRCS		:= tests/main.cpp tests/vector/constructors.cpp tests/vector/iterators.cpp \
 				tests/vector/capacity.cpp tests/vector/elem_access.cpp tests/vector/modifiers.cpp \
 				tests/vector/allocator.cpp \
-				tests/stack/stack.cpp tests/map/map.cpp
+				tests/stack/constructor.cpp tests/stack/functions.cpp \
+				tests/map/map.cpp
 
 OBJS		:= $(SRCS:.cpp=.o)
 HEADERS		:= -I .
@@ -29,6 +30,19 @@ all: $(NAME) $(NAME_STD)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
+$(NAME_STD):
+	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/main.cpp -o tests/main.o
+	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/vector/constructors.cpp -o tests/vector/constructors.o
+	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/vector/iterators.cpp -o tests/vector/iterators.o
+	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/vector/capacity.cpp -o tests/vector/capacity.o
+	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/vector/elem_access.cpp -o tests/vector/elem_access.o
+	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/vector/modifiers.cpp -o tests/vector/modifiers.o
+	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/vector/allocator.cpp -o tests/vector/allocator.o
+	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/stack/constructor.cpp -o tests/stack/constructor.o
+	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/stack/functions.cpp -o tests/stack/functions.o
+	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/map/map.cpp -o tests/map/map.o
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME_STD)
+
 .cpp.o:
 	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
@@ -39,18 +53,6 @@ fclean: clean
 	rm -rf $(NAME) $(NAME_STD)
 
 re: fclean all
-
-$(NAME_STD):
-	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/main.cpp -o tests/main.o
-	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/vector/constructors.cpp -o tests/vector/constructors.o
-	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/vector/iterators.cpp -o tests/vector/iterators.o
-	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/vector/capacity.cpp -o tests/vector/capacity.o
-	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/vector/elem_access.cpp -o tests/vector/elem_access.o
-	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/vector/modifiers.cpp -o tests/vector/modifiers.o
-	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/vector/allocator.cpp -o tests/vector/allocator.o
-	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/stack/stack.cpp -o tests/stack/stack.o
-	$(CC) $(CFLAGS) $(HEADERS) -DSTD -c tests/map/map.cpp -o tests/map/map.o
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME_STD)
 
 test: fclean $(NAME) $(NAME_STD)
 	@./$(NAME) vector > ft_vector

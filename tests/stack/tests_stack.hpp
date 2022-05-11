@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:30:27 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/09 16:46:35 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/11 21:07:45 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 # define TESTS_STACK_HPP
 
 # include "stack.hpp"
-# include <stack>
+# include "vector.hpp"
 # include <iostream>
 # include <memory>
+# include <stack>
+# include <vector>
 
 #ifndef NAMESPACE
 # ifdef STD
@@ -26,6 +28,7 @@
 # endif
 #endif
 
-void	test_stack();
+void	tests_stack_constructor();
+void	tests_stack_functions();
 
 #endif // TESTS_STACK_HPP

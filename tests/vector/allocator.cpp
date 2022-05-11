@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 20:31:44 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/11 20:33:58 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/11 21:03:24 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,5 @@ void	tests_vector_allocator()
 	for (i = 0; i < 5; i++)
 		v.get_allocator().destroy(&p[i]);
 	v.get_allocator().deallocate(p,5);
+	std::cout << "-------------------" << std::endl;
 }

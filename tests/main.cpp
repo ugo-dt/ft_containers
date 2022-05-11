@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 12:49:14 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/11 20:35:03 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/11 21:32:59 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,15 @@
 #include <type_traits>
 
 static inline
-void test_vector(char *s)
+void	test_stack()
+{
+	std::cout << ">>> Container: stack <<<" << std::endl;
+	tests_stack_constructor();
+	tests_stack_functions();
+}
+
+static
+void test_vector(const char *s)
 {
 	std::cout << ">>> Container: vector <<<" << std::endl;
 	if (s)

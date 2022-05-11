@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/10 14:57:57 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/11 21:35:26 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,8 @@ protected:
 	void clear() {_destruct_at_end(_begin);}
 	size_type capacity() const {return static_cast<size_type>(_end_capacity() - _begin);}
 
-	void _throw_length_error() const {std::__throw_length_error("vector");}
-	void _throw_out_of_range() const {std::__throw_out_of_range("vector");}
+	void _throw_length_error() const {throw std::length_error("vector");}
+	void _throw_out_of_range() const {throw std::out_of_range("vector");}
 
 	void _copy_assign_alloc(const _vector_base& c)
 	{
