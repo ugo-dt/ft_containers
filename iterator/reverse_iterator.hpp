@@ -6,12 +6,12 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:38:59 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/09 18:17:02 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/12 21:28:51 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef REVERSE_ITERATOR_HPP
-# define REVERSE_ITERATOR_HPP
+#ifndef ITERATORS_REVERSE_HPP
+# define ITERATORS_REVERSE_HPP
 
 # include "iterator_traits.hpp"
 
@@ -47,10 +47,6 @@ class reverse_iterator
 		template <class U>
 		reverse_iterator(const reverse_iterator<U>& u)
 			: current(u.base())
-		{
-		}
-		
-		~reverse_iterator()
 		{
 		}
 
@@ -109,7 +105,7 @@ inline
 bool
 operator==(const reverse_iterator<Iter1>& x, const reverse_iterator<Iter2>& y)
 {
-    return x.base() == y.base();
+	return x.base() == y.base();
 }
 
 template <class Iter1, class Iter2>
@@ -117,7 +113,7 @@ inline
 bool
 operator<(const reverse_iterator<Iter1>& x, const reverse_iterator<Iter2>& y)
 {
-    return x.base() > y.base();
+	return x.base() > y.base();
 }
 
 template <class Iter1, class Iter2>
@@ -125,7 +121,7 @@ inline
 bool
 operator!=(const reverse_iterator<Iter1>& x, const reverse_iterator<Iter2>& y)
 {
-    return x.base() != y.base();
+	return x.base() != y.base();
 }
 
 template <class Iter1, class Iter2>
@@ -133,7 +129,7 @@ inline
 bool
 operator>(const reverse_iterator<Iter1>& x, const reverse_iterator<Iter2>& y)
 {
-    return x.base() < y.base();
+	return x.base() < y.base();
 }
 
 template <class Iter1, class Iter2>
@@ -141,7 +137,7 @@ inline
 bool
 operator>=(const reverse_iterator<Iter1>& x, const reverse_iterator<Iter2>& y)
 {
-    return x.base() <= y.base();
+	return x.base() <= y.base();
 }
 
 template <class Iter1, class Iter2>
@@ -149,7 +145,7 @@ inline
 bool
 operator<=(const reverse_iterator<Iter1>& x, const reverse_iterator<Iter2>& y)
 {
-    return x.base() >= y.base();
+	return x.base() >= y.base();
 }
 
 template <class Iter1, class Iter2>
@@ -157,7 +153,7 @@ inline
 typename reverse_iterator<Iter1>::difference_type
 operator-(const reverse_iterator<Iter1>& x, const reverse_iterator<Iter2>& y)
 {
-    return y.base() - x.base();
+	return y.base() - x.base();
 }
 
 template <class Iter>
@@ -165,9 +161,9 @@ inline
 reverse_iterator<Iter>
 operator+(typename reverse_iterator<Iter>::difference_type n, const reverse_iterator<Iter>& x)
 {
-    return reverse_iterator<Iter>(x.base() - n);
+	return reverse_iterator<Iter>(x.base() - n);
 }
 
 }  // ft
 
-#endif // REVERSE_ITERATOR_HPP
+#endif // ITERATORS_REVERSE_HPP

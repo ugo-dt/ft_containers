@@ -1,21 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algorithm.hpp                                      :+:      :+:    :+:   */
+/*   min.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/12 18:26:02 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/12 21:03:51 by ugdaniel         ###   ########.fr       */
+/*   Created: 2022/05/12 21:01:11 by ugdaniel          #+#    #+#             */
+/*   Updated: 2022/05/12 21:30:24 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ALGORITHM_HPP
-# define ALGORITHM_HPP
+#ifndef ALGORITHM_MIN_HPP
+# define ALGORITHM_MIN_HPP
 
-# include "algorithm/equal.hpp"
-# include "algorithm/fill_n.hpp"
-# include "algorithm/lexicographical_compare.hpp"
-# include "algorithm/min.hpp"
+# include "functional.hpp"
 
-#endif // ALGORITHM_HPP
+namespace ft
+{
+
+template <class Tp, class Compare>
+inline
+const Tp&
+min(const Tp& a, const Tp& b, Compare comp)
+{
+	return comp(b, a) ? b : a;
+}
+
+template <class Tp>
+inline
+const Tp&
+min(const Tp& a, const Tp& b)
+{
+	return ft::min(a, b, less<Tp>());
+}
+
+}  // ft
+
+#endif // ALGORITHM_MIN_HPP

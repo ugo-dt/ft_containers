@@ -6,15 +6,14 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 09:09:27 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/09 18:19:05 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/12 21:28:34 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RANDOM_ACCESS_ITERATOR_HPP
-# define RANDOM_ACCESS_ITERATOR_HPP
+#ifndef ITERATOR_RANDOM_ACCESS_HPP
+# define ITERATOR_RANDOM_ACCESS_HPP
 
 # include "iterator_traits.hpp"
-#include <iostream>
 
 namespace ft
 {
@@ -35,22 +34,9 @@ class random_access_iterator
 		pointer	_ptr;
 
 	public:
-		random_access_iterator()
-			: _ptr(nullptr)
-		{
-		}
-
-		random_access_iterator(pointer ptr)
-			: _ptr(ptr)
-		{
-		}
-
-		random_access_iterator(const random_access_iterator &src)
-		{
-			*this = src;
-		}
-
-		~random_access_iterator() {}
+		random_access_iterator() : _ptr(nullptr) {}
+		random_access_iterator(pointer ptr) : _ptr(ptr) {}
+		random_access_iterator(const random_access_iterator &src) {*this = src;}
 
 	public:
 		pointer base() const {return _ptr;}
@@ -263,4 +249,4 @@ operator>=(const random_access_iterator<Tp1> &x, const random_access_iterator<Tp
 
 }  // ft
 
-#endif // RANDOM_ACCESS_ITERATOR_HPP
+#endif // ITERATOR_RANDOM_ACCESS_HPP

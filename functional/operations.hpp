@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algorithm.hpp                                      :+:      :+:    :+:   */
+/*   operations.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/12 18:26:02 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/12 21:03:51 by ugdaniel         ###   ########.fr       */
+/*   Created: 2022/05/12 15:28:34 by ugdaniel          #+#    #+#             */
+/*   Updated: 2022/05/12 21:30:38 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ALGORITHM_HPP
-# define ALGORITHM_HPP
+#ifndef FUNCTIONAL_OPERATIONS_HPP
+# define FUNCTIONAL_OPERATIONS_HPP
 
-# include "algorithm/equal.hpp"
-# include "algorithm/fill_n.hpp"
-# include "algorithm/lexicographical_compare.hpp"
-# include "algorithm/min.hpp"
+namespace ft
+{
 
-#endif // ALGORITHM_HPP
+template <class Tp>
+struct less
+	: binary_function<Tp, Tp, bool>
+{
+	typedef Tp   first_argument_type;
+	typedef Tp   second_argument_type;
+	typedef bool result_type;
+
+	bool operator()(const Tp& x, const Tp& y) const
+		{return x < y;}
+}; // less
+
+}  // ft
+
+#endif // FUNCTIONAL_OPERATIONS_HPP

@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algorithm.hpp                                      :+:      :+:    :+:   */
+/*   iterator.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/12 18:26:02 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/12 21:03:51 by ugdaniel         ###   ########.fr       */
+/*   Created: 2022/04/13 09:32:28 by ugdaniel          #+#    #+#             */
+/*   Updated: 2022/05/12 21:31:25 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ALGORITHM_HPP
-# define ALGORITHM_HPP
+#ifndef ITERATOR_HPP
+# define ITERATOR_HPP
 
-# include "algorithm/equal.hpp"
-# include "algorithm/fill_n.hpp"
-# include "algorithm/lexicographical_compare.hpp"
-# include "algorithm/min.hpp"
+# include "iterator/iterator_traits.hpp"
+# include "iterator/random_access_iterator.hpp"
+# include "iterator/reverse_iterator.hpp"
+# include <cstddef>
 
-#endif // ALGORITHM_HPP
+#endif // ITERATOR_HPP

@@ -6,14 +6,13 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 12:49:14 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/11 21:32:59 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/12 18:40:49 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector/tests_vector.hpp"
 #include "stack/tests_stack.hpp"
 #include "map/tests_map.hpp"
-#include <type_traits>
 
 static inline
 void	test_stack()
@@ -46,7 +45,7 @@ void test_vector(const char *s)
 		return ;
 	}
 	{
-		vector_all:
+	vector_all:
 		tests_vector_constructors();
 		tests_vector_iterators();
 		tests_vector_capacity();
