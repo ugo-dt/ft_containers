@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests_vector.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ugdaniel <ugdaniel@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 15:07:50 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/13 13:27:09 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/13 14:41:06 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,16 @@ public:
 	void x() {std::cout << this->_x << std::endl;}
 }; // Class
 
+/*
 template <class Tp>
-class Allocator
+class Allocator : public std::allocator<Tp>
 {
 public:
-	typedef Tp              value_type;
-	typedef Tp*             pointer;
-	typedef const Tp*       const_pointer;
-	typedef Tp&             reference;
-	typedef const Tp&       const_reference;
+	typedef Tp             value_type;
+	typedef Tp*            pointer;
+	typedef const Tp*      const_pointer;
+	typedef Tp&            reference;
+	typedef const Tp&      const_reference;
 	typedef std::size_t    size_type;
 	typedef std::ptrdiff_t difference_type;
 
@@ -90,6 +91,7 @@ public:
 		a.destroy(p);
 	}
 };
+*/
 
 template <class T, class Allocator>
 void	print_vector(const NAMESPACE::vector<T, Allocator>& v, bool e = true)

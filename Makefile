@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+         #
+#    By: ugdaniel <ugdaniel@42.student.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/07 22:13:05 by ugdaniel          #+#    #+#              #
-#    Updated: 2022/05/13 12:26:52 by ugdaniel         ###   ########.fr        #
+#    Updated: 2022/05/13 14:42:31 by ugdaniel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,11 @@ CFLAGS		:= -Wall -Werror -Wextra -std=c++98
 all: $(NAME_FT) $(NAME_STD)
 
 $(NAME_FT):
-	@make clean
+	@make -s clean
 	@make compile NAME=$(NAME_FT)
 
 $(NAME_STD):
-	@make clean
+	@make -s clean
 	@make compile NAME=$(NAME_STD) namespace=-DSTD
 
 compile: $(OBJS)
@@ -65,7 +65,7 @@ test_map:
 	@(diff -I '^Testing with.*' ft_map std_map && echo "map OK" && rm -f ft_map std_map) || echo "map KO"
 
 test: $(NAME_FT) $(NAME_STD)
-	make test_vector test_stack test_map
+	@make -s test_vector test_stack test_map
 	
 
 .PHONY: all clean fclean re
