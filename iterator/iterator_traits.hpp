@@ -6,17 +6,15 @@
 /*   By: ugdaniel <ugdaniel@42.student.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:21:03 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/13 14:36:04 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/13 15:53:29 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ITERATOR_TRAITS_HPP
 # define ITERATOR_TRAITS_HPP
 
+# include "type_traits.hpp"
 # include <cstddef>
-# ifndef nullptr
-#  define nullptr NULL
-# endif
 
 namespace ft
 {

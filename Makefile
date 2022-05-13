@@ -6,7 +6,7 @@
 #    By: ugdaniel <ugdaniel@42.student.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/07 22:13:05 by ugdaniel          #+#    #+#              #
-#    Updated: 2022/05/13 14:42:31 by ugdaniel         ###   ########.fr        #
+#    Updated: 2022/05/13 15:03:22 by ugdaniel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,5 @@ test_map:
 
 test: $(NAME_FT) $(NAME_STD)
 	@make -s test_vector test_stack test_map
-	
 
 .PHONY: all clean fclean re
