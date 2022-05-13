@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:51:02 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/12 21:18:49 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/13 17:54:24 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ public:
 		bool operator()(const value_type& x, const value_type& y) const
 			{return comp(x.first, y.first);}
 	};
+
 public:
 	map()
 	{}
