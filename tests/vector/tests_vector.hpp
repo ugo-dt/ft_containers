@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 15:07:50 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/11 21:33:17 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/13 13:27:09 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,71 @@
 
 class Class
 {
-	private:
-		int	_x;
+private:
+	int	_x;
 
-	public:
-		Class()
-		{}
+public:
+	Class()
+	{}
 
-		Class(const Class &x)
-			: _x(x._x)
-		{}
+	Class(const Class &x)
+		: _x(x._x)
+	{}
 
-		~Class()
-		{}
+	~Class()
+	{}
 
-		void x() {std::cout << this->_x << std::endl;}
+	void x() {std::cout << this->_x << std::endl;}
 }; // Class
 
-template <class T>
-void	print_vector(const NAMESPACE::vector<T>& v, bool e = true)
+template <class Tp>
+class Allocator
+{
+public:
+	typedef Tp              value_type;
+	typedef Tp*             pointer;
+	typedef const Tp*       const_pointer;
+	typedef Tp&             reference;
+	typedef const Tp&       const_reference;
+	typedef std::size_t    size_type;
+	typedef std::ptrdiff_t difference_type;
+
+	std::allocator<Tp> a;
+
+	template <class Up>
+	Allocator(const Allocator<Up>&) {}
+
+	Allocator() {std::cout << "Using Allocator class" << std::endl;}
+
+	pointer allocate( size_type n, const void * hint = 0)
+	{
+		std::cout << "- Allocator: allocating size of " << n << std::endl;
+		return (a.allocate(n, hint));
+	}
+
+	void deallocate( Tp* p, std::size_t n )
+	{
+		std::cout << "- Allocator: deallocating size of " << n << std::endl;
+		a.deallocate(p, n);
+	}
+
+	void construct( pointer p, const_reference val )
+	{
+		std::cout << "- Allocator: constructing value" << std::endl;
+		a.construct(p, val);
+	}
+
+	size_type max_size() const throw() { return a.max_size(); }
+
+	void destroy( pointer p )
+	{
+		std::cout << "- Allocator: destructing value" << std::endl;
+		a.destroy(p);
+	}
+};
+
+template <class T, class Allocator>
+void	print_vector(const NAMESPACE::vector<T, Allocator>& v, bool e = true)
 {
 	std::cout << "size:     " << v.size() << std::endl;
 	std::cout << "capacity: " << v.capacity() << std::endl;

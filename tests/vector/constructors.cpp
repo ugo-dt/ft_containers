@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 15:07:03 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/10 15:09:08 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/13 12:49:04 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	tests_vector_constructors()
 	{
 		std::cout << "> default" << std::endl;
 		print_vector(NAMESPACE::vector<int>(), 0);
-		print_vector(NAMESPACE::vector<int>(std::allocator<int>()), 0);
+		print_vector(NAMESPACE::vector<int, std::allocator<int> >(), 0);
+		print_vector(NAMESPACE::vector<int, Allocator<int> >(), 0);
 		std::cout << "-------------------" << std::endl;
 	}
 	{
