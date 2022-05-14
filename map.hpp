@@ -6,19 +6,32 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:51:02 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/13 17:54:24 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/14 17:39:57 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_HPP
 # define MAP_HPP
 
+# include "_tree.hpp"
 # include "functional.hpp"
 # include "utility.hpp" // std::pair
 # include <memory> // std::allocator
 
 namespace ft
 {
+
+class _map_iterator
+{
+	_map_iterator();
+	~_map_iterator();
+};
+
+class  _map_const_iterator
+{
+	_map_const_iterator();
+	~_map_const_iterator();
+};
 
 template <class Key, class Tp, class Compare = less<Key>,
           class Allocator = std::allocator<pair<const Key, Tp> > >
@@ -32,10 +45,6 @@ public:
 	typedef Allocator                                allocator_type;
 	typedef typename allocator_type::reference       reference;
 	typedef typename allocator_type::const_reference const_reference;
-	typedef typename allocator_type::pointer         pointer;
-	typedef typename allocator_type::const_pointer   const_pointer;
-	typedef typename allocator_type::size_type       size_type;
-	typedef typename allocator_type::difference_type difference_type;
 
 	class value_comp
 		: public binary_function<value_type, value_type, bool>
@@ -50,6 +59,9 @@ public:
 			{return comp(x.first, y.first);}
 	};
 
+private:
+	//typedef _tree<
+
 public:
 	map()
 	{}
@@ -58,6 +70,5 @@ public:
 }; // map
 
 }  // ft
-
 
 #endif // MAP_HPP

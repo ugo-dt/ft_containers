@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_traits.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ugdaniel <ugdaniel@42.student.fr>          +#+  +:+       +#+        */
+/*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 11:45:27 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/13 15:58:30 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/14 20:00:44 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 namespace ft
 {
 
-#define nullptr NULL
+# ifndef nullptr
+#  define nullptr NULL
+# endif
 
 inline
 int _convert_to_integral(int x) {return x;}

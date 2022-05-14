@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests_vector.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ugdaniel <ugdaniel@42.student.fr>          +#+  +:+       +#+        */
+/*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 15:07:50 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/13 14:41:06 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/14 17:22:37 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,6 @@ void	tests_vector_capacity();
 void	tests_vector_elem_access();
 void	tests_vector_modifiers();
 void	tests_vector_allocator();
+void	tests_vector_operators();
 
 #endif // TESTS_VECTOR_HPP

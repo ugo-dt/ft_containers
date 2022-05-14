@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 09:09:27 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/12 21:28:34 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/14 21:47:26 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,113 +36,113 @@ class random_access_iterator
 	public:
 		random_access_iterator() : _ptr(nullptr) {}
 		random_access_iterator(pointer ptr) : _ptr(ptr) {}
-		random_access_iterator(const random_access_iterator &src) {*this = src;}
+		random_access_iterator(const random_access_iterator& src) {*this = src;}
 
 	public:
 		pointer base() const {return _ptr;}
 
-		bool operator==(const iterator &y) const;
-		bool operator!=(const iterator &y) const;
-		bool operator<=(const iterator &y) const;
-		bool operator>=(const iterator &y) const;
-		bool operator<(const iterator &y)  const;
-		bool operator>(const iterator &y)  const;
+		bool operator==(const iterator& y) const;
+		bool operator!=(const iterator& y) const;
+		bool operator<=(const iterator& y) const;
+		bool operator>=(const iterator& y) const;
+		bool operator<(const iterator& y)  const;
+		bool operator>(const iterator& y)  const;
 
-		//pointer   operator->() const {return this->_ptr;}
+		pointer   operator->() const {return this->_ptr;}
 
-		iterator  operator+(const int &y) const;
-		iterator  operator-(const int &y) const;
+		iterator  operator+(const int& y) const;
+		iterator  operator-(const int& y) const;
 
 		operator  const_iterator() {return const_iterator(this->_ptr);}
 
-		iterator  &operator=(const random_access_iterator &y);
+		iterator & operator=(const random_access_iterator& y);
 		iterator  operator++(int);
 		iterator  operator--(int);
 		iterator& operator++();
 		iterator& operator--();
-		iterator& operator+=(const int &y);
-		iterator& operator-=(const int &y);
+		iterator& operator+=(const int& y);
+		iterator& operator-=(const int& y);
 
 		reference operator*() const;
-		reference operator[](const int &n) const;
+		reference operator[](const int& n) const;
 
-		friend	random_access_iterator	operator+(const int &x, const random_access_iterator &y)
+		friend	random_access_iterator	operator+(const int& x, const random_access_iterator& y)
 		{
 			random_access_iterator	i(y);
 			i += x;
 			return (i);
 		}
 
-		friend	random_access_iterator	operator-(const int &x, const random_access_iterator &y)
+		friend	random_access_iterator	operator-(const int& x, const random_access_iterator& y)
 		{
 			random_access_iterator	i(y);
 			i -= x;
 			return (i);
 		}
 
-		difference_type	operator-(const random_access_iterator &b) const {return _ptr - b._ptr;}
+		difference_type	operator-(const random_access_iterator& b) const {return _ptr - b._ptr;}
 
 }; // random_access_iterator
 
 template <class Tp>
 bool
-random_access_iterator<Tp>::operator==(const iterator &y) const
+random_access_iterator<Tp>::operator==(const iterator& y) const
 {
 	return this->_ptr == y._ptr;
 }
 
 template <class Tp>
 bool
-random_access_iterator<Tp>::operator!=(const iterator &y) const
+random_access_iterator<Tp>::operator!=(const iterator& y) const
 {
 	return !(this->_ptr == y._ptr);
 }
 
 template <class Tp>
 bool
-random_access_iterator<Tp>::operator<(const iterator &y) const
+random_access_iterator<Tp>::operator<(const iterator& y) const
 {
 	return this->_ptr < y._ptr;
 }
 
 template <class Tp>
 bool
-random_access_iterator<Tp>::operator>(const iterator &y) const
+random_access_iterator<Tp>::operator>(const iterator& y) const
 {
 	return y._ptr < this->_ptr;
 }
 
 template <class Tp>
 bool
-random_access_iterator<Tp>::operator<=(const iterator &y) const
+random_access_iterator<Tp>::operator<=(const iterator& y) const
 {
 	return !(this->_ptr > y._ptr);
 }
 
 template <class Tp>
 bool
-random_access_iterator<Tp>::operator>=(const iterator &y) const
+random_access_iterator<Tp>::operator>=(const iterator& y) const
 {
 	return !(this->_ptr < y._ptr);
 }
 
 template <class Tp>
 typename random_access_iterator<Tp>::iterator
-random_access_iterator<Tp>::operator+(const int &y) const
+random_access_iterator<Tp>::operator+(const int& y) const
 {
 	return iterator(this->_ptr + y);
 }
 
 template <class Tp>
 typename random_access_iterator<Tp>::iterator
-random_access_iterator<Tp>::operator-(const int &y) const
+random_access_iterator<Tp>::operator-(const int& y) const
 {
 	return iterator(this->_ptr - y);
 }
 
 template <class Tp>
 typename random_access_iterator<Tp>::iterator&
-random_access_iterator<Tp>::operator=(const random_access_iterator &y)
+random_access_iterator<Tp>::operator=(const random_access_iterator& y)
 {
 	this->_ptr = y._ptr;
 	return (*this);
@@ -184,7 +184,7 @@ random_access_iterator<Tp>::operator--()
 
 template <class Tp>
 typename random_access_iterator<Tp>::iterator&
-random_access_iterator<Tp>::operator+=(const int &y)
+random_access_iterator<Tp>::operator+=(const int& y)
 {
 	this->_ptr += y;
 	return *this;
@@ -192,7 +192,7 @@ random_access_iterator<Tp>::operator+=(const int &y)
 
 template <class Tp>
 typename random_access_iterator<Tp>::iterator&
-random_access_iterator<Tp>::operator-=(const int &y)
+random_access_iterator<Tp>::operator-=(const int& y)
 {
 	this->_ptr -= y;
 	return *this;
@@ -205,44 +205,51 @@ random_access_iterator<Tp>::operator*() const
 	return *(this->_ptr);
 }
 
+template <class Tp>
+typename random_access_iterator<Tp>::reference
+random_access_iterator<Tp>::operator[](const int&n ) const
+{
+	return (this->_ptr[n]);
+}
+
 template <class Tp1, class Tp2>
 bool
-operator==(const random_access_iterator<Tp1> &x, const random_access_iterator<Tp2> &y)
+operator==(const random_access_iterator<Tp1>& x, const random_access_iterator<Tp2>& y)
 {
 	return x.base() == y.base();
 }
 
 template <class Tp1, class Tp2>
 bool
-operator!=(const random_access_iterator<Tp1> &x, const random_access_iterator<Tp2> &y)
+operator!=(const random_access_iterator<Tp1>& x, const random_access_iterator<Tp2>& y)
 {
 	return !(x.base() == y.base());
 }
 
 template <class Tp1, class Tp2>
 bool
-operator<(const random_access_iterator<Tp1> &x, const random_access_iterator<Tp2> &y)
+operator<(const random_access_iterator<Tp1>& x, const random_access_iterator<Tp2>& y)
 {
 	return x.base() < y.base();
 }
 
 template <class Tp1, class Tp2>
 bool
-operator>(const random_access_iterator<Tp1> &x, const random_access_iterator<Tp2> &y)
+operator>(const random_access_iterator<Tp1>& x, const random_access_iterator<Tp2>& y)
 {
 	return y.base() < x.base();
 }
 
 template <class Tp1, class Tp2>
 bool
-operator<=(const random_access_iterator<Tp1> &x, const random_access_iterator<Tp2> &y)
+operator<=(const random_access_iterator<Tp1>& x, const random_access_iterator<Tp2>& y)
 {
 	return !(x.base() > y.base());
 }
 
 template <class Tp1, class Tp2>
 bool
-operator>=(const random_access_iterator<Tp1> &x, const random_access_iterator<Tp2> &y)
+operator>=(const random_access_iterator<Tp1>& x, const random_access_iterator<Tp2>& y)
 {
 	return !(x.base() < y.base());
 }

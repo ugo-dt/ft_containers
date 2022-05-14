@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ugdaniel <ugdaniel@42.student.fr>          +#+  +:+       +#+        */
+/*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 12:49:14 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/13 14:35:14 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/14 23:13:16 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,18 @@ void test_vector(const char *s)
 			tests_vector_modifiers();
 		else if (strcmp(s, "allocator") == 0)
 			tests_vector_allocator();
+		else if (strcmp(s, "operators") == 0 || strcmp(s, "operator") == 0)
+			tests_vector_operators();
 		return ;
 	}
-	{
 	vector_all:
-		tests_vector_constructors();
-		tests_vector_iterators();
-		tests_vector_capacity();
-		tests_vector_elem_access();
-		tests_vector_modifiers();
-		tests_vector_allocator();
-	}
+	tests_vector_constructors();
+	tests_vector_iterators();
+	tests_vector_capacity();
+	tests_vector_elem_access();
+	tests_vector_modifiers();
+	tests_vector_allocator();
+	tests_vector_operators();
 }
 
 int	main(int ac, char **av)
