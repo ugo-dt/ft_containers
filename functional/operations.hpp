@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:28:34 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/13 09:50:49 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/15 17:18:25 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ namespace ft
 {
 
 template <class Tp>
-struct less
-	: binary_function<Tp, Tp, bool>
+struct less : binary_function<Tp, Tp, bool>
 {
 	typedef Tp   first_argument_type;
 	typedef Tp   second_argument_type;
@@ -26,7 +25,7 @@ struct less
 
 	bool operator()(const Tp& x, const Tp& y) const
 		{return x < y;}
-}; // less
+}; // less<Tp>
 
 }  // ft
 
