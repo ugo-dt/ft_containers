@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 10:27:40 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/15 12:01:01 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/16 12:03:24 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,16 @@
 namespace ft
 {
 
-template <class _Tp, class _Compare, class _Allocator>
+template <class Tp, class Compare, class Allocator>
 class _tree
 {
-	
+public:
+	typedef Tp        value_type;
+	typedef Compare   value_compare;
+	typedef Allocator allocator_type;
+
+private:
+	typedef allocator_type::
 }; // _tree
 
 }  // ft

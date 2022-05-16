@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 20:53:58 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/12 21:29:31 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/16 11:19:05 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ inline
 OutputIterator
 fill_n(OutputIterator first, Size n, const Tp& x)
 {
-	return ft::_fill_n(first, ft::_convert_to_integral(n), x);
+	return _fill_n(first, ft::_convert_to_integral(n), x);
 }
 
 }  // ft
