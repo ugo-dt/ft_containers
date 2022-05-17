@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:51:02 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/16 12:00:24 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/17 13:32:26 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,57 +21,19 @@
 namespace ft
 {
 
-template <class Key, class Tp>
-struct _value_type
-{
-	typedef Key                               key_type;
-	typedef Tp                                mapped_type;
-	typedef pair<const key_type, mapped_type> value_type;
-
-private:
-	value_type _cc;
-
-public:
-	value_type& get_value()
-		{return _cc;}
-	const value_type& get_value() const
-		{return _cc};
-
-private:
-	_value_type();
-	_value_type(const _value_type&);
-	_value_type& operator=(const _value_type&);
-	~_value_type();
-};
-
-template <class Tp>
-struct _extract_key_value_types;
-
-template <class Key, class Tp>
-struct _extract_key_value_types<_value_type<Key, Tp> >
-{
-	typedef const Ke  key_type;
-	typedef Tp        mapped_type;
-};
-
 template <class TreeIterator>
 class _map_iterator
 {
 private:
-	typedef typename TreeIterator::NodeTypes      NodeTypes;
-	typedef typename TreeIterator::pointer_traits pointer_traits;
-
-	TreeIterator _i;
-
 public:
-	typedef bidirectional_iterator_tag iterator_category;
-
 	_map_iterator();
 	~_map_iterator();
 };
 
 class  _map_const_iterator
 {
+private:
+public:
 	_map_const_iterator();
 	~_map_const_iterator();
 };
@@ -81,13 +43,21 @@ template <class Key, class Tp, class Compare = less<Key>,
 class map
 {
 public:
-	typedef Key                                      key_type;
-	typedef Tp                                       mapped_type;
-	typedef pair<const key_type, mapped_type>        value_type;
-	typedef Compare                                  key_compare;
-	typedef Allocator                                allocator_type;
-	typedef typename allocator_type::reference       reference;
-	typedef typename allocator_type::const_reference const_reference;
+	typedef Key                                    key_type;
+	typedef Tp                                     mapped_type;
+	typedef pair<const key_type, mapped_type>      value_type;
+	typedef std::size_t                            size_type;
+	typedef std::ptrdiff_t                         difference_type;
+	typedef Compare                                key_compare;
+	typedef Allocator                              allocator_type;
+	typedef value_type&                            reference;
+	typedef const value_type&                      const_reference;
+	typedef typename allocator_type::pointer       pointer;
+	typedef typename allocator_type::const_pointer const_pointer;
+	typedef map_iterator<> iterator;
+	typedef const_map_iterator<> const_iterator;
+	typedef typename ft::reverse_iterator<iterator>       reverse_iterator;
+	typedef typename ft::reverse_iterator<const_iterator> const_reverse_iterator;
 
 	class value_comp
 		: public binary_function<value_type, value_type, bool>
@@ -101,9 +71,6 @@ public:
 		bool operator()(const value_type& x, const value_type& y) const
 			{return comp(x.first, y.first);}
 	};
-
-private:
-	typedef 
 
 public:
 	map()

@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 10:27:40 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/16 12:03:24 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/17 11:28:52 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@ public:
 	typedef Tp        value_type;
 	typedef Compare   value_compare;
 	typedef Allocator allocator_type;
-
-private:
-	typedef allocator_type::
 }; // _tree
 
 }  // ft
