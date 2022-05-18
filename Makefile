@@ -6,7 +6,7 @@
 #    By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/07 22:13:05 by ugdaniel          #+#    #+#              #
-#    Updated: 2022/05/15 16:40:49 by ugdaniel         ###   ########.fr        #
+#    Updated: 2022/05/18 16:26:15 by ugdaniel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS		:= tests/main.cpp tests/vector/constructors.cpp tests/vector/iterators.cpp
 				tests/map/map.cpp
 
 OBJS		:= $(SRCS:.cpp=.o)
-HEADERS		:= -I .
+HEADERS		:= -I include
 
 CC			:= c++
 CFLAGS		:= -Wall -Werror -Wextra -std=c++98
@@ -50,25 +50,26 @@ re: fclean all
 test_vector:
 	@printf "ft: vector"
 	@time ./$(NAME_FT) vector > ft_vector
-	@printf "\nstd: vector"
+	@printf "std: vector"
 	@time ./$(NAME_STD) vector > std_vector
 	@(diff -I '^Testing with.*' ft_vector std_vector && echo "vector OK" && rm -f ft_vector std_vector) || echo "vector KO"
 
 test_stack:
-	@printf "ft: stack"
+	@printf "\nft: stack"
 	@time ./$(NAME_FT) stack > ft_stack
-	@printf "\nstd: stack"
+	@printf "std: stack"
 	@time ./$(NAME_STD) stack > std_stack
 	@(diff -I '^Testing with.*' ft_stack std_stack && echo "stack OK" && rm -f ft_stack std_stack) || echo "stack KO"
 
 test_map:
-	@printf "ft: map"
+	@printf "\nft: map"
 	@time ./$(NAME_FT) map > ft_map
-	@printf "\nstd: map"
+	@printf "std: map"
 	@time ./$(NAME_STD) map > std_map
 	@(diff -I '^Testing with.*' ft_map std_map && echo "map OK" && rm -f ft_map std_map) || echo "map KO"
 
 test: $(NAME_FT) $(NAME_STD)
+	@printf "\n"
 	@make -s test_vector test_stack test_map
 
 .PHONY: all compile clean fclean re test_vector test_stack test_map test
