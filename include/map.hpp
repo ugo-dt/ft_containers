@@ -6,14 +6,14 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:51:02 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/18 16:23:40 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/18 16:29:49 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_HPP
 # define MAP_HPP
 
-# include "internal/_rb_tree.hpp"
+# include "_rb_tree.hpp"
 # include "algorithm.hpp"
 # include "functional.hpp"
 # include "utility.hpp"
