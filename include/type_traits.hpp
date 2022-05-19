@@ -6,12 +6,12 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 11:45:27 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/17 11:28:32 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/19 11:01:06 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPE_TRAITS_H
-# define TYPE_TRAITS_H
+#ifndef TYPE_TRAITS_HPP
+# define TYPE_TRAITS_HPP
 
 namespace ft
 {
@@ -73,4 +73,4 @@ template <> struct is_integral<unsigned long long> : true_type {};
 
 }  // ft
 
-#endif // TYPE_TRAITS_H
+#endif // TYPE_TRAITS_HPP

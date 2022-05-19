@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:51:02 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/18 22:20:50 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/19 12:43:39 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,6 @@
 namespace ft
 {
 
-template <class TreeIterator>
-class _map_iterator
-{
-private:
-public:
-	_map_iterator();
-	~_map_iterator();
-};
-
-class  _map_const_iterator
-{
-private:
-public:
-	_map_const_iterator();
-	~_map_const_iterator();
-};
-
 template <class Key, class Tp, class Compare = less<Key>,
           class Allocator = std::allocator<pair<const Key, Tp> > >
 class map
@@ -48,18 +31,18 @@ public:
 	typedef Key                                    key_type;
 	typedef Tp                                     mapped_type;
 	typedef pair<const key_type, mapped_type>      value_type;
-	typedef Compare                                keyCompare;
+	typedef Compare                                key_compare;
 	typedef Allocator                              allocator_type;
 
 	// Compares objects of type value_type.
-	class valueCompare
+	class value_compare
 		: public binary_function<value_type, value_type, bool>
 	{
 		friend class map<Key, Tp, Compare, Allocator>;
 	protected:
-		keyCompare comp;
+		key_compare comp;
 
-		valueCompare(keyCompare c)
+		value_compare(key_compare c)
 			: comp(c)
 		{
 		}
@@ -68,14 +51,14 @@ public:
 		{
 			return comp(x.first, y.first);
 		}
-	}; // valueCompare
+	}; // value_compare
 
 private:
 	// This turns a red-black tree into a map.
 	typedef typename
 		Allocator::template rebind<value_type>::other   _alloc_type;
 
-	typedef _rb_tree<key_type, value_type, _alloc_type> _base;
+	typedef _rb_tree<key_type, value_type, key_compare, _alloc_type> _base;
 
 	// The tree structure.
 	_base	_tree;
@@ -112,14 +95,14 @@ public:
 	map(InputIterator first, InputIterator last)
 		: _tree()
 	{
-		_tree.insert_unique(first, last);
+		_tree._insert_unique(first, last);
 	}
 
 	template <class InputIterator>
 	map(InputIterator first, InputIterator last, const Compare& c,const Allocator& a = Allocator())
 		: _tree(c, a)
 	{
-		_tree.insert_unique(first, last);
+		_tree._insert_unique(first, last);
 	}
 
 	map&
@@ -177,20 +160,20 @@ public:
 	ft::pair<iterator, bool>
 	insert(const value_type& x)
 	{
-		return _tree.insert_unique(x);
+		return _tree._insert_unique(x);
 	}
 
 	iterator
 	insert(iterator position, const value_type& x)
 	{
-		return _tree.insert_unique(position, x);
+		return _tree._insert_unique(position, x);
 	}
 
 	template <class InputIterator>
 	void
 	insert(InputIterator first, InputIterator last)
 	{
-		return _tree.insert_unique(first, last);
+		return _tree._insert_unique(first, last);
 	}
 
 	void
@@ -223,16 +206,16 @@ public:
 		_tree.clear();
 	}
 
-	keyCompare
+	key_compare
 	key_comp() const
 	{
 		return _tree.key_comp();
 	}
 	
-	valueCompare
+	value_compare
 	value_comp() const
 	{
-		return valueCompare(_tree.key_comp());
+		return value_compare(_tree.key_comp());
 	}
 
 	iterator

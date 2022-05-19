@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:05:23 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/12 21:27:50 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/19 11:04:10 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ struct pair
 		second = p.second;
 		return *this;
 	}
-}; // pair
+};
 
 template <class T1, class T2>
 inline
