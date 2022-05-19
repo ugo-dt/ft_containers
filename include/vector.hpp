@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/19 10:02:46 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/19 20:00:53 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,8 +155,7 @@ protected:
 }; // _vector_base
 
 template <class Tp, class Allocator>
-inline
-void
+inline void
 _vector_base<Tp, Allocator>::_destruct_at_end(pointer new_last)
 {
 	pointer soon_to_be_end = _end;
@@ -323,8 +322,7 @@ vector<Tp, Allocator>::_vallocate(size_type n)
 }
 
 template <class Tp, class Allocator>
-inline
-void
+inline void
 vector<Tp, Allocator>::_vdeallocate()
 {
 	if (this->_begin != nullptr)
@@ -354,8 +352,7 @@ vector<Tp, Allocator>::_construct_at_end(size_type n)
 //  Postcondition:  size() == old size() + n
 //  Postcondition:  [i] == x for all i in [size() - n, n)
 template <class Tp, class Allocator>
-inline
-void
+inline void
 vector<Tp, Allocator>::_construct_at_end(size_type n, const_reference x)
 {
 	if (size() + n > capacity())
@@ -379,8 +376,7 @@ vector<Tp, Allocator>::_construct_at_end(ForwardIterator first, ForwardIterator 
 
 /** @returns An iterator to the element p */
 template <class Tp, class Allocator>
-inline
-typename ft::vector<Tp, Allocator>::iterator
+inline typename ft::vector<Tp, Allocator>::iterator
 vector<Tp, Allocator>::_make_iter(pointer p)
 {
 	return iterator(p);
@@ -479,8 +475,7 @@ vector<Tp, Allocator>::assign(InputIterator first, InputIterator last,
 }
 
 template <class Tp, class Allocator>
-inline
-void
+inline void
 vector<Tp, Allocator>::push_back(const value_type& x)
 {
 	if (this->_end != this->_end_capacity())
@@ -495,16 +490,14 @@ vector<Tp, Allocator>::push_back(const value_type& x)
 }
 
 template <class Tp, class Allocator>
-inline
-void
+inline void
 vector<Tp, Allocator>::pop_back()
 {
 	this->_destruct_at_end(this->_end - 1);
 }
 
 template <class Tp, class Allocator>
-inline
-void
+inline void
 vector<Tp, Allocator>::_insert_in_array(pointer p, size_type n, iterator position, const value_type& x)
 {
 	int i = 0;
@@ -520,8 +513,7 @@ vector<Tp, Allocator>::_insert_in_array(pointer p, size_type n, iterator positio
 
 template <class Tp, class Allocator>
 template <class InputIterator>
-inline
-void
+inline void
 vector<Tp, Allocator>::_insert_in_array(pointer p, iterator position, InputIterator first, InputIterator last,
                                         typename enable_if<!is_integral<
                                             InputIterator>::value, InputIterator>::type*)
@@ -728,8 +720,7 @@ vector<Tp, Allocator>::swap(vector& v)
 }
 
 template <class Tp, class Allocator>
-inline
-bool
+inline bool
 operator==(const vector<Tp, Allocator>& x, const vector<Tp, Allocator>& y)
 {
 	const typename vector<Tp, Allocator>::size_type	sz = x.size();
@@ -737,40 +728,35 @@ operator==(const vector<Tp, Allocator>& x, const vector<Tp, Allocator>& y)
 }
 
 template <class Tp, class Allocator>
-inline
-bool
+inline bool
 operator!=(const vector<Tp, Allocator>& x, const vector<Tp, Allocator>& y)
 {
 	return !(x == y);
 }
 
 template <class Tp, class Allocator>
-inline
-bool
+inline bool
 operator<(const vector<Tp, Allocator>& x, const vector<Tp, Allocator>& y)
 {
 	return ft::lexicographical_compare(x.begin(), x.end(), y.begin(), y.end());
 }
 
 template <class Tp, class Allocator>
-inline
-bool
+inline bool
 operator>(const vector<Tp, Allocator>& x, const vector<Tp, Allocator>& y)
 {
 	return y < x;
 }
 
 template <class Tp, class Allocator>
-inline
-bool
+inline bool
 operator<=(const vector<Tp, Allocator>& x, const vector<Tp, Allocator>& y)
 {
 	return !(y < x);
 }
 
 template <class Tp, class Allocator>
-inline
-bool
+inline bool
 operator>=(const vector<Tp, Allocator>& x, const vector<Tp, Allocator>& y)
 {
 	return !(x < y);
@@ -795,8 +781,7 @@ operator>=(const vector<Tp, Allocator>& x, const vector<Tp, Allocator>& y)
  * having both the same template parameters, T and Alloc).
  */
 template <class Tp, class Allocator>
-inline
-void
+inline void
 swap(vector<Tp, Allocator>& x, vector<Tp, Allocator>& y)
 {
 	x.swap(y);

@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:03:06 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/19 11:03:50 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/19 19:15:26 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ template <class Pair>
 struct _Select1st : public unary_function<Pair, class Pair::first_type>
 {
 	typename Pair::first_type&
-	operator()(Pair& x) const
+	operator()(Pair& x)
 		{return x.first;}
 
 	const typename Pair::first_type&

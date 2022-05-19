@@ -19,7 +19,11 @@
  */
 
 # include "functional.hpp"
+# include "utility.hpp"
 # include <memory>
+
+namespace ft
+{
 
 enum _rb_tree_color {_node_red = false, _node_black = true};
 
@@ -33,9 +37,15 @@ struct _rb_tree_node
 {
 };
 
-namespace ft
+template <class Tp>
+struct _rb_tree_iterator
 {
+};
 
+template <class Tp>
+struct _rb_tree_const_iterator
+{
+};
 
 template <class Key, class Val, class KeyOfValue,
           class Compare, class Allocator = std::allocator<Val> >
@@ -193,7 +203,7 @@ protected:
 	const_reference  _value(_const_link_type x)
 		{return x->_value_field;}
 	static
-	const _Key&      _key(_const_link_type x)
+	const Key&      _key(_const_link_type x)
 		{return KeyOfValue()(_value(x));}
 	static
 	_link_type       _left(_base_ptr x)
@@ -211,7 +221,7 @@ protected:
 	const_reference  _value(_const_base_ptr x)
   		{return static_cast<_const_link_type>(x)->_value_field;}
 	static
-	const _Key&      _key(_const_base_ptr x)
+	const Key&      _key(_const_base_ptr x)
   		{return KeyOfValue()(_value(x));}
 	static
 	_base_ptr        _minimum(_base_ptr x)
@@ -233,32 +243,17 @@ public:
 	typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
 
 private:
-	iterator
-	_insert(_const_base_ptr x, _const_base_ptr y, const value_type&, v);
+	iterator   _insert(_const_base_ptr x, _const_base_ptr y, const value_type& v);
+	iterator   _insert_lower(_base_ptr x, _base_ptr y, const value_type& v);
+	iterator   _insert_equal_lower(const value_type& x);
+	_link_type _copy(_const_link_type x, _link_type p);
 
-	iterator
-	_insert_lower(_base_ptr x, _base_ptr y, const value_type& v);
+	void _erase(_link_type x);
 
-	iterator
-	_insert_equal_lower(const value_type& x);
-
-	_link_type
-	_copy(_const_link_type x, _link_type p);
-
-	void
-	_erase(_link_type x);
-
-	iterator
-	_lower_bound(_link_type x, _link_type y, const Key& k);
-
-	const_iterator
-	_lower_bound(_const_link_type x, _const_link_type y, const Key& k) const;
-
-	iterator
-	_upper_bound(_link_type x, _link_type y, const Key& k);
-
-	const_iterator
-	_upper_bound(_const_link_type x, _const_link_type y, const Key& k) const;
+	iterator       _lower_bound(_link_type x, _link_type y, const Key& k);
+	const_iterator _lower_bound(_const_link_type x, _const_link_type y, const Key& k) const;
+	iterator       _upper_bound(_link_type x, _link_type y, const Key& k);
+	const_iterator _upper_bound(_const_link_type x, _const_link_type y, const Key& k) const;
 
 public:
 	_rb_tree()
@@ -271,7 +266,7 @@ public:
 	}
 
 	_rb_tree(const _rb_tree& x)
-		: _tree(x._tree._key_compare, x._get_node_allocator())
+		: _tree(x._tree._keyCompare, x._get_node_allocator())
 	{
 		if (x._root() != 0)
 		{
@@ -284,7 +279,7 @@ public:
 
 	~_rb_tree()
 	{
-		_erase(_begin();)
+		_erase(_begin());
 	}
 
 	_rb_tree& operator=(const _rb_tree& x);
@@ -319,12 +314,167 @@ public:
 	size_type max_size() const
 		{return _get_node_allocator().max_size();}
 
-	void swap(_Rb_tree& __t);
+	void swap(_rb_tree& t);
 
 	// Insert/erase
 	pair<iterator, bool>
-	_insert_unique()
+		     _insert_unique(const value_type& x);
+	iterator _insert_unique_(const_iterator position, const value_type& x);
+	template<typename InputIterator>
+		void _insert_unique(InputIterator first, InputIterator last);
+
+	iterator _insert_equal(const value_type& x);
+	iterator _insert_equal_(const_iterator position, const value_type& x);
+	template<typename InputIterator>
+		void _insert_equal(InputIterator first, InputIterator last);
+
+private:
+	void _erase_aux(const_iterator position);
+	void _erase_aux(const_iterator first, const_iterator last);
+
+public:
+	void erase(iterator position)
+		{_erase_aux(position);}
+	void erase(const_iterator position)
+		{_erase_aux(position);}
+	void erase(iterator first, iterator last)
+		{_erase_aux(first, last); }
+	void erase(const_iterator first, const_iterator last)
+		{_erase_aux(first, last);}
+
+	void      erase(const key_type* first, const key_type* last);
+	size_type erase(const key_type& x);
+
+	void clear()
+	{
+		_erase(_begin());
+		_leftmost() = _end();
+		_root() = 0;
+		_rightmost() = _end();
+		_tree._node_count = 0;
+	}
+
+	// Set operations.
+	iterator       find(const key_type& k);
+	const_iterator find(const key_type& k) const;
+
+	size_type count(const key_type& k) const;
+
+	iterator       lower_bound(const key_type& k)
+		{return _lower_bound(_begin(), _end(), k);}
+
+	const_iterator lower_bound(const key_type& k) const
+		{return _lower_bound(_begin(), _end(), k);}
+
+	iterator       upper_bound(const key_type& k)
+		{return _upper_bound(_begin(), _end(), k);} 
+
+	const_iterator upper_bound(const key_type& k) const
+		{return _upper_bound(_begin(), _end(), k);}
+
+	pair<iterator, iterator>             equal_range(const key_type& k);
+	pair<const_iterator, const_iterator> equal_range(const key_type& k) const;
+
+	// Debugging.
+	bool _rb_verify() const;
 }; // _rb_tree
+
+template<typename Key, typename Val, typename KeyOfValue,
+         typename Compare, typename Alloc>
+inline bool
+operator==(const _rb_tree<Key, Val, KeyOfValue, Compare, Alloc>& x,
+           const _rb_tree<Key, Val, KeyOfValue, Compare, Alloc>& y)
+{
+	return x.size() == y.size() && std::equal(x.begin(), x.end(), y.begin());
+}
+
+template<typename Key, typename Val, typename KeyOfValue,
+         typename Compare, typename Alloc>
+inline bool
+operator<(const _rb_tree<Key, Val, KeyOfValue, Compare, Alloc>& x,
+          const _rb_tree<Key, Val, KeyOfValue, Compare, Alloc>& y)
+{
+	return std::lexicographical_compare(x.begin(), x.end(), y.begin(), y.end());
+}
+
+template<typename Key, typename Val, typename KeyOfValue,
+         typename Compare, typename Alloc>
+inline bool
+operator!=(const _rb_tree<Key, Val, KeyOfValue, Compare, Alloc>& x,
+           const _rb_tree<Key, Val, KeyOfValue, Compare, Alloc>& y)
+{
+	return !(x == y);
+}
+
+template<typename Key, typename Val, typename KeyOfValue,
+         typename Compare, typename Alloc>
+inline bool
+operator>(const _rb_tree<Key, Val, KeyOfValue, Compare, Alloc>& x,
+          const _rb_tree<Key, Val, KeyOfValue, Compare, Alloc>& y)
+{
+	return y < x;
+}
+
+template<typename Key, typename Val, typename KeyOfValue,
+         typename Compare, typename Alloc>
+inline bool
+operator<=(const _rb_tree<Key, Val, KeyOfValue, Compare, Alloc>& x,
+           const _rb_tree<Key, Val, KeyOfValue, Compare, Alloc>& y)
+{ return !(y < x); }
+
+template<typename Key, typename Val, typename KeyOfValue,
+         typename Compare, typename Alloc>
+inline bool
+operator>=(const _rb_tree<Key, Val, KeyOfValue, Compare, Alloc>& x,
+           const _rb_tree<Key, Val, KeyOfValue, Compare, Alloc>& y)
+{
+	return !(x < y);
+}
+
+template<typename Key, typename Val, typename KeyOfValue,
+         typename Compare, typename Alloc>
+inline void
+swap(_rb_tree<Key, Val, KeyOfValue, Compare, Alloc>& x,
+     _rb_tree<Key, Val, KeyOfValue, Compare, Alloc>& y)
+{
+	x.swap(y);
+}
+
+template<typename Key, typename Val, typename KeyOfValue,
+         typename Compare, typename Alloc>
+_rb_tree<Key, Val, KeyOfValue, Compare, Alloc>&
+_rb_tree<Key, Val, KeyOfValue, Compare, Alloc>::
+operator=(const _rb_tree<Key, Val, KeyOfValue, Compare, Alloc>& x)
+{
+	if (this != &x)
+	{
+		clear();
+		_tree._key_compare = x._tree._key_compare;
+		if (x._root() != 0)
+		{
+          _root() = _copy(x._begin(), _end());
+          _leftmost() = _minimum(_root());
+          _rightmost() = _maximum(_root());
+          _tree._node_count = x._tree._node_count;
+		}
+	}
+	return *this;
+}
+
+template<typename Key, typename Val, typename KeyOfValue,
+         typename Compare, typename Alloc>
+typename _rb_tree<Key, Val, KeyOfValue, Compare, Alloc>::iterator
+_rb_tree<Key, Val, KeyOfValue, Compare, Alloc>::
+_insert(_const_base_ptr x, _const_base_ptr p, const Val& v)
+{
+	bool insert_left = (x != 0 || p == _end()
+			|| _tree._key_compare(KeyOfValue()(v), _key(p)));
+	_link_type z = _create_node(v);
+
+	_rb_tree_insert_and_rebalance(insert_left, z, const_cast<_base_ptr>(p), this->_tree._header);
+	_tree._node_count++;
+	return iterator(z);
+}
 
 }  // ft
 
