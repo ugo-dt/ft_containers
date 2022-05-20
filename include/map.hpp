@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:51:02 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/19 19:17:25 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/20 22:06:31 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ public:
 		{
 		}
 
+	public:
 		bool operator()(const value_type& x, const value_type& y) const
 		{
 			return comp(x.first, y.first);
@@ -58,7 +59,8 @@ private:
 	typedef typename
 		Allocator::template rebind<value_type>::other   _alloc_type;
 
-	typedef _rb_tree<key_type, value_type, key_compare, _alloc_type> _base;
+	typedef _rb_tree<key_type, value_type, _Select1st<value_type>,
+		key_compare, _alloc_type> _base;
 
 	// The tree structure.
 	_base	_tree;

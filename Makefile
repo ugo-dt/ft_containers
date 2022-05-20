@@ -6,14 +6,14 @@
 #    By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/07 22:13:05 by ugdaniel          #+#    #+#              #
-#    Updated: 2022/05/19 10:01:31 by ugdaniel         ###   ########.fr        #
+#    Updated: 2022/05/20 21:55:03 by ugdaniel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME_FT		:= ft.out
 NAME_STD	:= std.out
 
-SRCS		:= tests/main.cpp tests/vector/constructors.cpp tests/vector/iterators.cpp \
+SRCS		:= 	tests/main.cpp tests/vector/constructors.cpp tests/vector/iterators.cpp \
 				tests/vector/capacity.cpp tests/vector/elem_access.cpp tests/vector/modifiers.cpp \
 				tests/vector/allocator.cpp tests/vector/operators.cpp \
 				tests/stack/constructor.cpp tests/stack/functions.cpp \
