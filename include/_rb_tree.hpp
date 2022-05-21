@@ -127,11 +127,12 @@ struct _rb_tree_iterator
 	{
 	}
 	
-	explicit _rb_tree_iterator(_link_type x)
+	explicit
+	_rb_tree_iterator(_link_type x)
 		: _node(x)
 	{
 	}
-	
+
 	reference
 	operator*() const
 		{return static_cast<_link_type>(_node)->_value_field;}
@@ -196,12 +197,14 @@ struct _rb_tree_const_iterator
 	typedef const _rb_tree_node<Tp>*            _link_type;
 
 	_base_ptr _node;
+
 	_rb_tree_const_iterator()
 		: _node()
 	{
 	}
 
-	explicit _rb_tree_const_iterator(_link_type x)
+	explicit
+	_rb_tree_const_iterator(_link_type x)
 		: _node(x)
 	{
 	}

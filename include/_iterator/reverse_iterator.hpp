@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:38:59 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/15 11:46:34 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/21 10:40:32 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,20 @@ class reverse_iterator
 		{
 		}
 
-		explicit reverse_iterator(iterator_type x)
+		explicit
+		reverse_iterator(iterator_type x)
 			: current(x)
 		{
 		}
 
-		template <class Up>
-		reverse_iterator(const reverse_iterator<Up>& u)
+		template <class Iter2>
+		reverse_iterator(const reverse_iterator<Iter2>& u)
 			: current(u.base())
 		{
 		}
 
-		template <class Up>
-		reverse_iterator& operator=(const reverse_iterator<Up>& u)
+		template <class Iter2>
+		reverse_iterator& operator=(const reverse_iterator<Iter2>& u)
 		{
 			current = u.base();
 			return *this;
