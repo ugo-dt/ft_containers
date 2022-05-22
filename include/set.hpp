@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 13:15:39 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/22 19:13:32 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/22 19:23:39 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ public:
 
 private:
 	typedef typename
-		Allocator::template rebind<Key>::other _key_alloc_type;
+		Allocator::template rebind<Key>::other        _key_alloc_type;
 
-	typedef _rb_tree<key_type, value_type, _identity<value_type>,
-		key_compare, _key_alloc_type> _base;
+	typedef _rb_tree<key_type, value_type,
+	                 _identity<value_type>,
+		             key_compare, _key_alloc_type>    _base;
 	
 	// The tree structure, representing a set.
 	_base _tree;
@@ -142,22 +143,22 @@ public:
 	void clear()
 		{_tree.clear();}
 
-	size_type      count(const key_type& x) const
+	size_type count(const key_type& x) const
 		{return _tree.find(x) == _tree.end() ? 0 : 1;}
 
-	iterator       find(const key_type& x)
+	iterator find(const key_type& x)
 		{return _tree.find(x);}
 
 	const_iterator find(const key_type& x) const
 		{return _tree.find(x);}
 
-	iterator       lower_bound(const key_type& x)
+	iterator lower_bound(const key_type& x)
 		{return _tree.lower_bound(x);}
 
 	const_iterator lower_bound(const key_type& x) const
 		{return _tree.lower_bound(x);}
 
-	iterator       upper_bound(const key_type& x)
+	iterator upper_bound(const key_type& x)
 		{return _tree.upper_bound(x);}
 
 	const_iterator upper_bound(const key_type& x) const

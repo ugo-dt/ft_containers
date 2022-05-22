@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:51:02 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/22 14:32:44 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/22 19:22:22 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ public:
 private:
 	// This turns a red-black tree into a map.
 	typedef typename
-		allocator_type::template rebind<value_type>::other _key_alloc_type;
+		Allocator::template rebind<value_type>::other _key_alloc_type;
 
 	typedef _rb_tree<key_type, value_type, _Select1st<value_type>,
 		key_compare, _key_alloc_type>                 _base;
@@ -126,8 +126,7 @@ public:
 	reverse_iterator       rend()         {return _tree.rend();}
 	const_reverse_iterator rend()   const {return _tree.rend();}
 
-	bool empty() const {return _tree.empty();}
-
+	bool empty()         const {return _tree.empty();}
 	size_type size()     const {return _tree.size();}
 	size_type max_size() const {return _tree.max_size();}
 
@@ -162,20 +161,20 @@ public:
 	ft::pair<iterator, bool> insert(const value_type& x)
 		{return _tree._insert_unique(x);}
 
-	iterator                 insert(iterator position, const value_type& x)
+	iterator insert(iterator position, const value_type& x)
 		{return _tree._insert_unique(position, x);}
 
 	template <class InputIterator>
-		void                 insert(InputIterator first, InputIterator last)
+		void insert(InputIterator first, InputIterator last)
 			{return _tree._insert_unique(first, last);}
 
-	void      erase(iterator position)
+	void erase(iterator position)
 		{_tree.erase(position);}
 
 	size_type erase(const key_type& x)
 		{return _tree.erase(x);}
 
-	void      erase(iterator first, iterator last)
+	void erase(iterator first, iterator last)
 		{_tree.erase(first, last);}
 
 	void swap(map& x)
@@ -190,28 +189,28 @@ public:
 	value_compare  value_comp() const
 		{return value_compare(_tree.key_comp());}
 
-	iterator       find(const key_type& x)
+	iterator find(const key_type& x)
 		{return _tree.find(x);}
 
 	const_iterator find(const key_type& x) const
 		{return _tree.find(x);}
 
-	size_type      count(const key_type& x) const
+	size_type count(const key_type& x) const
 		{return _tree.find(x) == _tree.end() ? 0 : 1;}
 
-	iterator       lower_bound(const key_type& x)
+	iterator lower_bound(const key_type& x)
 		{return _tree.lower_bound(x);}
 
 	const_iterator lower_bound(const key_type& x) const
 		{return _tree.lower_bound(x);}
 
-	iterator       upper_bound(const key_type& x)
+	iterator upper_bound(const key_type& x)
 		{return _tree.upper_bound(x);}
 
 	const_iterator upper_bound(const key_type& x) const
 		{return _tree.upper_bound(x);}
 
-	ft::pair<iterator, iterator>             equal_range(const key_type& x)
+	ft::pair<iterator, iterator> equal_range(const key_type& x)
 		{return _tree.equal_range(x);}
 
 	ft::pair<const_iterator, const_iterator> equal_range(const key_type& x) const
