@@ -425,7 +425,7 @@ protected:
 	const_reference  _value(_const_link_type x)
 		{return x->_value_field;}
 	static
-	const Key&      _key(_const_link_type x)
+	const Key&       _key(_const_link_type x)
 		{return KeyOfValue()(_value(x));}
 	static
 	_link_type       _left(_base_ptr x)

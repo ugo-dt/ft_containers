@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests_map.hpp                                      :+:      :+:    :+:   */
+/*   set.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 16:38:10 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/22 14:52:44 by ugdaniel         ###   ########.fr       */
+/*   Created: 2022/05/22 14:51:35 by ugdaniel          #+#    #+#             */
+/*   Updated: 2022/05/22 14:52:14 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TESTS_MAP_HPP
-# define TESTS_MAP_HPP
+#include "tests_set.hpp"
 
-# include "map.hpp"
-# include <map>
-# include <iostream>
-
-void	test_map();
-
-#endif // TESTS_MAP_HPP
+void	test_set()
+{
+	std::cout << ">>> Container: map <<<" << std::endl;
+	std::cout << "TODO" << std::endl;
+}

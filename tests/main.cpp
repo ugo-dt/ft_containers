@@ -6,13 +6,14 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 12:49:14 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/14 23:13:16 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/22 14:50:54 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector/tests_vector.hpp"
 #include "stack/tests_stack.hpp"
 #include "map/tests_map.hpp"
+#include "set/tests_set.hpp"
 #include <cstring>
 
 static inline

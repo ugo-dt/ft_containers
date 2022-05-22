@@ -6,7 +6,7 @@
 #    By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/07 22:13:05 by ugdaniel          #+#    #+#              #
-#    Updated: 2022/05/20 21:55:03 by ugdaniel         ###   ########.fr        #
+#    Updated: 2022/05/22 14:13:14 by ugdaniel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS		:= 	tests/main.cpp tests/vector/constructors.cpp tests/vector/iterators.cp
 				tests/map/map.cpp
 
 OBJS		:= $(SRCS:.cpp=.o)
-HEADERS		:= -I include
+HEADERS		:= -I include -I include/_algorithm -I include/_functional -I include/_iterator -I include/_utility
 
 CC			:= c++
 CFLAGS		:= -Wall -Werror -Wextra -std=c++98

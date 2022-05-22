@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 18:05:23 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/20 21:53:58 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/22 15:05:32 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,27 @@ struct pair
 	T1 first;
 	T2 second;
 
-	pair() : first(), second() {}
+	pair()
+		: first(),
+		  second()
+	{
+	}
 
-	pair(const first_type& a, const second_type& b) : first(a), second(b) {}
+	pair(const first_type& a, const second_type& b)
+		: first(a),
+		  second(b)
+	{
+	}
 
 	template <class U1, class U2>
-	pair(const pair<U1, U2>& p) : first(p.first), second(p.second) {}
+	pair(const pair<U1, U2>& p)
+		: first(p.first),
+		  second(p.second)
+	{
+	}
 
-	pair operator=(const pair& p)
+	pair&
+	operator=(const pair& p)
 	{
 		first = p.first;
 		second = p.second;
