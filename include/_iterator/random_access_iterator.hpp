@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 09:09:27 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/15 11:50:09 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/22 19:26:56 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ class random_access_iterator
 
 		difference_type	operator-(const random_access_iterator& b) const {return _ptr - b._ptr;}
 
-}; // random_access_iterator
+};
 
 template <class Tp>
 bool

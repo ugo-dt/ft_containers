@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:03:06 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/22 19:09:54 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/22 19:26:35 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ struct binary_function
 	typedef Arg1   first_argument_type;
 	typedef Arg2   second_argument_type;
 	typedef Result result_type;
-}; // binary_function
+};
 
 template <class Pair>
 struct _Select1st : public unary_function<Pair, typename Pair::first_type>

@@ -394,7 +394,7 @@ protected:
 			this->_header._left = &this->_header;
 			this->_header._right = &this->_header;
 		}
-	}; // _rb_tree_impl
+	};
 
 	_rb_tree_impl<Compare>	_tree;
 
@@ -599,7 +599,7 @@ public:
 
 	// Debugging
 	//bool _rb_verify() const;
-}; // _rb_tree
+};
 
 template<typename Key, typename Val, typename KeyOfValue,
          typename Compare, typename Alloc>
