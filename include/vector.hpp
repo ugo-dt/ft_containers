@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/23 22:04:25 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/23 22:06:47 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -452,7 +452,7 @@ vector<Tp, Allocator>::operator=(const vector& x)
 	if (this != &x)
 	{
 		_base::_copy_assign_alloc(x);
-		// make sure capacity is the same;
+		// make sure capacity is the same
 		this->reserve(x.capacity());
 		assign(x._begin, x._end);
 	}
