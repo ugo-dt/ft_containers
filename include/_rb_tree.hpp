@@ -91,17 +91,14 @@ _rb_tree_node_base* _rb_tree_decrement(_rb_tree_node_base* x) throw ();
 const
 _rb_tree_node_base* _rb_tree_decrement(const _rb_tree_node_base* x) throw ();
 
-void
-local_rb_tree_rotate_left(_rb_tree_node_base* const x,
-                          _rb_tree_node_base*& root);
-void
-local_rb_tree_rotate_right(_rb_tree_node_base* const x,
-                           _rb_tree_node_base*& root);
-void
-_rb_tree_insert_and_rebalance(const bool insert_left,
-								_rb_tree_node_base* x,
-								_rb_tree_node_base* p,
-								_rb_tree_node_base& header) throw ();
+void local_rb_tree_rotate_left(_rb_tree_node_base* const x,
+                               _rb_tree_node_base*& root);
+void local_rb_tree_rotate_right(_rb_tree_node_base* const x,
+                                _rb_tree_node_base*& root);
+void _rb_tree_insert_and_rebalance(const bool insert_left,
+                                   _rb_tree_node_base* x,
+                                   _rb_tree_node_base* p,
+                                   _rb_tree_node_base& header) throw ();
 _rb_tree_node_base*
 _rb_tree_rebalance_for_erase(_rb_tree_node_base* const z,
                              _rb_tree_node_base& header) throw ();
