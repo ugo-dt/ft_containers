@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:30:02 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/11 18:51:01 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/23 15:20:57 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	tests_vector_modifiers()
 	{
 		std::cout << "> push_back" << std::endl;
 		std::vector<int> v;
-		for (int i = 0; i < 42; i++)
+		for (int i = 0; i < 42000000; i++)
 			v.push_back(i * 42);
 		std::cout << "v stores " << int(v.size()) << " numbers." << std::endl;
 		std::cout << "-------------------" << std::endl;

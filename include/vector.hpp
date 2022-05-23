@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/19 20:00:53 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/23 22:04:25 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,6 +294,7 @@ public:
 private:
 	void _vallocate(size_type n);
 	void _vdeallocate();
+	size_type _recommend(size_type new_size) const;
 	void _construct_at_end(size_type n);
 	void _construct_at_end(size_type n, const_reference x);
 	template <class ForwardIterator>
@@ -331,6 +332,21 @@ vector<Tp, Allocator>::_vdeallocate()
 		this->_alloc.deallocate(this->_begin, this->capacity());
 		this->_begin = this->_end = this->_end_capacity() = nullptr;
 	}
+}
+
+//  Precondition:  new_size > capacity()
+template <class Tp, class Allocator>
+inline
+typename vector<Tp, Allocator>::size_type
+vector<Tp, Allocator>::_recommend(size_type new_size) const
+{
+    const size_type ms = max_size();
+    if (new_size > ms)
+        this->_throw_length_error();
+    const size_type cap = capacity();
+    if (cap >= ms / 2)
+        return ms;
+    return ft::max<size_type>(2 * cap, new_size);
 }
 
 //  Default constructs n objects starting at _end
@@ -436,6 +452,8 @@ vector<Tp, Allocator>::operator=(const vector& x)
 	if (this != &x)
 	{
 		_base::_copy_assign_alloc(x);
+		// make sure capacity is the same;
+		this->reserve(x.capacity());
 		assign(x._begin, x._end);
 	}
 	return *this;
@@ -482,7 +500,7 @@ vector<Tp, Allocator>::push_back(const value_type& x)
 		this->_construct_at_end(1, x);
 	else
 	{
-		vector	v(size() + 1, value_type(), this->_allocator());
+		vector	v(_recommend(size() + 1), value_type(), this->_allocator());
 		v.assign(this->_begin, this->_end);
 		v._alloc.construct(v._end++, x);
 		swap(v);
@@ -538,9 +556,9 @@ vector<Tp, Allocator>::insert(iterator position, const value_type& x)
 	if (this->_end < this->_end_capacity())
 	{
 		if (p == this->_end)
-	{
+		{
 			push_back(x);
-	}
+		}
 		else
 		{
 			_insert_in_array(this->_begin, 1, position, x);
@@ -683,7 +701,7 @@ vector<Tp, Allocator>::_append(size_type n, const_reference x)
 	{
 		size_type cs = size();
 		vector v(this->_allocator());
-		v._vallocate(cs + n);
+		v._vallocate(_recommend(cs + n));
 		v._construct_at_end(begin(), begin() + cs, cs);
 		v._construct_at_end(n, x);
 		swap(v);
