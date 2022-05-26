@@ -6,18 +6,20 @@
 #    By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/07 22:13:05 by ugdaniel          #+#    #+#              #
-#    Updated: 2022/05/22 14:13:14 by ugdaniel         ###   ########.fr        #
+#    Updated: 2022/05/26 13:02:54 by ugdaniel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME_FT		:= ft.out
-NAME_STD	:= std.out
+NAME_FT		:=	ft.out
+NAME_STD	:=	std.out
 
-SRCS		:= 	tests/main.cpp tests/vector/constructors.cpp tests/vector/iterators.cpp \
+SRCS_TESTS	:=	tests/main.cpp tests/vector/constructors.cpp tests/vector/iterators.cpp \
 				tests/vector/capacity.cpp tests/vector/elem_access.cpp tests/vector/modifiers.cpp \
 				tests/vector/allocator.cpp tests/vector/operators.cpp \
 				tests/stack/constructor.cpp tests/stack/functions.cpp \
 				tests/map/map.cpp
+
+SRCS		:= 	srcs/_rb_tree.cpp $(SRCS_TESTS)
 
 OBJS		:= $(SRCS:.cpp=.o)
 HEADERS		:= -I include -I include/_algorithm -I include/_functional -I include/_iterator -I include/_utility

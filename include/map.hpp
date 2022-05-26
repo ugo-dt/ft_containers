@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:51:02 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/22 19:22:22 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/24 14:23:57 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,17 +114,17 @@ public:
 		return *this;
 	}
 
-	allocator_type getAllocator() const {return _tree.getAllocator();}
+	allocator_type   getAllocator() const {return _tree.getAllocator();}
 
-	iterator               begin()        {return _tree.begin();}
-	const_iterator         begin()  const {return _tree.begin();}
-	iterator               end()          {return _tree.end();}
-	const_iterator         end()    const {return _tree.end();}
+	iterator                begin()       {return _tree.begin();}
+	const_iterator          begin() const {return _tree.begin();}
+	iterator                  end()       {return _tree.end();}
+	const_iterator            end() const {return _tree.end();}
 
 	reverse_iterator       rbegin()       {return _tree.rbegin();}
 	const_reverse_iterator rbegin() const {return _tree.rbegin();}
-	reverse_iterator       rend()         {return _tree.rend();}
-	const_reverse_iterator rend()   const {return _tree.rend();}
+	reverse_iterator         rend()       {return _tree.rend();}
+	const_reverse_iterator   rend() const {return _tree.rend();}
 
 	bool empty()         const {return _tree.empty();}
 	size_type size()     const {return _tree.size();}
