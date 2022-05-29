@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 15:07:50 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/27 11:59:36 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/29 20:39:28 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ public:
 	{}
 
 	void x() {std::cout << this->_x << std::endl;}
-}; // Class
+};
 
 /*
 template <class Tp>

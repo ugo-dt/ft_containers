@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:51:24 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/27 11:53:40 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/29 20:39:25 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ public:
 	friend
 	bool
 	operator< (const stack<T, C>& x, const stack<T, C>& y);	
-}; // stack
+};
 
 template <class Tp, class Container>
 inline bool

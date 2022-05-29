@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:51:02 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/24 14:23:57 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/29 20:39:22 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,7 @@ public:
 
 	ft::pair<const_iterator, const_iterator> equal_range(const key_type& x) const
 		{return _tree.equal_range(x);}
-}; // map
+};
 
 template <class Key, class Tp, class Compare, class Allocator>
 inline

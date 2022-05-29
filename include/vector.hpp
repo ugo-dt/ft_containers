@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/27 11:58:26 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/29 20:39:09 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,7 +311,7 @@ private:
 	void _append(size_type n, const_reference x);
 	iterator _make_iter(pointer pos);
 	const_iterator _make_iter(pointer pos) const;
-}; // vector
+};
 
 template <class Tp, class Allocator>
 void
