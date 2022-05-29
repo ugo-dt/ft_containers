@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:03:06 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/22 19:26:35 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/27 11:47:04 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ struct binary_function
 };
 
 template <class Pair>
-struct _Select1st : public unary_function<Pair, typename Pair::first_type>
+struct _Select1st
+	: public unary_function<Pair, typename Pair::first_type>
 {
 	typename Pair::first_type&
 	operator()(Pair& x)
@@ -44,7 +45,8 @@ struct _Select1st : public unary_function<Pair, typename Pair::first_type>
 };
 
 template<typename Tp>
-struct _identity : public unary_function<Tp, Tp>
+struct _identity
+	: public unary_function<Tp, Tp>
 {
 	Tp&
 	operator()(Tp& x) const

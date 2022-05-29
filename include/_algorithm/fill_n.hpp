@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 20:53:58 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/18 16:42:49 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/27 11:56:20 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ namespace ft
 {
 
 template <class OutputIterator, class Size, class Tp>
-inline
-OutputIterator
+inline OutputIterator
 _fill_n(OutputIterator first, Size n, const Tp& x)
 {
 	for (; n > 0; ++first, (void)--n)
@@ -30,11 +29,10 @@ _fill_n(OutputIterator first, Size n, const Tp& x)
 }
 
 template <class OutputIterator, class Size, class Tp>
-inline
-OutputIterator
+inline OutputIterator
 fill_n(OutputIterator first, Size n, const Tp& x)
 {
-	return _fill_n(first, ft::_convert_to_integral(n), x);
+	return _fill_n(first, n, x);
 }
 
 }  // ft

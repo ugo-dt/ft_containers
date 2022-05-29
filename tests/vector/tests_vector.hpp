@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 15:07:50 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/14 17:22:37 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/27 11:59:36 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ public:
 		a.construct(p, val);
 	}
 
-	size_type max_size() const throw() { return a.max_size(); }
+	size_type max_size() const throw() {return a.max_size();}
 
 	void destroy( pointer p )
 	{

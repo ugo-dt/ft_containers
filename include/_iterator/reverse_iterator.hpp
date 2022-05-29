@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:38:59 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/22 13:33:39 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/27 11:52:43 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,16 +96,16 @@ class reverse_iterator
 			return tmp;
 		}
 
-		reverse_iterator  operator+ (difference_type __n) const
-			{return reverse_iterator(current - __n);}
-		reverse_iterator& operator+=(difference_type __n)
-			{current -= __n; return *this;}
-		reverse_iterator  operator- (difference_type __n) const
-			{return reverse_iterator(current + __n);}
-		reverse_iterator& operator-=(difference_type __n)
-			{current += __n; return *this;}
-		reference         operator[](difference_type __n) const
-			{return *(*this + __n);}
+		reverse_iterator  operator+ (difference_type n) const
+			{return reverse_iterator(current - n);}
+		reverse_iterator& operator+=(difference_type n)
+			{current -= n; return *this;}
+		reverse_iterator  operator- (difference_type n) const
+			{return reverse_iterator(current + n);}
+		reverse_iterator& operator-=(difference_type n)
+			{current += n; return *this;}
+		reference         operator[](difference_type n) const
+			{return *(*this + n);}
 };
 
 template <class Iter1, class Iter2>
@@ -160,9 +160,9 @@ operator-(const reverse_iterator<Iter1>& x, const reverse_iterator<Iter2>& y)
 
 template <class Iter>
 reverse_iterator<Iter>
-operator+(typename reverse_iterator<Iter>::difference_type __n, const reverse_iterator<Iter>& x)
+operator+(typename reverse_iterator<Iter>::difference_type n, const reverse_iterator<Iter>& x)
 {
-    return reverse_iterator<Iter>(x.base() - __n);
+    return reverse_iterator<Iter>(x.base() - n);
 }
 
 }  // ft

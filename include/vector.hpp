@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/23 22:06:47 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/27 11:58:26 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,11 +148,11 @@ protected:
 		{
 			clear();
 			this->_alloc.deallocate(_begin, capacity());
-			_begin = _end = _end_capacity() = nullptr;
+			_begin = _end = _end_capacity() = 0;
 		}
 		_allocator() = c._allocator();
 	}
-}; // _vector_base
+};
 
 template <class Tp, class Allocator>
 inline void
@@ -167,9 +167,9 @@ _vector_base<Tp, Allocator>::_destruct_at_end(pointer new_last)
 template <class Tp, class Allocator>
 inline
 _vector_base<Tp, Allocator>::_vector_base()
-	: _begin(nullptr),
-	  _end(nullptr),
-	  _end_cap(nullptr),
+	: _begin(0),
+	  _end(0),
+	  _end_cap(0),
 	  _alloc(allocator_type())
 {
 }
@@ -177,9 +177,9 @@ _vector_base<Tp, Allocator>::_vector_base()
 template <class Tp, class Allocator>
 inline
 _vector_base<Tp, Allocator>::_vector_base(const allocator_type& a)
-	: _begin(nullptr),
-	  _end(nullptr),
-	  _end_cap(nullptr),
+	: _begin(0),
+	  _end(0),
+	  _end_cap(0),
 	  _alloc(a)
 {
 }
@@ -187,7 +187,7 @@ _vector_base<Tp, Allocator>::_vector_base(const allocator_type& a)
 template <class Tp, class Allocator>
 _vector_base<Tp, Allocator>::~_vector_base()
 {
-	if (_begin != nullptr)
+	if (_begin != 0)
 	{
 		clear();
 		_alloc.deallocate(_begin, capacity());
@@ -200,6 +200,7 @@ class vector
 {
 private:
 	typedef _vector_base<Tp, Allocator>                  _base;
+
 public:
 	typedef Tp                                           value_type;
 	typedef Allocator                                    allocator_type;	
@@ -326,11 +327,11 @@ template <class Tp, class Allocator>
 inline void
 vector<Tp, Allocator>::_vdeallocate()
 {
-	if (this->_begin != nullptr)
+	if (this->_begin != 0)
 	{
 		clear();
 		this->_alloc.deallocate(this->_begin, this->capacity());
-		this->_begin = this->_end = this->_end_capacity() = nullptr;
+		this->_begin = this->_end = this->_end_capacity() = 0;
 	}
 }
 

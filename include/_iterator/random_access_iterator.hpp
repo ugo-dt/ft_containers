@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 09:09:27 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/22 19:26:56 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/27 11:58:14 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ class random_access_iterator
 
 	public:
 		random_access_iterator()
-			: _ptr(nullptr)
+			: _ptr(0)
 		{
 		}
 
@@ -224,52 +224,45 @@ random_access_iterator<Tp>::operator[](const int&n ) const
 }
 
 template <class Tp1, class Tp2>
-bool
+inline bool
 operator==(const random_access_iterator<Tp1>& x, const random_access_iterator<Tp2>& y)
 {
 	return x.base() == y.base();
 }
 
 template <class Tp1, class Tp2>
-bool
+inline bool
 operator!=(const random_access_iterator<Tp1>& x, const random_access_iterator<Tp2>& y)
 {
 	return !(x.base() == y.base());
 }
 
 template <class Tp1, class Tp2>
-bool
+inline bool
 operator<(const random_access_iterator<Tp1>& x, const random_access_iterator<Tp2>& y)
 {
 	return x.base() < y.base();
 }
 
 template <class Tp1, class Tp2>
-bool
+inline bool
 operator>(const random_access_iterator<Tp1>& x, const random_access_iterator<Tp2>& y)
 {
 	return y.base() < x.base();
 }
 
 template <class Tp1, class Tp2>
-bool
+inline bool
 operator<=(const random_access_iterator<Tp1>& x, const random_access_iterator<Tp2>& y)
 {
 	return !(x.base() > y.base());
 }
 
 template <class Tp1, class Tp2>
-bool
+inline bool
 operator>=(const random_access_iterator<Tp1>& x, const random_access_iterator<Tp2>& y)
 {
 	return !(x.base() < y.base());
-}
-
-template <class Tp1, class Tp2>
-typename random_access_iterator<Tp1>::difference_type
-operator-(const random_access_iterator<Tp1>& x, const random_access_iterator<Tp2>& y)
-{
-	return x.base() - y.base();
 }
 
 template <class Tp1, class Tp2>
@@ -277,6 +270,13 @@ typename random_access_iterator<Tp1>::iterator
 operator+(const random_access_iterator<Tp1>& x, const random_access_iterator<Tp2>& y)
 {
 	return x.base() + y.base();
+}
+
+template <class Tp1, class Tp2>
+typename random_access_iterator<Tp1>::difference_type
+operator-(const random_access_iterator<Tp1>& x, const random_access_iterator<Tp2>& y)
+{
+	return x.base() - y.base();
 }
 
 }  // ft

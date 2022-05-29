@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:51:24 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/12 21:27:37 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/27 11:53:40 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,48 +58,42 @@ public:
 }; // stack
 
 template <class Tp, class Container>
-inline
-bool
+inline bool
 operator==(const stack<Tp, Container>& x, const stack<Tp, Container>& y)
 {
 	return x.c == y.c;
 }
 
 template <class Tp, class Container>
-inline
-bool
+inline bool
 operator<(const stack<Tp, Container>& x, const stack<Tp, Container>& y)
 {
 	return x.c < y.c;
 }
 
 template <class Tp, class Container>
-inline
-bool
+inline bool
 operator!=(const stack<Tp, Container>& x, const stack<Tp, Container>& y)
 {
 	return !(x == y);
 }
 
 template <class Tp, class Container>
-inline
-bool
+inline bool
 operator>(const stack<Tp, Container>& x, const stack<Tp, Container>& y)
 {
 	return y < x;
 }
 
 template <class Tp, class Container>
-inline
-bool
+inline bool
 operator>=(const stack<Tp, Container>& x, const stack<Tp, Container>& y)
 {
 	return !(x < y);
 }
 
 template <class Tp, class Container>
-inline
-bool
+inline bool
 operator<=(const stack<Tp, Container>& x, const stack<Tp, Container>& y)
 {
 	return !(y < x);

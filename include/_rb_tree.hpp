@@ -916,7 +916,8 @@ _insert_equal(const Val& v)
 	_link_type y = _end();
 
 	while (x != 0)
-	{      y = x;
+	{
+		y = x;
 		x = _tree._key_compare(KeyOfValue()(v), _key(x)) ?
 		_left(x) : _right(x);
 	}
@@ -1204,7 +1205,9 @@ template<typename Key, typename Val, typename KeyOfValue,
 inline bool
 operator<=(const _rb_tree<Key, Val, KeyOfValue, Compare, Alloc>& x,
            const _rb_tree<Key, Val, KeyOfValue, Compare, Alloc>& y)
-{ return !(y < x); }
+{
+	return !(y < x);
+}
 
 template<typename Key, typename Val, typename KeyOfValue,
          typename Compare, typename Alloc>

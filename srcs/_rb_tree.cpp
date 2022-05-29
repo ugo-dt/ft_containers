@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 22:01:43 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/20 22:39:44 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/27 11:27:57 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,28 +214,28 @@ _rb_tree_node_base*
 _rb_tree_rebalance_for_erase(_rb_tree_node_base* const z,
                                _rb_tree_node_base& header) throw ()
   {
-    _rb_tree_node_base *& root = header._parent;
-    _rb_tree_node_base *& leftmost = header._left;
-    _rb_tree_node_base *& rightmost = header._right;
-    _rb_tree_node_base* y = z;
-    _rb_tree_node_base* x = 0;
-    _rb_tree_node_base* x_parent = 0;
-    if (y->_left == 0)     // z has at most one non-null child. y == z.
-      x = y->_right;     // x might be null.
-    else
+	_rb_tree_node_base *& root = header._parent;
+	_rb_tree_node_base *& leftmost = header._left;
+	_rb_tree_node_base *& rightmost = header._right;
+	_rb_tree_node_base* y = z;
+	_rb_tree_node_base* x = 0;
+	_rb_tree_node_base* x_parent = 0;
+	if (y->_left == 0) // z has at most one non-null child. y == z.
+		x = y->_right; // x might be null.
+	else
 	{
-		if (y->_right == 0)  // z has exactly one non-null child. y == z.
-			x = y->_left;    // x is not null.
+		if (y->_right == 0) // z has exactly one non-null child. y == z.
+			x = y->_left; // x is not null.
 		else
 		{
 			// z has two non-null children.  Set y to
-			y = y->_right;   //   z's successor.  x might be null.
+			y = y->_right; //   z's successor.  x might be null.
 			while (y->_left != 0)
 				y = y->_left;
 			x = y->_right;
 		}
 	}
-    if (y != z)
+	if (y != z)
 	{
 		// relink y in place of z.  y is z's successor
 		z->_left->_parent = y;
@@ -244,7 +244,7 @@ _rb_tree_rebalance_for_erase(_rb_tree_node_base* const z,
 		{
 			x_parent = y->_parent;
 			if (x) x->_parent = y->_parent;
-			y->_parent->_left = x;   // y must be a child of _left
+			y->_parent->_left = x; // y must be a child of _left
 			y->_right = z->_right;
 			z->_right->_parent = y;
 		}
@@ -261,8 +261,8 @@ _rb_tree_rebalance_for_erase(_rb_tree_node_base* const z,
 		y = z;
 		// y now points to node to be actually deleted
 	}
-    else
-	{                        // y == z
+	else // y == z
+	{
 		x_parent = y->_parent;
 		if (x)
 			x->_parent = y->_parent;
@@ -277,7 +277,7 @@ _rb_tree_rebalance_for_erase(_rb_tree_node_base* const z,
 		}
 		if (leftmost == z)
 		{
-			if (z->_right == 0)        // z->_left must be null also
+			if (z->_right == 0) // z->_left must be null also
 				leftmost = z->_parent;
 			// makes leftmost == _header if z == root
 			else
@@ -285,10 +285,10 @@ _rb_tree_rebalance_for_erase(_rb_tree_node_base* const z,
 		}
 		if (rightmost == z)
 		{
-			if (z->_left == 0)         // z->_right must be null also
+			if (z->_left == 0) // z->_right must be null also
 			rightmost = z->_parent;
 			// makes rightmost == _header if z == root
-			else                      // x == z->_left
+			else // x == z->_left
 			rightmost = _rb_tree_node_base::_maximum(x);
 		}
 	}

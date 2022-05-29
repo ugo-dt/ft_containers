@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 11:45:27 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/22 19:09:23 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/27 11:56:53 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,6 @@
 
 namespace ft
 {
-
-# ifndef nullptr
-#  define nullptr NULL
-# endif
-
-inline
-int _convert_to_integral(int x) {return x;}
 
 /*
  * enable_if
