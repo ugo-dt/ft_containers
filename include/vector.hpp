@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/29 20:39:09 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/29 20:42:11 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ public:
 # include "algorithm.hpp"
 # include "iterator.hpp"
 # include "type_traits.hpp"
+# include <memory>
 # include <stdexcept>
 
 namespace ft
