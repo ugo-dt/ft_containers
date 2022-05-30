@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 13:15:39 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/22 19:23:39 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/05/30 22:39:46 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ public:
 		{return _tree.empty();}
 
 	size_type size() const
-	{return _tree.size();}
+		{return _tree.size();}
 
 	size_type max_size() const
 		{return _tree.max_size();}
