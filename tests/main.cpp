@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 12:49:14 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/22 14:50:54 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/06/04 16:13:01 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,14 @@ void test_vector(const char *s)
 
 int	main(int ac, char **av)
 {
-#ifdef STD
-	std::cout << "Testing with std" << std::endl;
-#else
-	std::cout << "Testing with ft" << std::endl;
-#endif
 	if (ac == 1)
 	{
 		std::cout << "available tests: vector, stack, map" << std::endl
-			<< "'./ft.out all' for all tests in a row" << std::endl;
+#ifdef STD
+			<< "'./std all' for all tests in a row" << std::endl;
+#else
+			<< "'./ft all' for all tests in a row" << std::endl;
+#endif
 		return (0);
 	}
 	else

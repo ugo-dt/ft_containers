@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _rb_tree.cpp                                       :+:      :+:    :+:   */
+/*   rb_tree.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 22:01:43 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/27 11:27:57 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/06/04 16:08:01 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "_rb_tree.hpp"
+# include "internal/rb_tree.hpp"
 
 namespace ft
 {
 
 _rb_tree_node_base*
-local_rb_tree_increment(_rb_tree_node_base* x) throw ()
+local_rb_tree_increment(_rb_tree_node_base* x)
 {
 	if (x->_right != 0)
 	{
@@ -39,19 +39,19 @@ local_rb_tree_increment(_rb_tree_node_base* x) throw ()
 }
 
 _rb_tree_node_base*
-_rb_tree_increment(_rb_tree_node_base* x) throw ()
+_rb_tree_increment(_rb_tree_node_base* x)
 {
 	return local_rb_tree_increment(x);
 }
 
 const _rb_tree_node_base*
-_rb_tree_increment(const _rb_tree_node_base* x) throw ()
+_rb_tree_increment(const _rb_tree_node_base* x)
 {
 	return local_rb_tree_increment(const_cast<_rb_tree_node_base*>(x));
 }
 
 _rb_tree_node_base*
-local_rb_tree_decrement(_rb_tree_node_base* x) throw ()
+local_rb_tree_decrement(_rb_tree_node_base* x)
 {
 	if (x->_color == _node_red && x->_parent->_parent == x)
 		x = x->_right;
@@ -76,13 +76,13 @@ local_rb_tree_decrement(_rb_tree_node_base* x) throw ()
 }
 
 _rb_tree_node_base*
-_rb_tree_decrement(_rb_tree_node_base* x) throw ()
+_rb_tree_decrement(_rb_tree_node_base* x)
 {
 	return local_rb_tree_decrement(x);
 }
 
 const _rb_tree_node_base*
-_rb_tree_decrement(const _rb_tree_node_base* x) throw ()
+_rb_tree_decrement(const _rb_tree_node_base* x)
 {
 	return local_rb_tree_decrement(const_cast<_rb_tree_node_base*>(x));
 }
@@ -129,7 +129,7 @@ void
 _rb_tree_insert_and_rebalance(const bool insert_left,
                               _rb_tree_node_base* x,
                               _rb_tree_node_base* p,
-                              _rb_tree_node_base& header) throw ()
+                              _rb_tree_node_base& header)
 {
 	_rb_tree_node_base *& root = header._parent;
 	// Initialize fields in new node to insert.
@@ -212,7 +212,7 @@ _rb_tree_insert_and_rebalance(const bool insert_left,
 
 _rb_tree_node_base*
 _rb_tree_rebalance_for_erase(_rb_tree_node_base* const z,
-                               _rb_tree_node_base& header) throw ()
+                               _rb_tree_node_base& header)
   {
 	_rb_tree_node_base *& root = header._parent;
 	_rb_tree_node_base *& leftmost = header._left;
