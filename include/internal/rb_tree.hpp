@@ -266,6 +266,22 @@ struct _rb_tree_const_iterator
 		{return _node != x._node;}
 };
 
+template <class Val>
+inline bool
+operator==(const _rb_tree_iterator<Val>& x,
+           const _rb_tree_const_iterator<Val>& y)
+{
+	return x._node == y._node;
+}
+
+template <class Val>
+inline bool
+operator!=(const _rb_tree_iterator<Val>& x,
+           const _rb_tree_const_iterator<Val>& y)
+{
+	return x._node != y._node;
+}
+
 template <class Key, class Val, class KeyOfValue,
           class Compare, class Allocator = std::allocator<Val> >
 class _rb_tree

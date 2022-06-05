@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 12:49:14 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/06/04 17:57:35 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/06/05 16:57:32 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,33 @@
 #include "map/tests_map.hpp"
 #include "set/tests_set.hpp"
 #include <cstring>
+
+static inline
+void	test_map()
+{
+	std::cout << ">>> Container: map <<<" << std::endl;
+	tests_map_constructors();
+	tests_map_bounds();
+	tests_map_comp();
+	tests_map_copy_construct();
+	tests_map_empty();
+	tests_map_erase();
+	tests_map_erase_2();
+	tests_map_insert();
+	tests_map_insert_2();
+	tests_map_find_count();
+	tests_map_ite_arrow();
+	tests_map_ite_n0();
+	tests_map_ite_n1();
+	tests_map_more();
+	tests_map_relational_ope();
+	tests_map_rev_ite_construct();
+	tests_map_rite_arrow();
+	tests_map_rite();
+	tests_map_swap();
+	tests_map_tricky_construct();
+	tests_map_tricky_erase();
+}
 
 static inline
 void	test_stack()

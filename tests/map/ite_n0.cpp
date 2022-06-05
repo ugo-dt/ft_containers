@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests_set.hpp                                      :+:      :+:    :+:   */
+/*   ite_n0.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/22 14:51:27 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/05/22 14:51:28 by ugdaniel         ###   ########.fr       */
+/*   Created: 2022/06/05 17:34:46 by ugdaniel          #+#    #+#             */
+/*   Updated: 2022/06/05 17:34:46 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TESTS_SET_HPP
-# define TESTS_SET_HPP
+#include "tests_map.hpp"
 
-# include "set.hpp"
-# include <set>
-# include <iostream>
+#define T1 int
+#define T2 int
 
-void	test_set();
+void	tests_map_ite_n0()
+{
+	NAMESPACE::map<T1, T2> mp;
+	mp[1] = 2;
 
-#endif // TESTS_SET_HPP
+	NAMESPACE::map<T1, T2>::const_iterator ite = mp.begin();
+//	*ite = 42; // < -- error
+	(void)ite;
+}
