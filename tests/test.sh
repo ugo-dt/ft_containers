@@ -2,7 +2,7 @@ set -e
 
 make -s fclean
 printf "Compiling with ft"
-make -s ft &
+make -s ft || exit &
 FILE=./ft
 until [ -f "$FILE" ]
 do
