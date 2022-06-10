@@ -81,27 +81,11 @@ struct _rb_tree_node
 	Val _value_field;
 };
 
-_rb_tree_node_base* local_rb_tree_increment(_rb_tree_node_base* x);
-_rb_tree_node_base* _rb_tree_increment(_rb_tree_node_base* x);
-const
-_rb_tree_node_base* _rb_tree_increment(const _rb_tree_node_base* x);
+      _rb_tree_node_base* _rb_tree_increment(_rb_tree_node_base* x);
+const _rb_tree_node_base* _rb_tree_increment(const _rb_tree_node_base* x);
 
-_rb_tree_node_base* local_rb_tree_decrement(_rb_tree_node_base* x);
-_rb_tree_node_base* _rb_tree_decrement(_rb_tree_node_base* x);
-const
-_rb_tree_node_base* _rb_tree_decrement(const _rb_tree_node_base* x);
-
-void local_rb_tree_rotate_left(_rb_tree_node_base* const x,
-                               _rb_tree_node_base*& root);
-void local_rb_tree_rotate_right(_rb_tree_node_base* const x,
-                                _rb_tree_node_base*& root);
-void _rb_tree_insert_and_rebalance(const bool insert_left,
-                                   _rb_tree_node_base* x,
-                                   _rb_tree_node_base* p,
-                                   _rb_tree_node_base& header);
-_rb_tree_node_base*
-_rb_tree_rebalance_for_erase(_rb_tree_node_base* const z,
-                             _rb_tree_node_base& header);
+      _rb_tree_node_base* _rb_tree_decrement(_rb_tree_node_base* x);
+const _rb_tree_node_base* _rb_tree_decrement(const _rb_tree_node_base* x);
 
 template <class Tp>
 struct _rb_tree_iterator
@@ -281,6 +265,15 @@ operator!=(const _rb_tree_iterator<Val>& x,
 {
 	return x._node != y._node;
 }
+
+void
+_rb_tree_insert_and_rebalance(const bool insert_left,
+                                   _rb_tree_node_base* x,
+                                   _rb_tree_node_base* p,
+                                   _rb_tree_node_base& header);
+_rb_tree_node_base*
+_rb_tree_rebalance_for_erase(_rb_tree_node_base* const z,
+                             _rb_tree_node_base& header);
 
 template <class Key, class Val, class KeyOfValue,
           class Compare, class Allocator = std::allocator<Val> >

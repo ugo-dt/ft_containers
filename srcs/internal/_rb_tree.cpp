@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rb_tree.cpp                                        :+:      :+:    :+:   */
+/*   _rb_tree.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 22:01:43 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/06/04 16:08:01 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/06/10 13:00:05 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "internal/rb_tree.hpp"
+/* Red-black tree utilities implementation. */
+
+#include "_rb_tree.hpp"
 
 namespace ft
 {
 
-_rb_tree_node_base*
+static _rb_tree_node_base*
 local_rb_tree_increment(_rb_tree_node_base* x)
 {
 	if (x->_right != 0)
@@ -50,7 +52,7 @@ _rb_tree_increment(const _rb_tree_node_base* x)
 	return local_rb_tree_increment(const_cast<_rb_tree_node_base*>(x));
 }
 
-_rb_tree_node_base*
+static _rb_tree_node_base*
 local_rb_tree_decrement(_rb_tree_node_base* x)
 {
 	if (x->_color == _node_red && x->_parent->_parent == x)
@@ -87,7 +89,7 @@ _rb_tree_decrement(const _rb_tree_node_base* x)
 	return local_rb_tree_decrement(const_cast<_rb_tree_node_base*>(x));
 }
 
-void
+static void
 local_rb_tree_rotate_left(_rb_tree_node_base* const x,
                           _rb_tree_node_base*& root)
 {
@@ -106,7 +108,7 @@ local_rb_tree_rotate_left(_rb_tree_node_base* const x,
 	x->_parent = y;
 }
 
-void
+static void
 local_rb_tree_rotate_right(_rb_tree_node_base* const x,
                            _rb_tree_node_base*& root)
 {
