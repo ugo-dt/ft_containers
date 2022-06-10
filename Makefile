@@ -6,7 +6,7 @@
 #    By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/07 22:13:05 by ugdaniel          #+#    #+#              #
-#    Updated: 2022/06/05 16:56:07 by ugdaniel         ###   ########.fr        #
+#    Updated: 2022/06/10 12:56:05 by ugdaniel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRCS_TESTS	:=	tests/main.cpp tests/vector/constructors.cpp tests/vector/iterator
 				tests/map/rev_ite_construct.cpp tests/map/rite_arrow.cpp tests/map/rite.cpp \
 				tests/map/swap.cpp tests/map/tricky_construct.cpp tests/map/tricky_erase.cpp
 
-SRCS		:= 	srcs/internal/rb_tree.cpp $(SRCS_TESTS)
+SRCS		:= 	srcs/internal/_rb_tree.cpp $(SRCS_TESTS)
 
 OBJS		:= $(SRCS:.cpp=.o)
 HEADERS		:= -I include -I include/internal
