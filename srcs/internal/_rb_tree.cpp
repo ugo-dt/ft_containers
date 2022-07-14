@@ -6,11 +6,24 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 22:01:43 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/06/10 13:00:05 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/07/14 13:09:32 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Red-black tree utilities implementation. */
+/**
+ * Red-black tree utilities implementation.
+ * 
+ * Every node is red or black.
+ * Root node is always black.
+ * New insertions are always red.
+ * Every path from root to leaf has the same number of black nodes.
+ * No path can have two consecutives red nodes.
+ * Null node are always black.
+ * 
+ * Rebalance
+ * 		Black aunt: rotate
+ * 		Red aunt: colorfilp
+ */
 
 #include "_rb_tree.hpp"
 
