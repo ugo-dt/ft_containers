@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 16:37:49 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/06/05 17:34:32 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/06/14 23:34:34 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,6 @@ void	tests_map_constructors()
 	// (3) Copy constructor
 	std::map<std::string, int> copied(map1);
 	std::cout << "\ncopied = "; print_map(copied);
-	std::cout << "map1 = "; print_map(map1);
-
-	// (4) Move constructor
-	std::map<std::string, int> moved(std::move(map1));
-	std::cout << "\nmoved = "; print_map(moved);
 	std::cout << "map1 = "; print_map(map1);
 
 	{
