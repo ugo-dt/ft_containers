@@ -6,7 +6,7 @@
 /*   By: ugdaniel <ugdaniel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 14:23:36 by ugdaniel          #+#    #+#             */
-/*   Updated: 2022/06/04 19:31:17 by ugdaniel         ###   ########.fr       */
+/*   Updated: 2022/07/15 09:29:29 by ugdaniel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -681,8 +681,6 @@ template <class Tp, class Allocator>
 void
 vector<Tp, Allocator>::reserve(size_type n)
 {
-	if (n >= max_size())
-		this->_throw_length_error();
 	if (n > capacity())
 	{
 		size_type cs = size();
